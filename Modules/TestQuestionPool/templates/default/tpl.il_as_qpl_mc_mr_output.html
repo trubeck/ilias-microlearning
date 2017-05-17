@@ -1,0 +1,73 @@
+	{QUESTIONTEXT}
+	<!-- BEGIN selection_limit_hint -->
+	<p class="ilAdditionalAssQuestionInstruction">{SELECTION_LIMIT_HINT}</p>
+	<!-- END selection_limit_hint -->
+	<table class="nobackground ilClearFloat">
+<!-- BEGIN answer_row -->	
+		<tr>
+			<td class="middle" width="15">
+				<input type="checkbox" name="multiple_choice_result_{ANSWER_ID}" value="{ANSWER_ID}" id="answer_{ANSWER_ID}"{CHECKED_ANSWER} class="ilAssMultipleChoiceOption ilAssMultipleChoiceResult" data-qst-id="{QID}" data-ans-id="{ANSWER_ID}" />
+			</td>
+			<td class="middle">
+				<label for="answer_{ANSWER_ID}">
+<!-- BEGIN preview -->
+					<table class="ilc_media_cont_MediaContainer">
+						<tr>
+							<td class="ilc_Mob"><img border="0" src="{ANSWER_IMAGE_URL}" alt="{ANSWER_IMAGE_ALT}" title="{ANSWER_IMAGE_TITLE}" /></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="ilc_media_caption_MediaCaption"><a target="_blank" href="{URL_PREVIEW}" title="{TEXT_PREVIEW}"><img border="0" align="right" src="{IMG_PREVIEW}"/></a></div>
+							</td>
+						</tr>
+					</table>
+<!-- END preview -->
+<!-- BEGIN answer_image -->
+					<img src="{ANSWER_IMAGE_URL}" alt="{ANSWER_IMAGE_ALT}" title="{ANSWER_IMAGE_TITLE}" />
+<!-- END answer_image -->
+					{ANSWER_TEXT}
+				</label>
+			</td>
+		</tr>
+<!-- BEGIN feedback -->
+		<tr>
+			<td></td>
+			<td>
+				<span class="feedback">{FEEDBACK}</span>
+			</td>
+		</tr>
+<!-- END feedback -->
+<!-- END answer_row -->
+		<!-- BEGIN none_above -->
+		<tr>
+			<td></td>
+			<td><hr /></td>
+		</tr>
+		<tr>
+			<td class="middle" width="15">
+				<input class="ilAssMultipleChoiceNone" type="radio" name="mc_none_above" value="1" id="mc_none_above" {CHECKED_NONE_ABOVE} />
+			</td>
+			<td class="middle">
+				<label for="mc_none_above">
+					{LABEL_NONE_ABOVE}
+				</label>
+			</td>
+			<td class="middle">
+		</tr>
+		<!-- END none_above -->
+	</table>
+	
+<script type="text/javascript">
+	(function($) { $(document).ready(
+
+			function()
+			{
+				var question = $.fn.ilAssMultipleChoiceEngine({QUESTION_ID}, {
+					maxSelection: {SELECTION_LIMIT_VALUE}
+				});
+
+				question.init();
+			}
+
+	); }(jQuery));
+</script>

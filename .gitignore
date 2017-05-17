@@ -1,0 +1,34 @@
+# IDEs and Development
+/.project
+/.idea
+/.cache
+/.buildpath
+/.settings
+/extern
+/Services/PHPUnit/config/cfg.phpunit.php
+/nbproject
+
+# General Patterns
+*.bak
+.DS_Store
+*~
+.svn
+*.swp
+*.swo
+
+# Generated Files
+/ilias.ini.php
+/ilias.log
+/db_template_writer.php
+/setup/sql/dbupdate_custom.php
+
+# Directories
+/data
+/Customizing/global
+/setup/sql/ilDBTemplate
+virtual-data
+
+# /dicto
+/dicto/results/*
+!/dicto/results/README.md
+override.php
