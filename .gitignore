@@ -23,10 +23,10 @@
 /setup/sql/dbupdate_custom.php
 
 # Directories
-/data
-/Customizing/global
+/data/*
+/Customizing/global/*
 /setup/sql/ilDBTemplate
-virtual-data
+virtual-data/*
 
 # /dicto
 /dicto/results/*
