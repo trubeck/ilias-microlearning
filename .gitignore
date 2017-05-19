@@ -16,11 +16,13 @@
 *.swp
 *.swo
 
+
 # Generated Files
 /ilias.ini.php
 /ilias.log
 /db_template_writer.php
 /setup/sql/dbupdate_custom.php
+update.sh
 
 # Directories
 /data/*
