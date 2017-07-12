@@ -1,0 +1,81 @@
+<!-- BEGIN cancel_btn --><div class="cancelbutton"><a class="btn btn-default" href="{CANCEL_URL}">{CANCEL_GAME}</a></div><!-- END cancel_btn -->
+<div id="memory" class="container">
+<!-- BEGIN background -->
+<img src="{BACKGROUND_IMAGE}" class="stretch" alt="background" />
+<!-- END background -->
+<!-- BEGIN row -->	
+	<div class="row row-centered">
+<!-- BEGIN column -->	
+		<div id="{CARD_ID}" class="card"></div>
+<!-- END column -->	
+	</div>
+<!-- END row -->	
+</div>
+<div id="leftcard">
+	<div class="hd">{GAME_TITLE}</div>
+	<div class="bd"></div>
+	<div class="ft"></div>
+</div>
+<div id="rightcard">
+	<div class="hd">{GAME_TITLE}</div>
+	<div class="bd"></div>
+	<div class="ft"></div>
+</div>
+<div id="found">
+	<div class="hd">{FOUND_TITLE}</div>
+	<div class="bd"></div>
+	<div class="ft"></div>
+</div>
+<script type="text/javascript" charset="utf-8">
+	var memoryCards;
+	var pairs;
+	var continueButton = '{BUTTON_CONTINUE}';
+	
+	function initMatchMemoPairs()
+	{
+		pairs = new Array();
+<!-- BEGIN pair -->
+		pairs.push(new Array({LEFT}, {RIGHT}, '{SOLUTION}'));
+<!-- END pair -->
+	}
+	
+	function initMatchMemoCards()
+	{
+		memoryCards = new Array();
+<!-- BEGIN card -->
+		memoryCards[{CARD_CONTENT_ID}] = '{CARD_CONTENT_TEXT}';
+<!-- END card -->
+	}
+
+	$(document).ready(function() 
+	{
+		$('#id_save').prop('disabled', true);
+		$('#id_nickname').keyup(function() 
+		{
+			if($(this).val() != '') 
+			{
+				$('#id_save').prop('disabled', false);
+			}
+			else
+			{
+				$('#id_save').prop('disabled', true);
+			}
+		});
+	});
+	
+</script>
+<div id="memoryfinished" style="display: none;">
+	<p id="finishedmsg" style="display: none;">{FINISH_MESSAGE}</p>
+	<form name="highscoreform" method="post" action="{FORMACTION}" role="form" class="form-horizontal preventDoubleSubmission">
+		<input type="hidden" name="movecount" />
+		<input type="hidden" name="start" value="{TIME_START}" />
+		<input type="hidden" name="level" value="{TEXT_LEVEL}" />
+		<input type="hidden" name="cards" value="{TEXT_CARDS}" />
+		<input type="hidden" name="topic" value="{TEXT_TOPIC}" />
+		<input type="hidden" name="stop" />
+		{TEXT_NICKNAME}: <input id="id_nickname" class="form-control" type="text" name="nickname" size="20" /> 
+		<input id="id_save" type="submit" class="btn btn-default" name="cmd[saveHighScore]" value="{SAVE_HIGHSCORE}" /> 
+		<input id="id_skip" type="submit" class="btn btn-default" name="cmd[skipHighScore]" value="{SKIP_HIGHSCORE}" />
+	</form>
+</div>
+<div id="moves">{TEXT_MOVES}: <span class="moves">0</span></div>

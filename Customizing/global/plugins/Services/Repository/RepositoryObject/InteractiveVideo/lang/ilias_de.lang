@@ -1,0 +1,183 @@
+<!-- language file start -->
+obj_xvid#:#Interaktives Video
+objs_xvid#:#Interaktive Videos
+obj_xvid_duplicate#:#Kopieren
+objs_xvid_duplicate#:#Interaktives Videos kopieren
+xvid_add#:#Neues Interaktives Video anlegen
+xvid_new#:#Neues Interaktives Video anlegen
+xvid_read#:#Interaktives Video lesen
+xvid_write#:#Interaktives Video bearbeiten
+xvid_delete#:#Interaktives Video löschen
+xvid_edit_permission#:#Rechteeinstellungen ändern
+xvid_visible#:#Interaktives Video ist sichtbar
+reset#:#Zurücksetzen
+show_all_comments#:#Alle Kommentare anzeigen: 
+author_filter#:#Autorenfilter
+crs_create_xvid#:#Neues Interaktives Video anlegen
+grp_create_xvid#:#Neues Interaktives Video anlegen
+fold_create_xvid#:#Neues Interaktives Video anlegen
+root_create_xvid#:#Neues Interaktives Video anlegen
+cat_create_xvid#:#Neues Interaktives Video anlegen
+interactive#:#Interaktive
+tutor#:#Tutor
+questions_comments#:#Fragen und Kommentare
+questions_comments_sub_tab#:#Verwalten
+sure_delete_comments#:#Sind Sie sicher, dass die selektierten Commentare gelöscht werden sollen?
+video_file#:#Video
+comment#:#Kommentar
+comments#:#Kommentare
+post#:#Posten
+cancel#:#Abbrechen
+sure_delete_comment#:#Sind Sie sicher, dass die die gewählten Kommentare löschen möchten?
+missing_comment_text#:#Bitte geben Sie einen Kommentar ein.
+missing_stopping_point#:#Der Haltepunkt wurde nicht zum Server übertragen. Bitte versuchen Sie es erneut.
+invalid_comment_ids#:#Einige Kommentare konnten nicht gefunden werden. 
+comments_successfully_deleted#:#Die gewählten Kommentare wurden erfolgreich gelöscht.
+insert_comment#:#Neue Frage / Neuen Kommentar einfügen
+edit_comment#:#Kommentar bearbeiten
+user#:#Benutzer
+switch_on#:#An
+switch_off#:#Aus
+correct#:#Richtig
+correct_solution#:#Richtige Lösung
+add_question#:#Frage hinzufügen
+single_choice#:#Single Choice
+multiple_choice#:#Multiple Choice
+correct#:#Richtige beantwortete Fragen
+questions#:#Fragen
+results#:#Ergebnisse
+user_results#:#Benutzerergebnisse
+answer_text#:#Antwort
+percentage#:#Prozent
+answered#:#Fragen beantwortet
+question_results#:#Fragenergebnisse
+user_answered#:#Beantwortet von Nutzern
+user_correct#:#Richtig beantwortet von Nutzern
+insert_question#:#Frage hinzufügen
+insert_comment#:#Kommentar hinzufügen
+my_comments#:#Meine Kommentare
+general#:#Allgemein
+repeat_question#:#Frage wiederholen
+tags#:#Tags
+question_text#:#Fragentext
+question_type#:#Fragentyp
+feedback_correct#:#Feedback Richtige Antwort
+feedback_one_wrong#:#Feedback bei mindestens einer falschen Antwort
+results_successfully_deleted#:#Die gewählten Ergebnisse wurden erfolgreich gelöscht
+sure_delete_results#:#Sind Sie sicher, dass Sie die gewählten Ergebnisse löschen möchten?
+comments_successfully_deleted#:#Die gewählten Kommentare wurden erfolgreich gelöscht
+invalid_question_ids#:#Ungültige Fragen-Ids
+invalid_user_ids#:#Ungültige User-Ids
+invalid_comment_ids#:#Ungültige Kommentar-Ids
+comment_title#:#Kommentar-Titel
+send#:#Abschicken
+close#:#Schließen
+question#:#Frage
+is_anonymized#:#Kommentare ohne Namen anzeigen
+is_anonymized_info#:#Wenn aktiviert, werden alle Kommentare ohne Benutzernamen angezeigt.
+is_public#:#Alle Kommentare veröffentlichen
+is_public_info#:#Wenn aktiviert, können alle Benutzer alle Kommentare lesen. Im anderen Fall sehen sie nur ihre eigenen Kommentare
+correct_answered#:#Richtig beantwortet
+show_my_results#:#Meine Ergebnisse
+is_jump_correct#:#"Richtig"-Sprungmarke verwenden
+is_jump_wrong#:#"Falsch"-Sprungmarke verwenden
+limit_attempts#:#Versuche begrenzen
+limit_attempts_info#:#Der Benutzer darf die Frage nur einmal beantworten
+is_private_comment#:#Privater Kommentar
+feedback_jump_text#:#Springe zu
+repeat_question_info#:#Wenn  aktiviert, wird die Frage bei jedem Abspielen des Videos immer wieder angezeigt. Falls die Option "Korrekt beantwortete Fragen wiederholen" in den Einstellungen deaktiviert ist, wird die Frage nur so lange angezeigt, bis sie korrekt beantwortet wurde und danach übersprungen.
+sum#:#Summe
+answered#:#Beantwortet
+csv_export#:#CSV Export
+complete_question_results#:#Komplette Fragenergebnisse
+feedback#:#Feedback
+already_answered#:#Frage wurde bereits beantwortet.
+reflection#:#Reflexionsfrage
+answers#:#Antworten
+sure_update_question#:#Sind Sie sicher, dass Sie die Frage überschreiben wollen? Vorhandene Benutzerergebnisse werden gelöscht!
+question_type_info#:#Sie können zwischen drei Fragetypen wählen: Single Choice, Multiple Choice und Reflexionsfragen. Eine Reflexionsfrage wird wie eine SC bzw. eine MC Frage angezeigt, enthält jedoch keine Antwortmöglichkeiten. Sie wird sofort als bestanden gewertet, wenn Sie einem Nutzer mindestens einmal angezeigt wurde.
+is_jump_correct_info#:#Sie können hier eine Sprungmarke zu einer relevanten Stelle im Video angeben, zu der Nutzer über einen Button springen können, wenn die Frage richtig beantwortet wurde. Der Button wird gemeinsam mit dem Feedback eingeblended.
+is_jump_wrong_info#:#Sie können hier eine Sprungmarke zu einer relevanten Stelle im Video angeben, zu der Nutzer über einen Button springen können, wenn die Frage falsch beantwortet wurde. Der Button wird gemeinsam mit dem Feedback eingeblended.
+learning_recommendation#:#Lernempfehlung an folgender Stelle im Video
+is_repeat#:#Korrekt beantwortete Fragen überspringen
+is_repeat_info#:#Wenn diese Option aktiviert ist, werden bereits korrekt beantwortete Fragen beim Abspielen übersprungen.
+offline#:#Offline
+status#:#Status
+is_chronologic#:#Alle Kommentare von Beginn an zeigen
+is_chronologic_info#:#Wenn diese Option aktiviert wird, wird die Option 'Alle Kommentare' vorausgewählt und es werden alle Kommentare des gesamten Videos von Beginn an in chronologischer Reihenfolge angezeigt.
+time_end#:#Ende der Passage
+show_response_frequency#:#Zeige Antworthäufigkeiten nach dem Antworten an
+show_response_frequency_info#:#Nachdem die Frage beantwortet wurde, wird unter jeder Antwortoption die relative Häufigkeit in Prozent angezeigt
+type#:#Typ
+title_of_question#:#Titel der Frage
+endtime_warning#:#Das Ende der Passage darf nicht kleiner sein als die aktuelle Zeit im Video
+screen_info#:#Diese Ansicht dient zum Erstellen und Verwalten von Fragen und Kommentaren. Achtung: Interaktive Fragen werden hier NICHT beim Abspielen des Videos angezeigt, wechseln Sie zum Reiter "Inhalt" um die Fragen während des Abspielvorganges eingeblendet zu bekommen.
+show_correct_icon#:#Feedback visuell als 'richtig' kennzeichnen
+show_correct_icon_info#:#Wenn aktiviert, wird das Feedback grün unterlegt dargestellt und mit einem Häkchen als 'richtig' markiert.
+show_wrong_icon#:#Feedback visuell als 'falsch' kennzeichnen
+show_wrong_icon_info#:#Wenn aktiviert, wird das Feedback rot unterlegt dargestellt und durch ein Kreuz als 'falsch' markiert.
+no_text_warning#:#Sie müssen einen Text eingeben
+grp_create_xvid#:#Interaktives Video anlegen
+crs_create_xvid#:#Interaktives Video anlegen
+cat_create_xvid#:#Interaktives Video anlegen
+root_create_xvid#:#Interaktives Video anlegen
+fold_create_xvid#:#Interaktives Video anlegen
+rbac_create_xvid#:#Interaktives Video anlegen 
+source#:#Quelle
+installed_version#:#Installierte Databank Version: %s, Datei Datenbank Version %s
+source_does_not_exist#:#Quelle existiert nicht mehr oder wurde in der Administration deaktiviert
+update_db#:#Datenbank Updates einspielen
+db_up_to_date#:#Datenbank aktuell
+db_update_worked#:#Datenbank erfolgreich aktualisiert
+db_update_failed#:#Datenbank Update schlug fehl: %s
+task_switch#:#Aufgabenstellung aktivieren
+task_switch_info#:#Aufgabenstellung aktivieren
+task#:#Aufgabenstellung
+lp_mode_title_by_questions#:#Fragen beantwortet 
+lp_mode_desc_by_questions#:#Das Objekt gilt als 'Bearbeitet', wenn für alle definierten Fragen eine 'richtige' Antwort gewählt wurde. Falls keine Fragen konfiguriert wurden, gilt das Objekt beim Erreichen der Endposition des Videos als 'Bearbeitet'.
+lp_users#:#Benutzer
+lp_matrix#:#Matrixansicht
+lp_summary#:#Zusammenfassung
+lp_settings#:#Einstellungen
+select_at_least_one#:#Bitte wählen sie mindestens eine Quelle aus.
+back_to#:#zurück zu
+back_to_title#:#Wollen Sie zum Urprungsobjekt %s (%s) zurückkehren?
+save#:#Speichern
+at_least_one_source#:#Es wird mindestens eine Video Quelle benötigt, stellen sie bitte sicher das sie in der Konfiguration des Interaktive Video Plugins mindestens eine Quelle ausgewählt haben.
+feedback_correct_obj#:#Feedback Link auf Magazin Objekt bei korrekter Antwort
+feedback_correct_obj_info#:#Feedback Link auf Magazin Objekt bei korrekter Antwort
+feedback_wrong_obj#:#Feedback Link auf Magazin Objekt bei mindestens einer falschen Antwort
+feedback_wrong_obj_info#:#Feedback Link auf Magazin Objekt bei mindestens einer falschen Antwort
+show_comment_field#:#Zeige ein Kommtarfeld an
+show_comment_field_info#:#Zeige ein Kommtarfeld unter der Reflektionsfrage an
+more_informations#:#Weiterführende Informationen
+neutral_type#:#Bewertung
+with_correct#:#Mit korrekter Antwort
+neutral#:#Neutrale Antworten
+neutral_type_info#:#Wenn die Option Neutrale Anworten ausgewählt ist, gibt es keine richtige Lösung für diese Aufgabe
+feedback_neutral#:#Feedback
+feedback_jump_neutral_info#:#Sie können hier eine Sprungmarke zu einer relevanten Stelle im Video angeben, zu der Nutzer über einen Button springen können, wenn die Frage beantwortet wurde. Der Button wird gemeinsam mit dem Feedback eingeblended.
+feedback_jump_neutral#:#Sprungmarke
+feedback_repository_neutral#:#Feedback Link zu einem Repository Object
+feedback_repository_neutral_info#:#Feedback Link zu einem Repository Object
+neutral_questions#:#Neutrale Fragen
+neutral_question#:#Neutrale Frage
+export_comments#:#Kommentare Exportieren
+export_all_comments#:#Alle Kommentare Exportieren
+question_image#:#Bild für Frage
+extract#:#Thumbnail aus Video erzeugen
+use_this_image#:#Dieses Bild verwenden
+time_for_preview#:#Zeitpunkt: 
+comment_title_info#:#Der Titel wird im Kommentarstream angezeigt und ist für die Kursteilnehmer damit immer sichtbar.
+correct_answer#:#Richtig
+wrong_answer#:#Falsch
+neutral_answer#:#-
+not_answered#:#Nicht beantwortet
+private#:#privat
+public#:#öffentlich
+visibility#:#Sichtbarkeit
+save_anyway#:#Trotzdem speichern
+save_without_correct#:#Sind haben keine korrekte Antwort ausgewählt
+save_without_correct_detail#:#Sie haben weder eine Reflektionfrage, noch neutrale Antworten aktiviert, sind sie sicher, das sie die Frage ohne korrekte Antwort speichern wollen?
+no_comment#:#Kein Kommentarfeld
+no_comment_info#:#Es wird kein Kommentarfeld unter dem Video angezeigt, Kommentare durch Reflektionsfragen mit aktiviertem Kommentarfeld sind nach wie vor möglich.

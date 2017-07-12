@@ -1,0 +1,164 @@
+.commandbuttons {
+	text-align: center;
+	width: 100%;
+}
+
+.commandbuttons a {
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+table.il_ColumnLayout {
+	background: none;
+}
+
+.row-centered {
+	text-align:center;
+}
+
+#memory .card {
+	display:inline-block;
+	float:none;
+	/* reset the text-align */
+	text-align:left;
+
+	/* custom width */
+	width: 75px;
+	height: 75px;
+	background-color: #12738D;
+	border: 1px #666 solid;
+	margin: 5px;
+}
+
+#memory .cardinactive {
+	background-color: #CABC1A;
+}
+
+#leftcard .bd, #rightcard .bd {
+	overflow: auto;
+	background-color: #fff;
+	padding: 10px;
+}
+
+#leftcard .ft, #rightcard .ft {
+	height: 15px;
+	padding: 0;
+}
+
+#leftcard .yui-resize-handle-br, #rightcard .yui-resize-handle-br {
+	right: 0;
+	bottom: 0;
+	height: 8px;
+	width: 8px;
+	position: absolute;
+}
+
+/*  
+The following CSS is added to prevent scrollbar bleedthrough on Gecko browsers (e.g. Firefox) on MacOS.
+*/
+
+/*
+PLEASE NOTE: It is necessary to toggle the "overflow" property of the body element between "hidden" and "auto" in order to prevent the scrollbars from remaining visible after the the Resizable Panel is hidden.  For more information on this issue, read the comments in the "container-core.css" file.
+We use the #reziablepanel_c id based specifier, so that the rule is specific enough to over-ride the .bd overflow rule above.
+*/
+
+#leftcard_c.hide-scrollbars .yui-resize .bd, #rightcard_c.hide-scrollbars .yui-resize .bd {
+	overflow: hidden;
+}
+
+#leftcard_c.show-scrollbars .yui-resize .bd, #rightcard_c.show-scrollbars .yui-resize .bd {
+	overflow: auto;
+}
+
+/*
+PLEASE NOTE: It is necessary to set the "overflow" property of the underlay element to "visible" in order for the scrollbars on the body of a Resizable Panel instance to be visible.  By default the "overflow" property of the underlay element is set to "auto" when a Panel is made visible on Gecko for Mac OS X to prevent scrollbars from poking through it on that browser + platform combintation.  For more information on this issue, read the comments in the container-core.css" file.
+*/
+
+#leftcard_c.show-scrollbars .underlay, #rightcard_c.show-scrollbars .underlay {
+	overflow: visible;
+}
+
+.stretch {
+	position: fixed;
+	z-index: -1;
+}
+
+/* accordion */
+.accordion {
+	border: 1px solid #aaa;
+	padding: 4px;
+	margin: 1em;
+	background: #fff;
+}
+
+.accordion dt {
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+	padding: 3px 8px;
+}
+
+.accordion dt.selected {
+	background: #034582;
+}
+
+.accordion dt:hover, .accordion dt.over {
+	text-decoration: underline;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.accordion dd {
+	display: none;
+	padding: 4px;
+	overflow: hidden;
+}
+
+.accordion dd.open {
+	display: block;
+}
+
+.accordion dd.getHeight {
+	display: block;
+}
+
+.fullscreen {
+	padding: 2em;
+}
+
+.theme-table {
+	margin-top: -5px;
+}
+
+.theme-table table {
+	margin-bottom: 50px;
+}
+
+.theme-table .suboption {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.theme-table .theme-mixed,
+#il_prop_cont_themes > label {
+	cursor: text;
+}
+
+.table.table-disabled label {
+	cursor: text !important;
+}
+
+#il_prop_cont_topicdisabled label,  #il_prop_cont_leveldisabled label {
+	cursor: text !important;
+}
+
+.intro {
+	margin-bottom: 10px;
+}
+
+#found_c, #leftcard_c, #rightcard_c {
+	z-index: 10000 !important;
+}
