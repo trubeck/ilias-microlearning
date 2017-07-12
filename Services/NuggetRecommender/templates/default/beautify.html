@@ -1,0 +1,27 @@
+<div>
+    <style scoped>
+        div{
+            color: green;
+        }
+    </style>
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.recommendations').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3
+            });
+        });
+    </script>
+
+    <div class="recommendations">
+        {RECOM}
+    </div>
+
+    <!--script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script-->
+
+</div>
