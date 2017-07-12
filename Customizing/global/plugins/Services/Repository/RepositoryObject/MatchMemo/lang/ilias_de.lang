@@ -1,0 +1,84 @@
+crs_create_xmry#:#Neues Match & Memo Spiel anlegen
+grp_create_xmry#:#Neues Match & Memo Spiel anlegen
+fold_create_xmry#:#Neues Match & Memo Spiel anlegen
+root_create_xmry#:#Neues Match & Memo Spiel anlegen
+cat_create_xmry#:#Neues Match & Memo Spiel anlegen
+obj_xmry#:#Match & Memo Spiel
+objs_xmry#:#Match & Memo Spiele
+xmry_add#:#Füge Match & Memo Spiel hinzu
+xmry_delete#:#Lösche Match & Memo Spiel
+xmry_edit_permission#:#Ändere Rechte
+xmry_new#:#Neues Match & Memo Spiel
+xmry_read#:#Match & Memo Spiel ansehen
+xmry_upload_file#:#Upload file
+xmry_visible#:#Match & Memo Spiel ist sichtbar
+xmry_write#:#Match & Memo Spiel bearbeiten
+obj_xmry_duplicate#:#Kopiere Match & Memo Spiel
+objs_xmry_duplicate#:#Kopiere Match & Memo Spiele
+mry_copy#:#Kopiere Match & Memo Spiel
+mry_show_title#:#Match & Memo Titel im Kopf der Karten anzeigen
+mry_highscore_single#:#Pro Teilnehmer nur einen Eintrag in der Bestenliste erlauben
+mry_highscore_single_desc#:#Teilnehmer werden in der Bestenliste nur ein Mal mit ihrem jeweils besten Ergebnis angezeigt.
+mry_warning_not_complete#:#Das Match & Memo-Spiel ist nicht vollständig.
+plugininfo#:#Plugin-Information
+memory_game#:#Match & Memo Spiel
+maintenance#:#Wartung
+heading#:#Überschrift
+heading_info#:#Bitte geben Sie eine Überschrift an, die auf der Startseite des Match & Memo Spiels angezeigt werden soll.
+intro#:#Einführung
+intro_info#:#Bitte geben Sie einen einleitenden Text ein, der auf der Startseite des Match & Memo Spiels angezeigt werden soll.
+memory_help#:#Hilfe
+highscore#:#Bestenliste
+new_game#:#Neues Spiel starten
+game_start#:#Spielstart
+level_easy#:#Leicht
+level_medium#:#Mittel
+level_hard#:#Schwer
+level_mixed#:#Gemischter Schwierigkeitsgrad
+nr_of_moves#:#Anzahl der Züge
+memory_finished#:#Glückwunsch! Sie haben das Match & Memo Spiel in %s Zügen gelöst. Bitte geben Sie Ihren Spitznamen an, um sich in die Bestenliste einzutragen.
+memory_nickname#:#Spitzname
+memory_save_highscore#:#Ergebnis speichern
+memory_skip_highscore#:#Weiter
+restart_question#:#Wollen Sie ein weiteres Spiel starten?
+exit_game#:#Spiel beenden
+moves#:#Züge
+time_s#:#Zeit (in Sekunden)
+rank#:#Position
+highscore_empty#:#Keine Ergebnisse verfügbar
+cards#:#Karten
+start#:#Start
+save_close#:#Speichern und Schließen
+save_new#:#Speichern und neues Paar erstellen
+found_pair#:#Paar gefunden
+continue#:#Weiter
+background_image#:#Hintergrundbild
+participants#:#Teilnehmende
+msg_all_data_deleted#:#Die Daten aller Teilnehmenden wurden gelöscht.
+msg_selected_data_deleted#:#Ausgewählte Daten gelöscht
+confirm_delete_all_data#:#Wollen Sie wirklich die Daten aller Teilnehmenden löschen?
+msg_no_selection#:#Sie haben keine Auswahl getroffen.
+confirm_delete_selected_data#:#Wollen Sie wirklich die Daten der ausgewählten Teilnehmenden löschen?
+fullscreen#:#Vollbild
+fullscreen_description#:#Startet das Match & Memo Spiel im Vollbild-Modus. Es werden keine ILIAS-Elemente angezeigt.
+cancel_game#:#Spiel abbrechen
+topic#:#Themengebiet
+theme_easy#:#Leicht
+theme_medium#:#Mittel
+theme_hard#:#Schwer
+theme_mixed#:#Gemischt
+row_label#:#Anzahl der Match & Memo Pools
+themes#:#Themengebiete
+msg_topic_is_required#:#Bitte wählen Sie mindestens einen Match & Memo Pool für ein Themengebiet.
+msg_wrong_percentage#:#Die Summe der prozentualen Anteile muss immer 100 ergeben. Alternativ können Sie die prozentualen Anteile leer lassen, die Karten werden dann gleich über alle Pools verteilt.
+back_url#:#Rücksprungadresse
+back_url_info#:#Wenn Sie es wünschen, dass die Teilnehmenden nach Beendigung eines Match & Memo Spiels an eine bestimmte Internet-Adresse weitergeleitet werden, so tragen Sie diese Adresse hier ein.
+properties#:#Eigenschaften
+matchmemo_plugin_configuration#:#Match & Memo Plugin-Konfiguration
+configuration_saved#:#Konfiguration gespeichert
+msg_obj_modified#:#Konfiguration gespeichert
+msg_obj_modified_with_pool_sync#:#Konfiguration gespeichert und Karten aus den Match & Memo Pools übernommen.
+msg_input_is_required#:#Bitte treffen Sie entsprechende Einstellungen bzgl. der Themengebiete
+obj_xmpl_select#:#Wähle Match & Memo Pool
+msg_wrong_percentage_range#:#Der Wertebereich der prozentualen Anteile liegt zwischen 1 und 99. Bitte geben Sie einen entsprechenden Wert ein.
+msg_min_different_pools_violation#:#Bitte wählen Sie %s unterschiedliche Pools aus.

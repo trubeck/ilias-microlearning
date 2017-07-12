@@ -136,7 +136,8 @@ class ilObjectMetaDataGUI
 		
 		return (($this->obj_id || !$this->obj_type) &&
 			in_array($type, array(
-				"crs", 
+				"crs",
+				"xpal",
 				"file", 
 				"glo", "glo:gdf", 
 				"svy", "spl", 
@@ -187,7 +188,7 @@ class ilObjectMetaDataGUI
 	
 	public function getTab($a_base_class = null)
 	{
-		global $ilCtrl;
+		global $ilCtrl, $lng;
 		
 		if(!$a_base_class)
 		{

@@ -1,0 +1,57 @@
+// 
+// English Language File for Match & Memo Pool Plugin
+//
+
+<!-- language file start -->
+crs_create_xmpl#:#Create Match & Memo Pool
+grp_create_xmpl#:#Create Match & Memo Pool
+fold_create_xmpl#:#Create Match & Memo Pool
+root_create_xmpl#:#Create Match & Memo Pool
+cat_create_xmpl#:#Create Match & Memo Pool
+obj_xmpl#:#Match & Memo Pool
+objs_xmpl#:#Match & Memo Pools
+obj_xmpl_duplicate#:#Copy Match & Memo Pool
+objs_xmpl_duplicate#:#Copy Match & Memo Pools
+obj_xmpl_select#:#Select Match & Memo Pool
+xmpl_add#:#Add Match & Memo Pool
+xmpl_new#:#Add New Match & Memo Pool
+xmpl_read#:#Read access to Match & Memo Pool
+xmpl_write#:#Edit Match & Memo Pool
+xmpl_delete#:#Delete Match & Memo Pool
+xmpl_visible#:#Match & Memo Pool is visible
+xmpl_edit_permission#:#Change permission settings
+xmpl_copy#:#Copy
+edit#:#Edit
+properties#:#Properties
+plugininfo#:#Plugin-Information
+pairs#:#Pairs
+pair_add#:#Create new pair
+card#:#Card
+edit_pair#:#Edit Match & Memo Pair
+pair_browser#:#Match & Memo Pairs
+mpl_online_property#:#Online
+mpl_online_property_description#:#Only online Match & Memo pools could be used in Match & Memo games.
+pair_solution#:#Solution Text
+obj_mpl_select#:#--- Please select ---
+mpl_pairs_imported#:#%d pairs imported.
+mpl_nothing_imported#:#Nothing imported. Please check your import file.
+import_no_title#:#Import (no title)
+import_no_description#:#Import (no description)
+import_unknown#:#Unknown
+upload_file#:#Upload file
+upload_file_description#:#To insert textual Match & Memo pairs please upload a CSV file. Enter at least the two cards in a row and optionally a solution text, a pair title, an author and a description. Separate the entries by a semicolon. If you have to use a semicolon in one of the entries, please precede each semicolon with a backslash. For example: Card 1;Card 2;Solution;Title;Author;Description
+msg_pairs_no_selection#:#Please select at least one Match & Memo Pair.
+msg_pairs_deleted#:#Match & Memo Pair(s) deleted.
+paste_no_objects#:#There are no pairs in the clipboard. Please copy or move a pair into the clipboard.
+paste_success#:#The pair(s) have been pasted into the Match & Memo pool
+move_insert_clipboard#:#The selected pairs(s) are marked for moving
+move_select_none#:#Please check at least one pair to select it for moving
+copy_insert_clipboard#:#The selected pair(s) are copied to the clipboard
+copy_select_none#:#Please check at least one pair to copy it to the clipboard
+matchmemopool_plugin_configuration#:#Match & Memo Pool Plugin Configuration
+configuration_saved#:#Configuration saved
+save_close#:#Save and Close
+save_new#:#Save and Create New Pair
+cannot_set_online_not_enough_pairs#:#The Match & Memo Pool cannot be switched to "online", you have to create at least 16 pairs.
+not_enough_pairs#:#There are less than 16 pairs available.
+set_offline_not_enough_pairs#:#The Match & Memo Pool was switched to "offline" because there a less than 16 pairs available.

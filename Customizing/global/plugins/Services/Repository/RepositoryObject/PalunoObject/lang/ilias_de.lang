@@ -1,0 +1,44 @@
+obj_xpal#:#Paluno Object
+objs_xpal#:#Paluno Objects
+obj_xpal_duplicate#:#Kopieren
+objs_xpal_duplicate#:#Kopiere Paluno Objects
+obj_xpal_select#:#Wähle Paluno Object
+xpal_add#:#Paluno Object hinzufügen
+xpal_new#:#Neues Paluno Object
+xpal_read#:#Lesezugriff auf Paluno Object
+xpal_write#:#Paluno Object bearbeiten
+xpal_delete#:#Paluno Object löschen
+xpal_visible#:#Paluno Object ist sichtbar
+xpal_edit_permission#:#Zugriffsrecht bearbeiten
+crs_create_xpal#:#Erstelle Paluno Object
+grp_create_xpal#:#Erstelle Paluno Object
+fold_create_xpal#:#Erstelle Paluno Object
+root_create_xpal#:#Erstelle Paluno Object
+cat_create_xpal#:#Erstelle Paluno Object
+title#:#Titel
+description#:#Beschreibung
+online#:#Online
+save#:#Speichern
+update#:#Update
+properties#:#Eigenschaften
+content#:#Inhalt
+copy#:#Kopieren
+edit#:#Bearbeiten
+meta_data#:#Metadaten
+export#:#Export
+set_not_attempted#:#Setze Lernfortschritt auf "Nicht Versucht"
+set_in_progress#:#Setze Lernfortschritt auf "In Bearbeitung"
+set_passed#:#Setze Lernfortschritt auf "Bestanden"
+set_failed#:#Setze Lernfortschritt auf "Nicht Bestanden"
+set_completed#:#Setze Lernfortschritt auf "Durchgeführt"
+lp_status_0#:#Nicht Versucht
+lp_status_1#:#In Bearbeitung
+lp_status_2#:#Durchgeführt
+lp_status_3#:#Nicht Bestanden
+lp_status_#:#Kein Status gesetzt.
+lp_status_info#:#Achtung, wenn Sie den Lernfortschritt ändern so wird der Lernfortschritt für diesen Benutzer bearbeitet UND alle anderen Benutzer auf "Nicht Teilgenommen" gesetzt! Mit der Lucenesuche wird dieses Objekt gefunden, wenn man nach dem Titel, der Beschreibung oder dem Begriff "Repoplugin" sucht.
+offline:#:Offline
+important#:#Wichtig
+online_status#:#Online Status
+lp_status#:#Lernfortschritt
+update_successful#:Die Änderungen wurden gespeichert.

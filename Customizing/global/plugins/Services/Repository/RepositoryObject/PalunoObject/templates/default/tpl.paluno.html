@@ -1,0 +1,60 @@
+<!-- BEGIN paluno_block -->
+<nav class="ilToolbar navbar navbar-default yamm " role="navigation" id="2">
+    <div class="container-fluid interativeVideoNavHeader">
+        <div class="collapse navbar-collapse ilFloatLeft" id="tb-collapse-2">
+            <ul class="ilToolbarItems nav navbar-nav">
+                <li>
+                    <h1>Daily Scrum Timeboxen</h1>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse ilFloatRight" id="tb-collapse-2">
+            <ul class="ilToolbarItems nav navbar-nav">
+                <li>
+                    <div>
+                        <button class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="true">
+                            Pruefe dein Wissen
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <button class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="true">
+                            Merken
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<img src="{SRC_ADDNEW}" style="width:733px;height:415px;">
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <!-- BEGIN task_description -->
+        <div class=ilFormHeader">
+            <h3 class="ilHeader task_interaction"><span class="task_icon arrow_down"></span><span class="task_text">{TASK_TEXT}</span></h3>
+        </div>
+        <div class="task_description">{TASK_DESCRIPTION}</div>
+        <!-- END task_description -->
+        <div id="ilInteractiveVideoPlayerContainer">
+            {VIDEO_PLAYER}
+        </div>
+        {COMMENTS_FORM}
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class=ilFormHeader">
+            <h3 class="ilHeader">{TXT_COMMENTS}</h3>
+        </div>
+        <div id="ilInteractiveVideoComments" class="scroll-text">
+            <ul id="ul_scroll"></ul>
+        </div>
+    </div>
+</div>
+{CONFIG}
+{MODAL_OVERLAY}
+
+<div class="prototype">
+</div>
+
+<!-- END paluno_block -->

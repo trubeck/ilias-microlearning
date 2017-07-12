@@ -1,0 +1,78 @@
+<!-- BEGIN cancelbutton -->
+<div class="cancelbutton"><a class="btn btn-default" href="{CANCEL_URL}">{CANCEL_GAME}</a></div>
+<!-- END cancelbutton -->
+<div id="memory">
+<!-- BEGIN heading -->
+<h1>{TEXT_HEADING}</h1>
+<!-- END heading -->
+<!-- BEGIN intro -->
+<div class="intro">{TEXT_INTRO}</div>
+<!-- END intro -->
+<div class="commandbuttons">
+	<a class="help btn btn-default" href="{URL_HELP}" onclick="javascript:return false;">{TEXT_HELP}</a>
+<!-- BEGIN newgame -->	
+	<a class="newgame btn btn-default" href="{URL_NEWGAME}">{TEXT_NEWGAME}</a>
+<!-- END newgame --><!-- BEGIN finish_button -->
+	<a class="newgame btn btn-default" href="{URL_FINISH}">{TEXT_FINISH}</a><!-- END finish_button -->
+</div>
+</div>
+<h1>{TEXT_HIGHSCORE}</h1>
+<dl class="accordion">
+<!-- BEGIN accordion_page -->
+	<dt class="selected">{ACCORDION_TITLE}</dt>
+	<dd class="open">
+		<div class="bd">{ACCORDION_CONTENT}</div>
+	</dd>
+<!-- END accordion_page -->
+</dl>
+<div id="helpwindow">
+	<div class="hd">{HELP_TITLE}</div>
+	<div class="bd">{HELP_TEXT}</div>
+	<div class="ft"></div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+var help;
+
+function showHelp(e, obj)
+{
+	help.show();
+}
+
+var handleYes = function() {
+	this.hide();
+};
+
+
+function initHelpWindow() {
+	// @todo: If the modal overlay does not work (e.g. in chrome), remove the ILIAS fixed header
+	help = new YAHOO.widget.SimpleDialog("helpwindow", 
+	{ 
+		width: "500px",
+		fixedcenter: true,
+		visible: false,
+		draggable: true,
+		close: true,
+		icon: YAHOO.widget.SimpleDialog.ICON_HELP,
+		modal: true,
+		zIndex:10000,
+		constraintoviewport: true,
+		buttons: [ { text:"OK", handler:handleYes, isDefault:true }]
+	});
+	help.render("memory");
+
+	helpurls = YAHOO.util.Dom.getElementsBy(function (el) { return (YAHOO.util.Dom.hasClass(el, 'help')) ? true : false; }, 'a', document);
+	for (i = 0; i < helpurls.length; i++)
+	{
+		YAHOO.util.Event.addListener(helpurls[i], 'click', showHelp);
+	}
+}
+
+il.Util.addOnLoad(initHelpWindow);
+<!-- BEGIN sel_acc -->
+Event.on(window,"load", function() {
+	YAHOO.ilias.accordion.openHeader({FINISHED_LEVEL});
+});
+<!-- END sel_acc -->
+</script>

@@ -1,0 +1,84 @@
+crs_create_xmry#:#Create Match & Memo Game
+grp_create_xmry#:#Create Match & Memo Game
+fold_create_xmry#:#Create Match & Memo Game
+root_create_xmry#:#Create Match & Memo Game
+cat_create_xmry#:#Create Match & Memo Game
+obj_xmry#:#Match & Memo Game
+objs_xmry#:#Match & Memo Games
+xmry_add#:#Add Match & Memo Game
+xmry_delete#:#Delete Match & Memo Game
+xmry_edit_permission#:#Change permission settings
+xmry_new#:#New Match & Memo Game
+xmry_read#:#Read access to Match & Memo Game
+xmry_upload_file#:#Upload file
+xmry_visible#:#Match & Memo Game is visible
+xmry_write#:#Edit Match & Memo Game
+obj_xmry_duplicate#:#Copy Match & Memo Game
+objs_xmry_duplicate#:#Copy Match & Memo Games
+mry_copy#:#Copy Match & Memo Game
+mry_show_title#:#Show Match & Memo title in card header
+mry_highscore_single#:#Highscore entries occur only once per participant
+mry_highscore_single_desc#:#A participant is only shown once with his nickname in the highscore with his/her best score.
+mry_warning_not_complete#:#The Match & Memo game is not complete.
+plugininfo#:#Plugin-Information
+memory_game#:#Match & Memo Game
+maintenance#:#Maintenance
+heading#:#Heading
+heading_info#:#Please enter a heading the will be shown on the start page of the Match & Memo game.
+intro#:#Introduction
+intro_info#:#Please enter an introduction text that will be shown on the start page of the memory game.
+memory_help#:#Help
+highscore#:#Highscores
+new_game#:#Start New Game
+game_start#:#Game Start
+level_easy#:#Easy
+level_medium#:#Medium
+level_hard#:#Hard
+level_mixed#:#Mixed level of difficulty
+nr_of_moves#:#Number of moves
+memory_finished#:#Congratulations. You finished the Match & Memo game in %s moves. Please enter a nickname to store your results in the highscore list.
+memory_nickname#:#Nickname
+memory_save_highscore#:#Save Score
+memory_skip_highscore#:#Continue
+restart_question#:#Do you want to start a new game?
+exit_game#:#Exit Game
+moves#:#Moves
+time_s#:#Time (in seconds)
+rank#:#Rank #
+highscore_empty#:#No scores available
+cards#:#Cards
+start#:#Start
+save_close#:#Save and Close
+save_new#:#Save and Create New Pair
+found_pair#:#Pair found
+continue#:#Continue
+background_image#:#Background Image
+participants#:#Participants
+msg_all_data_deleted#:#All participant data deleted
+msg_selected_data_deleted#:#Selected participant data deleted
+confirm_delete_all_data#:#Do you really want to delete the data of all participants?
+msg_no_selection#:#You made no selection!
+confirm_delete_selected_data#:#Do you really want to delete the data of the selected participants?
+fullscreen#:#Fullscreen mode
+fullscreen_description#:#Run the Match & Memo game in fullscreen mode. No ILIAS controls will be shown.
+cancel_game#:#Cancel Game
+topic#:#Topic
+theme_easy#:#Easy
+theme_medium#:#Medium
+theme_hard#:#Hard
+theme_mixed#:#Mixed
+row_label#:#Number of Match & Memo pools
+themes#:#Themes
+msg_topic_is_required#:#Please select at least one Match & Memo Pool for a topic.
+msg_wrong_percentage#:#The sum of the percentages must be exact 100. Alternatively you can leave the percentages empty to distribute the card uniformly.
+back_url#:#Backlink
+back_url_info#:#If you need ILIAS to redirect to a special location when a user finishes or cancels a Match & Memo game, please enter the URL to the location here.
+properties#:#Properties
+matchmemo_plugin_configuration#:#Match & Memo Plugin Configuration
+configuration_saved#:#Configuration saved
+msg_obj_modified#:#Configuration saved
+msg_obj_modified_with_pool_sync#:#Configuration saved, synchronized pools to game.
+msg_input_is_required#:#Please choose a desired theme configuration.
+obj_xmpl_select#:#Select Match & Memo Pool
+msg_wrong_percentage_range#:#Please insert a value between 1 and 99.
+msg_min_different_pools_violation#:#Please choose %s different pools.

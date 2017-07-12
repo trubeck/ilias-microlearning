@@ -1,0 +1,74 @@
+<div class="table-responsive theme-table">
+<!-- BEGIN theme -->	
+	<table class="table table-striped{DISABLED_TABLE}">
+		<tr>
+			<td><label for="{POST_VAR}[title][{ROW_INDEX}]">{TEXT_TOPIC}</label></td>
+			<td><input class="form-control" type="text" name="{POST_VAR}[title][{ROW_INDEX}]" <!-- BEGIN prop_value -->value="{PROPERTY_VALUE}" <!-- END prop_value --> id="{POST_VAR}[title][{ROW_INDEX}]" size="60" maxlength="255"{DISABLED_TITLE} /></td>
+			<td>
+<!-- BEGIN buttons -->
+				<button type="submit" name="cmd[{BUTTON_POST_VAR}add][{BUTTON_ROW_INDEX}]">{ADD_BUTTON}</button>
+				<button type="submit" name="cmd[{BUTTON_POST_VAR}remove][{BUTTON_ROW_INDEX}]">{REMOVE_BUTTON}</button>
+<!-- END buttons -->
+			</td>
+		</tr>
+		<tr>
+			<td><label for="{POST_VAR}[easy][{ROW_INDEX}]">{TEXT_EASY}</label></td>
+			<td>
+				<select class="form-control" id="{POST_VAR}[easy][{ROW_INDEX}]" name="{POST_VAR}[easy][{ROW_INDEX}]"{DISABLED_SELECT}>
+<!-- BEGIN option_easy -->
+					<option value="{OPTION_VALUE}"{SELECTED_EASY}>{OPTION_TEXT}</option>
+<!-- END option_easy -->
+				</select>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label for="{POST_VAR}[medium][{ROW_INDEX}]">{TEXT_MEDIUM}</label></td>
+			<td>
+				<select class="form-control" id="{POST_VAR}[medium][{ROW_INDEX}]" name="{POST_VAR}[medium][{ROW_INDEX}]"{DISABLED_SELECT}>
+<!-- BEGIN option_medium -->
+					<option value="{OPTION_VALUE}"{SELECTED_MEDIUM}>{OPTION_TEXT}</option>
+<!-- END option_medium -->
+				</select>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label for="{POST_VAR}[hard][{ROW_INDEX}]">{TEXT_HARD}</label></td>
+			<td>
+				<select class="form-control" id="{POST_VAR}[hard][{ROW_INDEX}]" name="{POST_VAR}[hard][{ROW_INDEX}]"{DISABLED_SELECT}>
+<!-- BEGIN option_hard -->
+					<option value="{OPTION_VALUE}"{SELECTED_HARD}>{OPTION_TEXT}</option>
+<!-- END option_hard -->
+				</select>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="ilValignTop"><label class="theme-mixed" for="{POST_VAR}[mixed][{ROW_INDEX}]">{TEXT_MIXED}</label></td>
+			<td>
+				<div class="form-inline">
+				<label for="{POST_VAR}[rows][{ROW_INDEX}]">{ROW_LABEL}</label>
+				<select class="form-control" id="{POST_VAR}[rows][{ROW_INDEX}]" name="{POST_VAR}[rows][{ROW_INDEX}]"{DISABLED_MIXEDSELECTOR}>
+<!-- BEGIN row_option -->
+					<option value="{ROW_OPTION_VALUE}"{ROW_OPTION_VALUE_SELECTED}>{ROW_OPTION_TEXT}</option>
+<!-- END row_option -->
+				</select>
+				<input type="submit" class="btn btn-default" name="cmd[setrows{POST_VAR}][{ROW_INDEX}]" value="{TEXT_SELECT}"{DISABLED_SETROWS} />
+				</div>
+<!-- BEGIN pool_mixed -->
+				<div class="suboption form-inline">
+				<select class="form-control" id="{POST_VAR}[mixed][{ROW_INDEX}][{COUNTER}]" name="{POST_VAR}[mixed][{ROW_INDEX}][{COUNTER}]"{DISABLED_SELECT_MIXED}>
+<!-- BEGIN option_mixed -->
+					<option value="{OPTION_VALUE}"{SELECTED_MIXED}>{OPTION_TEXT}</option>
+<!-- END option_mixed -->
+				</select>
+				<input type="text" class="form-control" size="4" name="{POST_VAR}[mixed_percent][{ROW_INDEX}][{COUNTER}]" {MIXED}{DISABLED_MIXED_PERCENT}/> %
+				</div>
+<!-- END pool_mixed -->
+			</td>
+			<td></td>
+		</tr>
+<!-- END theme -->	
+	</table>
+</div>

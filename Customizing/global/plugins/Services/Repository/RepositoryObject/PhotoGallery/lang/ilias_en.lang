@@ -1,0 +1,75 @@
+<!-- language file start -->
+content#:#Content
+info#:#Info
+settings#:#Settings
+permissions#:#Permissions
+view#:#View
+manage#:#Manage
+success#:#Album is created!
+no_checkbox#:#Please select at least one item!
+delete_album#:#Delete object(s)?
+cancel#:#Cancel
+delete#:#Delete
+msg_removed_album#:#Object(s) deleted!
+albumtitle#:#Album title
+actions#:#Actions
+edit#:#Edit
+title#:#Title
+description#:#Description
+create_album#:#Create album
+edit_album#:#Edit album
+enter_date#:#Select date
+date#:#Date
+save#:#Save
+cancel#:#Cancel
+success_edit#:#Changes saved!
+upload_pic#:#Upload picture
+edit_pic#:#Edit picture
+pic_title#:#Picture title
+pic#:#Picture
+select_preview#:#Set as preview picture
+add_pic#:#Upload
+back_to_gallery#:#Back to gallery
+success_pic#:#Picture is created!
+delete_pic#:#Delete object(s)?
+msg_removed_pic#:#Object(s) is deleted!
+add_new_pic#:#Add new picture
+back_to_pictures#:#Back to pictures
+exif_data#:#Exif data
+gallery_title#:#Gallery title
+back_to_diashow#:#Back to diashow
+download#:#Download
+move#:#Move
+take_pic_date#:#Take exposure date
+info_foto_date#:#As long as the pictures deliver a date. Otherwise it is possible to change the date over edit picture.
+pics#:#Pictures
+xpho_new#:#Create new Photo Gallery
+objs_xpho_duplicate#:#Copy Photo Gallery
+objs_xpho#:#Galleries
+obj_xpho#:#Photo Gallery
+obj_title_create_new#:#Create new Photogallery
+xpho_add#:#Add Photo Gallery
+xpho_edit_permission#:#Edit Permission
+xpho_visible#:#Visible
+xpho_read#:#Read
+xpho_write#:#Edit
+xpho_delete#:#Delete
+download_images#:#Download Images
+xpho_rep_robj_xpho_download_images#:#Download Images
+permission_denied#:#Access Denied. You do not have the necessary rights.
+wrong_filetype#:#One or more files contained a wrong datatype. Allowed filetypes: .jpg, .jpeg, .png, .gif
+grp_create_xpho#:#Create Photogallery
+crs_create_xpho#:#Create Photogallery
+cat_create_xpho#:#Create Photogallery
+root_create_xpho#:#Create Photogallery
+fold_create_xpho#:#Create Photogallery
+rbac_create_xpho#:#Create Photogallery
+sorting#:#Sorting
+sort_type#:#Sort type
+sort_type_create_date#:#Upload date
+sort_type_title#:#Title
+album_sort_type_info#:#Controls how pictures in this album are sorted, either by upload date or title
+sort_direction#:#Sort direction
+sort_direction_asc#:#Ascending
+sort_direction_desc#:#Descending
+album_sort_direction_info#:#Influences the sort direction of the sort type selected above

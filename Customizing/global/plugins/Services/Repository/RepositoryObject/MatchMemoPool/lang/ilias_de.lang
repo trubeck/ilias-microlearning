@@ -1,0 +1,57 @@
+// 
+// German Language File for Match & Memo Pool Plugin
+//
+
+<!-- language file start -->
+crs_create_xmpl#:#Neuen Match & Memo Pool anlegen
+grp_create_xmpl#:#Neuen Match & Memo Pool anlegen
+fold_create_xmpl#:#Neuen Match & Memo Pool anlegen
+root_create_xmpl#:#Neuen Match & Memo Pool anlegen
+cat_create_xmpl#:#Neuen Match & Memo Pool anlegen
+obj_xmpl#:#Match & Memo Pool
+objs_xmpl#:#Match & Memo Pools
+obj_xmpl_duplicate#:#Kopiere Match & Memo Pool
+objs_xmpl_duplicate#:#Kopiere Match & Memo Pools
+obj_xmpl_select#:#Wähle Match & Memo Pool
+xmpl_add#:#Füge Match & Memo Pool hinzu
+xmpl_new#:#Neuer Match & Memo Pool
+xmpl_read#:#Match & Memo Pool ansehen
+xmpl_write#:#Match & Memo Pool bearbeiten
+xmpl_delete#:#Match & Memo Pool löschen
+xmpl_visible#:#Match & Memo Pool ist sichtbar
+xmpl_edit_permission#:#Ändere Rechte
+xmpl_copy#:#Kopieren
+edit#:#Bearbeiten
+properties#:#Eigenschaften
+plugininfo#:#Plugin-Information
+pairs#:#Paare
+pair_add#:#Neues Paar erstellen
+card#:#Karte
+edit_pair#:#Paar bearbeiten
+pair_browser#:#Paare
+mpl_online_property#:#Online
+mpl_online_property_description#:#Nur Match & Memo Pools, die "online" sind, können in Match & Memo Spielen verwendet werden.
+pair_solution#:#Lösungstext
+obj_mpl_select#:#--- Bitte auswählen ---
+mpl_pairs_imported#:#Es wurden %d Paare importiert.
+mpl_nothing_imported#:#Es wurden nichts importiert. Bitte überprüfen Sie den Inhalt Ihrer Importdatei.
+import_no_title#:#Import (ohne Titel)
+import_no_description#:#Import (ohne Beschreibung)
+import_unknown#:#Unbekannt
+upload_file#:#Datei hochladen
+upload_file_description#:#Sie können Match & Memo-Kartenpaare in Textform in einer sogenannten CSV-Datei importieren. Tragen Sie pro Zeile mindestens die beiden Karten und optional noch einen Lösungstext, den Titel des Paares, den Autor des Paares und die Beschreibung des Paares in die Datei ein und trennen Sie die einzelnen Einträge durch ein Semikolon. Falls Sie ein Semikolon innerhalb ihrer Textbeiträge verwenden müssen, stellen Sie diesem bitte einen umgekehrten Schrägstrich voran. Beispiel: Karte 1;Karte 2;Lösung;Titel;Autor;Beschreibung
+msg_pairs_no_selection#:#Bitte wählen Sie mindestens ein Paar aus.
+msg_pairs_deleted#:#Paar(e) gelöscht.
+paste_no_objects#:#Es befinden sich keine Paare in der Zwischenablage. Bitte kopieren oder verschieben Sie wenigstens eine Paar in die Zwischenablage.
+paste_success#:#Die Paare wurden in den Match & Memo Pool eingefügt
+move_insert_clipboard#:#Die ausgewählten Paare wurden zum Verschieben markiert
+move_select_none#:#Bitte wählen Sie mindestens ein Paar zum Verschieben aus
+copy_insert_clipboard#:#Die ausgewählten Paare wurden in die Zwischenablage kopiert
+copy_select_none#:#Bitte wählen Sie mindestens eine Paar aus, um dieses in die Zwischenablage zu kopieren
+matchmemopool_plugin_configuration#:#Match & Memo Pool Plugin-Konfiguration
+configuration_saved#:#Konfiguration gespeichert
+save_close#:#Speichern und Schließen
+save_new#:#Speichern und neues Paar erstellen
+cannot_set_online_not_enough_pairs#:#Der Match & Memo Pool kann nicht "online" geschaltet werden, da mindestens 16 Paare benötigt werden.
+not_enough_pairs#:#Es sind weniger als 16 Paare enthalten.
+set_offline_not_enough_pairs#:#Der Match & Memo Pool wurde "offline" geschaltet, da weniger als 16 Paare vorliegen.
