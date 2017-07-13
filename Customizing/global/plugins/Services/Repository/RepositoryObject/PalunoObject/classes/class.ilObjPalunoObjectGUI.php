@@ -240,6 +240,8 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$tpl->setCurrentBlock("paluno_block");
 		$tpl->setVariable("TYP", $this->txt("obj_xpal"));
 		$tpl->setVariable("SRC_ADDNEW", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+		$tpl->setVariable("ARROW_LEFT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow left.png");
+		$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
 		//$tpl->setVariable("TYP", $this->object->getID());
 		$tpl->parseCurrentBlock();
 		//$tpl->setCurrentBlock("addpic");
