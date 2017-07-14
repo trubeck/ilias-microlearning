@@ -4,6 +4,7 @@
 /.cache
 /.buildpath
 /.settings
+/.vs
 /extern
 /Services/PHPUnit/config/cfg.phpunit.php
 /nbproject
