@@ -92,6 +92,7 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 	/**
 	 * Do Cloning
 	*/ 
+	/**
 	function doCloneObject($new_obj, $a_target_id, $a_copy_id)
 	{
 		global $ilDB;
@@ -100,7 +101,7 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 		$new_obj->setOptionOne($this->getOptionOne());
 		$new_obj->update();
 	}  
-
+	*/
 	/**
 	 * Set online
 	 *
