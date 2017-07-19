@@ -55,11 +55,21 @@ class ilNuggetRecommenderGUI
 
         $my_tpl = new ilTemplate('beautify.html', true, true,'Services/NuggetRecommender');
 
-        $a = "<div>Ene</div>";
-        $a .= "<div>Mene</div>";
-        $a .= "<div>Miste</div>";
 
-        $my_tpl->setVariable("RECOM", $a);
+        include_once "./Services/NuggetRecommender/classes/class.ilNuggetRecommender.php";
+
+        $recommender = new ilNuggetRecommender();
+
+        $recommendedTitles = $recommender->recommend();
+
+        $display ="";
+
+        for($x = 0; $x<count($recommendedTitles); $x++)
+        {
+            $display .= "<div>" . $recommendedTitles[$x] . "</div>";
+        }
+
+        $my_tpl->setVariable("RECOM", $display);
 
         $tpl->setContent($my_tpl->get());
 
@@ -67,26 +77,7 @@ class ilNuggetRecommenderGUI
 
     }
 
-    function DBreqest()
-    {
 
-        global $ilDB;
-        include ("./include/inc.header.php");
-
-        $type = "htlm";
-        $id = 270;
-        //$result = $ilDB->getDBVersion();
-        //$result = $ilDB->query("SELECT * FROM object_data WHERE type = ".$ilDB->quote($type, "text"));
-        //$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($id, "integer"));
-        //$result = $ilDB->query("SELECT * FROM il_meta_meta_data WHERE obj_id = ".$ilDB->quote($id, "integer"));
-        $result = $ilDB->query("SELECT * FROM il_meta_keyword WHERE obj_id = ".$ilDB->quote($id, "integer"));
-        $data = $ilDB->fetchAssoc($result);
-        //$parse = implode(",", $data);
-        $entry = $data["obj_type"];
-        //$tpl->getStandardTemplate();
-        $tpl->setContent($entry);
-        //$tpl->show();
-    }
 
 
 
