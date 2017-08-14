@@ -8,6 +8,9 @@ require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/
  */
 class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterface
 {
+
+	public static $purposes = array ("Standard", "VideoAlternative", "VideoPortable", "AudioPortable");
+
 	/**
 	 * Constructor
 	 *
@@ -25,6 +28,35 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 	final function initType()
 	{
 		$this->setType(ilPalunoObjectPlugin::ID);
+	}
+
+	/**
+	 * Get sorted items array
+	 *
+	 * @param
+	 * @return
+	 */
+	function getSortedItemsArray()
+	{
+		$med_items = $this->getItemsArray();
+
+		return $med_items;
+	}
+
+		/**
+	* Get ItemsArray.
+	*
+	* @return	array	ItemsArray
+	*/
+	function getItemsArray()
+	{
+		include_once("./Services/News/classes/class.ilNewsItem.php");
+		$it = new ilNewsItem();
+		$it->setContextObjId($this->getId());
+		$it->setContextObjType($this->getType());
+		$this->itemsarray = $it->queryNewsForContext(false, 0, "", false, false);
+
+		return $this->itemsarray;
 	}
 
 	/**

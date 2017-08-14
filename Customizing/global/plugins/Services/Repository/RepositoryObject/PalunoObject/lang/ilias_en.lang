@@ -22,6 +22,7 @@ save#:#Save
 update#:#Update
 properties#:#Properties
 content#:#Content
+upload#:#Upload
 copy#:#Copy
 edit#:#Edit
 meta_data#:#Metadata
@@ -42,3 +43,23 @@ important#:#Important
 online_status#:#Online Status
 lp_status#:#Learning Progress
 update_successful#:Update Successful
+view#:#User-View
+admin#:#Admin-View
+add#:#Add video
+cancel#:#Cancel
+duration#:#Play Time
+duration_info#:#If no value is entered, IT&me tries do determine the play time automatically.
+xpal_videoalternative_title#:#Alternative Video File (Use in Browser)
+xpal_standard_title#:#Standard Media File
+xpal_videoportable_title#:#Additional Video File for Portable Devices
+xpal_audioportable_title#:#Additional Audio File for Portable Devices
+xpal_current_value_info#:#Shows the current value of this format.
+value#:#Value
+url#:#URL
+xpal_reference_info#:#Provide URL pointing to resource
+xpal_clear_purpose_title#:#Delete
+xpal_mimetype#:#Mime Type
+xpal_mimetype_info#:#Select mime type to control plugin used for playback.<br>Please note: Be aware that not every browser contains the plugin you intend to use.
+xpal_automatic_detection#:#Automatic Detection
+xpal_input_either_file_or_url#:#Please specify a file or an URL. If you provide a file, please note the maximum allowed upload file size.
+no_content#:#Noch kein Inhalt vorhanden
