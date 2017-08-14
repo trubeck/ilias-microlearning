@@ -48,7 +48,7 @@ class ilNuggetRecommender
 
         else
         {
-            for($x = 0; $x<3; $x++)
+            while(count($result) != 3)
             {
                 $random = mt_rand(0, count($titles));
                 $result[] = $titles[$random];
