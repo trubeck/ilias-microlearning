@@ -349,7 +349,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 						$mpl->setAlternativeVideoMimeType($med_alt->getFormat());
 					}
 				
-					$tpl->setVariable("PLAYER", $mpl->getPreviewHtml());
+					$tpl->setVariable("PLAYER", $mpl->getPalunoPlayerHtml(true));
 				}
 				$tpl->parseCurrentBlock();
 			}
