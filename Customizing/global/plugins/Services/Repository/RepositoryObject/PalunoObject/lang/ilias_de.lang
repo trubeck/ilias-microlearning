@@ -46,6 +46,7 @@ update_successful#:Die Änderungen wurden gespeichert.
 view#:#User-View
 admin#:#Admin-View
 add#:#Video hinzufügen
+delete#:#Video löschen
 cancel#:#Abbrechen
 duration#:#Laufzeit
 duration_info#:#Wenn kein Wert eingegeben wird, bestimmt IT&me die Laufzeit automatisch.
@@ -63,3 +64,8 @@ xpal_mimetype_info#:#Wählen Sie einen MIME-Type aus, um das richtige Plugin zu 
 xpal_automatic_detection#:#Automatisch
 xpal_input_either_file_or_url#:#Bitte geben Sie entweder eine Datei oder eine URL an. Achten Sie bei Angabe einer Datei bitte auf die maximal erlaubte Upload-Größe.
 no_content#:#Noch kein Inhalt vorhanden
+save_to_desktop#:#Merken
+check_yourself#:#Pruefe dein Wissen
+added_to_desktop#:#Das Objekt wurde auf den Schreibtisch gelegt.
+removed_from_desktop#:#Das Objekt wurde vom Schreibtisch genommen.
+remove#:#Entfernen

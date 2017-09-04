@@ -31,6 +31,8 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	private $purposeSuffixes = array ();
 	private $mimeTypes = array();
 
+	protected $itemId;
+
 	/**
 	 * Initialisation
 	 */
@@ -40,6 +42,8 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$this->ctrl = $ilCtrl;
 		$this->tabs = $ilTabs;
 		$this->tpl = $tpl;
+		//$this->ctrl->saveParameter($this, "ref_item_id");
+		//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", "");
 
 		include_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/classes/class.ilPalunoObjectSettings.php');
 		$settings = ilPalunoObjectSettings::_getInstance();
@@ -123,6 +127,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			case "showAdmin":
 			case "addVideoObject":
 			case "saveVideo":
+			case "confirmDeletion":
 				$this->checkPermission("write");
 				$this->$cmd();
 				break;
@@ -134,6 +139,10 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			case "setStatusToInProgress":
 			case "setStatusToNotAttempted":
 			case "handlePlayerEvent":
+			case "moveToDesktop":
+			case "removeFromDesktop":		
+			case "goToExam":
+			case "isObjectOnDesktop":
 				$this->checkPermission("read");
 				$this->$cmd();
 				break;
@@ -268,20 +277,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 
 	/**
 	 * Show content
-	 * protected function showContent() 
-	{
-		$this->tabs->activateTab("content");
-		$this->setSubTabs("view");
-		$this->tabs->activateSubTab("view");
-		$tpl = new ilTemplate("tpl.upload.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
-		$tpl->setCurrentBlock("paluno_block");
-		$tpl->setVariable("TYP", $this->txt("obj_xpal"));
-		
-		$tpl->parseCurrentBlock();
-		
-		$html = $tpl->get();	
-		$this->tpl->setContent($html);
-	}
+	 * 
 	 * @param
 	 * @return
 	 */
@@ -303,6 +299,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		{
 			foreach ($med_items as $item)
 			{
+				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", $item["id"]);
 				$mob = new ilObjMediaObject($item["mob_id"]);
 				$med = $mob->getMediaItem("Standard");
 			
@@ -313,6 +310,22 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
 				$tpl->setVariable("TITLE", $item["title"]);
 				$tpl->setVariable("DESCRIPTION", $item["content"]);
+
+				$this->ctrl->setParameter($this, "item_ref_id", $this->object->getRefId());
+				//Merken-Button
+				$form = new ilPropertyFormGUI();
+				$form->setTitle($item["title"]);
+				$form->setFormAction($this->ctrl->getFormAction($this, "goToExam"));
+				$form->addCommandButton("goToExam", $this->plugin->txt("check_yourself"));
+				if(!$this->isObjectOnDesktop())
+				{
+					$form->addCommandButton("moveToDesktop", $this->plugin->txt("save_to_desktop"));
+				}
+				else
+				{
+					$form->addCommandButton("removeFromDesktop", $this->plugin->txt("remove"));
+				}
+				$tpl->setVariable("FORM", $form->getHTML());
 
 				// player
 				if (is_object($med))
@@ -341,6 +354,9 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 					$mpl->setTitle($item["title"]);
 					$mpl->setDescription($item["content"]);
 					$mpl->setForceAudioPreview(true);
+
+					//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", $item["id"]);
+
 					$med_alt = $mob->getMediaItem("VideoAlternative");
 					if (is_object($med_alt))
 					{
@@ -417,21 +433,29 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		{
 			$ilToolbar->addButton($this->txt("add"), $this->ctrl->getLinkTarget($this, "addVideoObject"));
 		}
-		$tpl = new ilTemplate("tpl.upload.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
-		$tpl->setCurrentBlock("paluno_block");
+		else
+		{
+			$ilToolbar->addButton($this->txt("delete"), $this->ctrl->getLinkTarget($this, "confirmDeletion"));
+		}
+		//$tpl = new ilTemplate("tpl.upload.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
+		//$tpl->setCurrentBlock("paluno_block");
 		//$tpl->setVariable("TYP", $this->txt("obj_xpal"));
 		
-		$tpl->parseCurrentBlock();
+		//$tpl->parseCurrentBlock();
 		
-		$html = $tpl->get();	
-		$this->tpl->setContent($html);
+		//$html = $tpl->get();	
+		//$this->tpl->setContent($html);
 	}
 
 	protected function showUpload() {
 		$this->tabs->activateTab("upload");
+		$form = new ilPropertyFormGUI();
+		$form->setTitle($this->plugin->txt("obj_xpal"));
+		$this->addValuesToForm($form);
 		$tpl = new ilTemplate("tpl.upload.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
 		$tpl->setCurrentBlock("paluno_block");
-		$tpl->setVariable("TYP", $this->txt("obj_xpal"));
+		//$tpl->setVariable("TYP", $this->txt("obj_xpal"));
+		$tpl->setVariable("TYP", $form->getHTML());
 		$tpl->parseCurrentBlock();
 		//$tpl->setCurrentBlock("addpic");
 		//$tpl->setVariable("SRC_ADDNEW", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/icon_xpal.svg");
@@ -799,8 +823,86 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$this->form_gui->setValuesByPost();
 		$this->tpl->setContent($this->form_gui->getHTML());			    
 	}
-	
 
+	/**
+	* Is object on desktop?
+	*/
+	function isObjectOnDesktop()
+	{	
+		global $ilUser;
+   
+        if (ilObjUser::_isDesktopItem($ilUser->getId() ,(int) $this->object->getRefId(), $this->object->getType()))
+		{
+			return true;
+        }
+		else
+		{
+			return false;
+		}
+		
+		$this->ctrl->redirect($this, "showContent");
+	}
+
+	/**
+	* Move to desktop.
+	*/
+	function moveToDesktop()
+	{	
+		global $ilUser;
+
+                
+        if ($this->object->getRefId())
+		{
+			ilObjUser::_addDesktopItem($ilUser->getId() ,(int) $this->object->getRefId(), $this->object->getType());
+			ilUtil::sendSuccess($this->txt("added_to_desktop"), true);
+        }
+        
+		$this->ctrl->redirect($this, "showContent");
+	}
+
+	/**
+	* Remove from desktop.
+	*/
+	function removeFromDesktop()
+	{	
+		global $ilUser;
+
+                
+        if ($this->object->getRefId())
+		{
+			ilObjUser::_dropDesktopItem($ilUser->getId() ,(int) $this->object->getRefId(), $this->object->getType());
+			ilUtil::sendSuccess($this->txt("removed_from_desktop"), true);
+        }
+        
+		$this->ctrl->redirect($this, "showContent");
+	}
+
+	/**
+	* Go to exam.
+	*/
+	function goToExam()
+	{	
+        
+		ilUtil::sendSuccess($this->txt("obj_xpal"), true);
+		
+		$this->ctrl->redirect($this, "showContent");
+	}
+
+	/**
+	* Confirmation Screen.
+	*/
+	function confirmDeletion()
+	{
+		$this->checkPermission("write");
+		$this->tabs->activateTab("admin");
+		
+		//include_once("./Services/News/classes/class.ilNewsItem.php");
+		ilUtil::sendSuccess($this->txt("obj_xpal"), true);
+		//$mc_item = new ilNewsItem(289);
+		//$mc_item->delete();
+		$this->ctrl->redirect($this, "editProperties");
+	}
+	
 	/**
 	 * @param $object ilObjPalunoObject
 	 * @param $form ilPropertyFormGUI

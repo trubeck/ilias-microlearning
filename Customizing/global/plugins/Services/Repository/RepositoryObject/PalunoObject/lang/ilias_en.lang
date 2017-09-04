@@ -46,6 +46,7 @@ update_successful#:Update Successful
 view#:#User-View
 admin#:#Admin-View
 add#:#Add video
+delete#:#Delete video
 cancel#:#Cancel
 duration#:#Play Time
 duration_info#:#If no value is entered, IT&me tries do determine the play time automatically.
@@ -63,3 +64,8 @@ xpal_mimetype_info#:#Select mime type to control plugin used for playback.<br>Pl
 xpal_automatic_detection#:#Automatic Detection
 xpal_input_either_file_or_url#:#Please specify a file or an URL. If you provide a file, please note the maximum allowed upload file size.
 no_content#:#Noch kein Inhalt vorhanden
+save_to_desktop#:#Merken
+check_yourself#:#Pruefe dein Wissen
+added_to_desktop#:#The item has been added to the desktop.
+removed_from_desktop#:#The item has been removed from the desktop.
+remove#:#Entfernen
