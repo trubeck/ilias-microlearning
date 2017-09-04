@@ -22,6 +22,7 @@ save#:#Speichern
 update#:#Update
 properties#:#Eigenschaften
 content#:#Inhalt
+upload#:#Upload
 copy#:#Kopieren
 edit#:#Bearbeiten
 meta_data#:#Metadaten
@@ -42,3 +43,29 @@ important#:#Wichtig
 online_status#:#Online Status
 lp_status#:#Lernfortschritt
 update_successful#:Die Änderungen wurden gespeichert.
+view#:#User-View
+admin#:#Admin-View
+add#:#Video hinzufügen
+delete#:#Video löschen
+cancel#:#Abbrechen
+duration#:#Laufzeit
+duration_info#:#Wenn kein Wert eingegeben wird, bestimmt IT&me die Laufzeit automatisch.
+xpal_videoalternative_title#:#Alternatives Videoformat zur Nutzung im Browser
+xpal_standard_title#:#Standard-Mediendatei
+xpal_videoportable_title#:#Zusätzliche Video-Datei für portable Geräte
+xpal_audioportable_title#:#Zusätzliche Audio-Datei für portable Geräte
+xpal_current_value_info#:#Aktueller Wert des Formats
+value#:#Wert
+url#:#URL
+xpal_reference_info#:#URL zur Ressource, z.B. HTTP-Adresse.
+xpal_clear_purpose_title#:#Löschen
+xpal_mimetype#:#MIME-Type
+xpal_mimetype_info#:#Wählen Sie einen MIME-Type aus, um das richtige Plugin zu definieren. <br />Hinweis: Bitte berücksichtigen Sie, dass nicht alle Browser alle Plugins installiert haben bzw. unterstützen.
+xpal_automatic_detection#:#Automatisch
+xpal_input_either_file_or_url#:#Bitte geben Sie entweder eine Datei oder eine URL an. Achten Sie bei Angabe einer Datei bitte auf die maximal erlaubte Upload-Größe.
+no_content#:#Noch kein Inhalt vorhanden
+save_to_desktop#:#Merken
+check_yourself#:#Pruefe dein Wissen
+added_to_desktop#:#Das Objekt wurde auf den Schreibtisch gelegt.
+removed_from_desktop#:#Das Objekt wurde vom Schreibtisch genommen.
+remove#:#Entfernen
