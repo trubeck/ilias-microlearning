@@ -14,18 +14,18 @@ class ilNuggetRecommender
 
     }
 
-    function getVisitedNuggets()
+    function getNuggetIDs()
     {
         global $ilDB, $ilUser;
 
         //$user_id = $ilUser->getId();
-        $type = "mcst";
-        $result = $ilDB->query("SELECT title FROM object_data WHERE type = ".$ilDB->quote($type, "text") );
+        $type = "xpal";
+        $result = $ilDB->query("SELECT obj_id FROM object_data WHERE type = ".$ilDB->quote($type, "text") );
 
         $entry = "";
         while($data = $ilDB->fetchAssoc($result))
         {
-            $entry .= $data["title"] . ",";
+            $entry .= $data["obj_id"] . ",";
         }
 
         $entry = explode(",", substr($entry, 0, -1));
@@ -35,25 +35,48 @@ class ilNuggetRecommender
 
     }
 
-    function recommend()
+    function getTitleByID($id)
     {
-        $titles = $this->getVisitedNuggets();
+        global $ilDB;
+
+        $result = $ilDB->query("SELECT title FROM object_data WHERE obj_id = ".$ilDB->quote($id, "integer"));
+
+        $data = $ilDB->fetchAssoc($result);
+
+        return $data["title"];
+
+    }
+
+    function getRefIDFromObjID($objID)
+    {
+        global $ilDB;
+
+        $result = $ilDB->query("SELECT ref_id FROM object_reference WHERE obj_id = ".$ilDB->quote($objID, "integer"));
+
+        $data = $ilDB->fetchAssoc($result);
+
+        return $data["ref_id"];
+    }
+
+    function getRandom($count)
+    {
+        $ids = $this->getNuggetIDs();
 
         $result = array();
 
-        if(count($titles) <= 3)
+        if(count($ids) <= $count)
         {
-            $result = $titles;
+            $result = $ids;
         }
 
         else
         {
-            while(count($result) != 3)
+            while(count($result) != $count)
             {
-                $random = mt_rand(0, count($titles));
-                $result[] = $titles[$random];
-                unset($titles[$random]);
-                $titles = array_values($titles);
+                $random = mt_rand(0, count($ids)-1);
+                $result[] = $ids[$random];
+                unset($ids[$random]);
+                $ids = array_values($ids);
             }
 
 
@@ -63,4 +86,22 @@ class ilNuggetRecommender
 
 
     }
+
+    function recommend($count)
+    {
+        $result = array();
+        $objIDs = $this->getRandom($count);
+
+
+        for($i = 0; $i<count($objIDs); $i++)
+        {
+            $result[$this->getTitleByID($objIDs[$i])] = $this->getRefIDFromObjID($objIDs[$i]);
+        }
+
+
+        return $result;
+
+    }
+
+
 }
