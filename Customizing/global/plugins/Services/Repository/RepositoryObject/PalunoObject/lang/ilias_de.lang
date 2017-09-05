@@ -22,7 +22,7 @@ save#:#Speichern
 update#:#Update
 properties#:#Eigenschaften
 content#:#Inhalt
-upload#:#Upload
+exam#:#Pruefung
 copy#:#Kopieren
 edit#:#Bearbeiten
 meta_data#:#Metadaten
@@ -69,3 +69,4 @@ check_yourself#:#Pruefe dein Wissen
 added_to_desktop#:#Das Objekt wurde auf den Schreibtisch gelegt.
 removed_from_desktop#:#Das Objekt wurde vom Schreibtisch genommen.
 remove#:#Entfernen
+set_exam_nugget#:#Prüfungs-Nugget auswählen

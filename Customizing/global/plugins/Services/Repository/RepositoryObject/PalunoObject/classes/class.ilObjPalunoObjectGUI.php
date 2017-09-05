@@ -12,7 +12,7 @@ require_once("./Services/Form/classes/class.ilNonEditableValueGUI.php");
 
 /**
  * @ilCtrl_isCalledBy ilObjPalunoObjectGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI
- * @ilCtrl_Calls ilObjPalunoObjectGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilExportGUI, ilObjectMetaDataGUI
+ * @ilCtrl_Calls ilObjPalunoObjectGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilExportGUI, ilObjectMetaDataGUI, ilPersonalDesktopGUI, ilObjTestGUI
  */
 class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 {
@@ -30,8 +30,8 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	private $additionalPurposes = array ("VideoPortable", "AudioPortable");
 	private $purposeSuffixes = array ();
 	private $mimeTypes = array();
-
-	protected $itemId;
+	private $examNuggets = array();
+	private $tstObjects = array();
 
 	/**
 	 * Initialisation
@@ -55,6 +55,8 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		{
 			$this->mimeTypes[$mt] = $mt;
 		}
+
+		$this->mimeTypes = array();
 		
 		include_once("./Services/Utilities/classes/class.ilMimeTypeUtil.php");
 		foreach (ilMimeTypeUtil::getExt2MimeMap() as $mt)
@@ -127,13 +129,15 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			case "showAdmin":
 			case "addVideoObject":
 			case "saveVideo":
+			case "setTstNuggets":
+			case "saveExamNugget":
 			case "confirmDeletion":
 				$this->checkPermission("write");
 				$this->$cmd();
 				break;
 
 			case "showContent":   // list all commands that need read permission here
-			case "showUpload":
+			case "showExam":
 			case "setStatusToCompleted":
 			case "setStatusToFailed":
 			case "setStatusToInProgress":
@@ -180,12 +184,6 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		if ($ilAccess->checkAccess("read", "", $this->object->getRefId()))
 		{
 			$this->tabs->addTab("content", $this->txt("content"), $ilCtrl->getLinkTarget($this, "showContent"));
-		}
-
-		// upload tab
-		if ($ilAccess->checkAccess("write", "", $this->object->getRefId()))
-		{
-			$this->tabs->addTab("upload", $this->txt("upload"), $ilCtrl->getLinkTarget($this, "showUpload"));
 		}
 
 		// standard info screen tab
@@ -435,8 +433,9 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		}
 		else
 		{
-			$ilToolbar->addButton($this->txt("delete"), $this->ctrl->getLinkTarget($this, "confirmDeletion"));
+			$ilToolbar->addButton($this->txt("delete"), $this->ctrl->getLinkTarget($this, ""));
 		}
+		$ilToolbar->addButton($this->txt("exam"), $this->ctrl->getLinkTarget($this, "setTstNuggets"));
 		//$tpl = new ilTemplate("tpl.upload.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
 		//$tpl->setCurrentBlock("paluno_block");
 		//$tpl->setVariable("TYP", $this->txt("obj_xpal"));
@@ -447,8 +446,9 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		//$this->tpl->setContent($html);
 	}
 
-	protected function showUpload() {
-		$this->tabs->activateTab("upload");
+	/**
+	protected function showExam() {
+		$this->tabs->activateTab("exam");
 		$form = new ilPropertyFormGUI();
 		$form->setTitle($this->plugin->txt("obj_xpal"));
 		$this->addValuesToForm($form);
@@ -465,6 +465,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$html = $tpl->get();	
 		$this->tpl->setContent($html);
 	}
+	*/
 
 	/**
 	* Add video
@@ -825,6 +826,93 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	}
 
 	/**
+	* Set Exam Nugget
+	*/
+	function setTstNuggets()
+	{
+		global $tpl;
+
+		$this->checkPermission("write");
+		$this->tabs->activateTab("admin");
+
+		$this->examNuggets = $this->getExamNuggets();
+
+		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
+		$this->form_gui = new ilPropertyFormGUI();
+		$this->form_gui->setMultipart(true);
+
+		$this->form_gui->setTitle($this->txt("set_exam_nugget"));
+
+		// examNugget selection
+    	$examNuggetSelection = new ilSelectInputGUI();
+		$examNuggetSelection->setPostVar("selected_exam");
+    	$examNuggetSelection->setTitle($this->txt("exam"));
+    	$options = array("");
+    	$options = $this->examNuggets;
+    	$examNuggetSelection->setOptions($options);
+    	$this->form_gui->addItem($examNuggetSelection);
+
+		//save/cancel
+		$this->form_gui->addCommandButton("saveExamNugget", $this->txt("save"));
+		$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "saveExamNugget"));
+		$this->form_gui->addCommandButton("showAdmin", $this->txt("cancel"));
+
+		$this->tpl->setContent($this->form_gui->getHTML());
+	}
+
+	/**
+	* Save Exam Nugget.
+	*/
+	function saveExamNugget()
+	{
+		$this->checkPermission("write");
+		$this->tabs->activateTab("admin");
+
+		$number = $_POST["selected_exam"];
+		$obj_id = $this->getObjectId($number);
+		$this->object->setRefIdFromExam($obj_id);
+		ilUtil::sendSuccess($this->object->getRefIdFromExam(), true);
+		
+		$this->ctrl->redirect($this, "showContent");
+	}
+
+	/**
+	* Get Exam Nuggets.
+	*/
+	function getExamNuggets()
+	{
+		$tstNuggets = array();
+		$this->tstObjects = $this->object->_getObjectsDataForType("tst", false);
+		foreach($this->tstObjects as $tst)
+		{
+			$currentArray = $tst;
+			$tstNuggets[] = $currentArray["title"];
+		}
+		
+		return $tstNuggets;
+	}
+
+	/**
+	* Get Object Id.
+	*/
+	function getObjectId($number)
+	{
+		$this->tstObjects = $this->object->_getObjectsDataForType("tst", false);
+
+		$i = 0;
+		foreach($this->tstObjects as $tst)
+		{
+			if($i == $number)
+			{
+				$obj_id = $tst["id"];
+			}
+			$i++;
+		}
+		
+		return $obj_id;
+	}
+
+	/**
 	* Is object on desktop?
 	*/
 	function isObjectOnDesktop()
@@ -866,8 +954,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	function removeFromDesktop()
 	{	
 		global $ilUser;
-
-                
+     
         if ($this->object->getRefId())
 		{
 			ilObjUser::_dropDesktopItem($ilUser->getId() ,(int) $this->object->getRefId(), $this->object->getType());
@@ -881,11 +968,10 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	* Go to exam.
 	*/
 	function goToExam()
-	{	
-        
-		ilUtil::sendSuccess($this->txt("obj_xpal"), true);
-		
-		$this->ctrl->redirect($this, "showContent");
+	{
+		$referenceIdFromExam = $this->object->getRefIdFromExam();
+		$this->ctrl->setParameterByClass("ilObjTestGUI", "ref_id", 72);
+		$this->ctrl->redirectByClass("ilObjTestGUI", "");
 	}
 
 	/**
@@ -896,11 +982,26 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$this->checkPermission("write");
 		$this->tabs->activateTab("admin");
 		
-		//include_once("./Services/News/classes/class.ilNewsItem.php");
-		ilUtil::sendSuccess($this->txt("obj_xpal"), true);
+		//include_once("./Services/Object/classes/class.ilObject.php");
+		//$obj = new ilNewsItem();
+		$this->tstObjects = $this->object->_getObjectsDataForType("tst", false);
+		foreach($this->tstObjects as $tst)
+		{
+			$currentArray = $tst;
+			$examNuggets[] = $currentArray["title"];
+			//$currentArray = array();
+		}
+		$all = implode(",", $examNuggets);
+		$firstest = $this->tstObjects[1];
+		$lastTest = array_pop($this->tstObjects);
+		$entry = $firstest["title"];
+		//$examNuggets[] = $entry;
+		//$parse = implode(",", $keys);
+		ilUtil::sendSuccess($entry, true);
 		//$mc_item = new ilNewsItem(289);
 		//$mc_item->delete();
-		$this->ctrl->redirect($this, "editProperties");
+		//$this->ctrl->redirect($this, "editProperties");
+		$this->ctrl->redirectByClass("ilPersonalDesktopGUI", "jumpToSelectedItems");
 	}
 	
 	/**

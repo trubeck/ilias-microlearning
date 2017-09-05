@@ -22,7 +22,7 @@ save#:#Save
 update#:#Update
 properties#:#Properties
 content#:#Content
-upload#:#Upload
+exam#:#Exam
 copy#:#Copy
 edit#:#Edit
 meta_data#:#Metadata
@@ -68,4 +68,4 @@ save_to_desktop#:#Merken
 check_yourself#:#Pruefe dein Wissen
 added_to_desktop#:#The item has been added to the desktop.
 removed_from_desktop#:#The item has been removed from the desktop.
-remove#:#Entfernen
+set_exam_nugget#:#Set exam nugget
