@@ -10,6 +10,7 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 {
 
 	public static $purposes = array ("Standard", "VideoAlternative", "VideoPortable", "AudioPortable");
+	public $referenceIdFromExam = 0;
 
 	/**
 	 * Constructor
@@ -57,6 +58,26 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 		$this->itemsarray = $it->queryNewsForContext(false, 0, "", false, false);
 
 		return $this->itemsarray;
+	}
+
+	/**
+	* Set Ref Id from Exam.
+	*/
+	function setRefIdFromExam($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_reference WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$this->referenceIdFromExam = $data["ref_id"];
+	}
+
+	/**
+	* Get Ref Id from Exam.
+	*/
+	function getRefIdFromExam()
+	{
+		return $this->referenceIdFromExam;
 	}
 
 	/**
