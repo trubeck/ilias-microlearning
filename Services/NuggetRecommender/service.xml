@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<service xmlns="http://www.w3.org" version="$Id$" id="nrecommender">
+<service xmlns="http://www.w3.org" version="$Id$" id="recommender">
     <baseclasses>
         <baseclass name="ilNuggetRecommenderGUI" dir="classes" />
     </baseclasses>

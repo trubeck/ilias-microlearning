@@ -38,20 +38,19 @@ class ilNuggetRecommenderGUI
             default:
 
                 // determin the current command (take "view" as default)
-                $cmd = $ilCtrl->getCmd("view");
-                if (in_array($cmd, array("view")))
+                $cmd = $ilCtrl->getCmd("globalview");
+                if (in_array($cmd, array("globalview")))
                 {
                     $this->$cmd();
                 }
                 break;
         }
 
-        $tpl->show();
+
     }
 
-    function view()
+    function view($count = 3)
     {
-        global $tpl;
 
         $my_tpl = new ilTemplate('beautify.html', true, true,'Services/NuggetRecommender');
 
@@ -60,21 +59,36 @@ class ilNuggetRecommenderGUI
 
         $recommender = new ilNuggetRecommender();
 
-        $recommendedTitles = $recommender->recommend();
+        $recommendedTitles = $recommender->recommend($count);
 
         $display ="";
 
-        for($x = 0; $x<count($recommendedTitles); $x++)
+//        for($x = 0; $x<count($recommendedTitles); $x++)
+//        {
+//            $display .= "<div>" . $recommendedTitles[$x] . "</div>";
+//        }
+
+        foreach($recommendedTitles as $id => $title)
         {
-            $display .= "<div>" . $recommendedTitles[$x] . "</div>";
+            $display .= "<div><a href=ilias.php?baseClass=ilObjPluginDispatchGUI&cmd=forward&ref_id=" . $id . "&forwardCmd=showContent>" . $title . "</a></div>";
         }
 
         $my_tpl->setVariable("RECOM", $display);
 
+        return $my_tpl;
+
+    }
+
+    function globalview(){
+
+        global $tpl;
+
+        $my_tpl = $this->view();
+
+
         $tpl->setContent($my_tpl->get());
 
-
-
+        $tpl->show();
     }
 
 
