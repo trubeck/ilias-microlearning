@@ -68,7 +68,7 @@ class ilNuggetRecommenderGUI
 //            $display .= "<div>" . $recommendedTitles[$x] . "</div>";
 //        }
 
-        foreach($recommendedTitles as $title => $id)
+        foreach($recommendedTitles as $id => $title)
         {
             $display .= "<div><a href=ilias.php?baseClass=ilObjPluginDispatchGUI&cmd=forward&ref_id=" . $id . "&forwardCmd=showContent>" . $title . "</a></div>";
         }

@@ -95,7 +95,7 @@ class ilNuggetRecommender
 
         for($i = 0; $i<count($objIDs); $i++)
         {
-            $result[$this->getTitleByID($objIDs[$i])] = $this->getRefIDFromObjID($objIDs[$i]);
+            $result[$this->getRefIDFromObjID($objIDs[$i])] = $this->getTitleByID($objIDs[$i]);
         }
 
 
