@@ -333,7 +333,6 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				$form = new ilPropertyFormGUI();
 				$form->setTitle($item["title"]);
 				$form->setFormAction($this->ctrl->getFormAction($this, "goToExam"));
-				$form->addCommandButton("makeTest", $this->plugin->txt("value"));
 				$form->addCommandButton("goToExam", $this->plugin->txt("check_yourself"));
 				if(!$this->isObjectOnDesktop())
 				{
@@ -989,7 +988,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	*/
 	function goToExam()
 	{
-		//$referenceIdFromExam = $this->object->getRefIdFromExam();
+		$referenceIdFromExam = $this->object->getRefIdFromExam();
 		$this->ctrl->setParameterByClass("ilObjTestGUI", "ref_id", 72);
 		$this->ctrl->redirectByClass("ilObjTestGUI", "");
 	}
