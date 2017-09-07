@@ -61,6 +61,20 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 	}
 
 	/**
+	* Get Nugget name by object ID.
+	*/
+	function getNuggetNameByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["title"];
+
+		return $entry;
+	}
+
+	/**
 	* Set Ref Id from Exam.
 	*/
 	function setRefIdFromExam($obj_id)
@@ -78,6 +92,20 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 	function getRefIdFromExam()
 	{
 		return $this->referenceIdFromExam;
+	}
+
+	/**
+	* Get Ref Id from Exam by object ID.
+	*/
+	function getRefIdFromExamByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_reference WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$refIdFromNugget = $data["ref_id"];
+
+		return $refIdFromNugget;
 	}
 
 	/**

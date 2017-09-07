@@ -132,6 +132,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			case "setTstNuggets":
 			case "saveExamNugget":
 			case "confirmDeletion":
+			case "makeTest":		
 				$this->checkPermission("write");
 				$this->$cmd();
 				break;
@@ -303,7 +304,25 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			
 				$tpl->setCurrentBlock("paluno_block");
 				//$tpl->setVariable("TYP", $item["title"]);
-				$tpl->setVariable("SRC_ADDNEW", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$nuggetObjIds = $this->getRandomNuggetObjIds(3);
+				$nugget1 = $this->object->getNuggetNameByObjId($nuggetObjIds[0]);
+				$nugget2 = $this->object->getNuggetNameByObjId($nuggetObjIds[1]);
+				$nugget3 = $this->object->getNuggetNameByObjId($nuggetObjIds[2]);
+				$referenceId1 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[0]);
+				$referenceId2 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[1]);
+				$referenceId3 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[2]);
+				$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId1);
+				$tpl->setVariable('LINK_NUG1', $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent'));
+				$tpl->setVariable("NAME_1", $nugget1);
+				$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId2);
+				$tpl->setVariable('LINK_NUG2', $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent'));
+				$tpl->setVariable("NAME_2", $nugget2);
+				$tpl->setVariable("NUGGET_3", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId3);
+				$tpl->setVariable('LINK_NUG3', $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent'));
+				$tpl->setVariable("NAME_3", $nugget3);
 				$tpl->setVariable("ARROW_LEFT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow left.png");
 				$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
 				$tpl->setVariable("TITLE", $item["title"]);
@@ -314,6 +333,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				$form = new ilPropertyFormGUI();
 				$form->setTitle($item["title"]);
 				$form->setFormAction($this->ctrl->getFormAction($this, "goToExam"));
+				$form->addCommandButton("makeTest", $this->plugin->txt("value"));
 				$form->addCommandButton("goToExam", $this->plugin->txt("check_yourself"));
 				if(!$this->isObjectOnDesktop())
 				{
@@ -969,7 +989,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	*/
 	function goToExam()
 	{
-		$referenceIdFromExam = $this->object->getRefIdFromExam();
+		//$referenceIdFromExam = $this->object->getRefIdFromExam();
 		$this->ctrl->setParameterByClass("ilObjTestGUI", "ref_id", 72);
 		$this->ctrl->redirectByClass("ilObjTestGUI", "");
 	}
@@ -1002,6 +1022,24 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		//$mc_item->delete();
 		//$this->ctrl->redirect($this, "editProperties");
 		$this->ctrl->redirectByClass("ilPersonalDesktopGUI", "jumpToSelectedItems");
+	}
+
+	function getRandomNuggetObjIds($count)
+	{
+		include_once("Services/NuggetRecommender/classes/class.ilNuggetRecommender.php");
+		$recommender = new ilNuggetRecommender();
+		$nuggets = $recommender->getRandom($count);
+
+		return $nuggets;
+	}
+
+	function makeTest()
+	{
+		//ilUtil::sendSuccess("eins", true);
+		$result = $this->getRandomNuggetObjIds(3);
+		ilUtil::sendSuccess($result[2], true);
+
+		$this->ctrl->redirect($this, "showContent");
 	}
 	
 	/**
