@@ -20,7 +20,7 @@ class ilNuggetRecommender
 
         //$user_id = $ilUser->getId();
         $type = "xpal";
-        $result = $ilDB->query("SELECT obj_id FROM object_data WHERE type = ".$ilDB->quote($type, "text") );
+        $result = $ilDB->query("SELECT DISTINCT obj_id FROM object_data NATURAL JOIN object_reference WHERE type = ".$ilDB->quote($type, "text")  . "AND deleted IS NULL");
 
         $entry = "";
         while($data = $ilDB->fetchAssoc($result))
