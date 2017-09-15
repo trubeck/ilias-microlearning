@@ -145,7 +145,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			case "setStatusToNotAttempted":
 			case "handlePlayerEvent":
 			case "moveToDesktop":
-			case "removeFromDesktop":		
+			case "removeFromDesktop":
 			case "goToExam":
 			case "isObjectOnDesktop":
 				$this->checkPermission("read");
@@ -289,53 +289,28 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$this->tabs->activateSubTab("view");
 		
 		$tpl = new ilTemplate("tpl.paluno.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
-
 		include_once("./Services/MediaObjects/classes/class.ilObjMediaObject.php");
 		require_once('./Services/WebAccessChecker/classes/class.ilWACSignedPath.php');
 		$med_items = $this->object->getSortedItemsArray();
-
 		if (count($med_items) != 0)
 		{
 			foreach ($med_items as $item)
 			{
-				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", $item["id"]);
+				//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", $item["id"]);
 				$mob = new ilObjMediaObject($item["mob_id"]);
 				$med = $mob->getMediaItem("Standard");
 			
 				$tpl->setCurrentBlock("paluno_block");
 				//$tpl->setVariable("TYP", $item["title"]);
-				$nuggetObjIds = $this->getRandomNuggetObjIds(3);
-				$nugget1 = $this->object->getNuggetNameByObjId($nuggetObjIds[0]);
-				$nugget2 = $this->object->getNuggetNameByObjId($nuggetObjIds[1]);
-				$nugget3 = $this->object->getNuggetNameByObjId($nuggetObjIds[2]);
-				$referenceId1 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[0]);
-				$referenceId2 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[1]);
-				$referenceId3 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[2]);
-				$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
-				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId1);
-				$tpl->setVariable('LINK_NUG1', $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent'));
-				$tpl->setVariable("NAME_1", $nugget1);
-				$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
-				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId2);
-				$tpl->setVariable('LINK_NUG2', $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent'));
-				$tpl->setVariable("NAME_2", $nugget2);
-				$tpl->setVariable("NUGGET_3", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
-				$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId3);
-				$tpl->setVariable('LINK_NUG3', $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent'));
-				$tpl->setVariable("NAME_3", $nugget3);
-				$tpl->setVariable("ARROW_LEFT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow left.png");
-				$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
-				$tpl->setVariable("TITLE", $item["title"]);
-				$tpl->setVariable("DESCRIPTION", $item["content"]);
 
-				$this->ctrl->setParameter($this, "item_ref_id", $this->object->getRefId());
 				//Merken-Button
 				$form = new ilPropertyFormGUI();
 				$form->setTitle($item["title"]);
-				$form->setFormAction($this->ctrl->getFormAction($this, "goToExam"));
+				$form->setFormAction($this->ctrl->getFormAction($this));
 				$form->addCommandButton("goToExam", $this->plugin->txt("check_yourself"));
 				if(!$this->isObjectOnDesktop())
 				{
+					//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $this->object->getRefId());
 					$form->addCommandButton("moveToDesktop", $this->plugin->txt("save_to_desktop"));
 				}
 				else
@@ -344,14 +319,38 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				}
 				$tpl->setVariable("FORM", $form->getHTML());
 
+				$nuggetObjIds = $this->getRandomNuggetObjIds(3);
+				$nugget1 = $this->object->getNuggetNameByObjId($nuggetObjIds[0]);
+				$nugget2 = $this->object->getNuggetNameByObjId($nuggetObjIds[1]);
+				$nugget3 = $this->object->getNuggetNameByObjId($nuggetObjIds[2]);
+				$referenceId1 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[0]);
+				$referenceId2 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[1]);
+				$referenceId3 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[2]);
+				//Nugget 1
+				$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$tpl->setVariable('LINK_NUG1', $this->goToNugget($referenceId1));
+				$tpl->setVariable("NAME_1", $nugget1);
+				//Nugget 2
+				$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$tpl->setVariable('LINK_NUG2', $this->goToNugget($referenceId2));
+				$tpl->setVariable("NAME_2", $nugget2);
+				//Nugget 3
+				$tpl->setVariable("NUGGET_3", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$tpl->setVariable('LINK_NUG3', $this->goToNugget($referenceId3));
+				$tpl->setVariable("NAME_3", $nugget3);
+
+				$tpl->setVariable("ARROW_LEFT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow left.png");
+				$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
+				$tpl->setVariable("TITLE", $item["title"]);
+				$tpl->setVariable("DESCRIPTION", $item["content"]);
+				//$this->ctrl->setParameter($this, "item_ref_id", $this->object->getRefId());
+				
 				// player
 				if (is_object($med))
 				{
 					include_once("./Services/MediaObjects/classes/class.ilMediaPlayerGUI.php");
-
 					// the news id will be used as player id, see also ilMediaCastTableGUI
 					$mpl = new ilMediaPlayerGUI($item["id"], $this->ctrl->getLinkTarget($this, "handlePlayerEvent", "", true, false));
-
 					if (strcasecmp("Reference", $med->getLocationType()) == 0)
 					{
 						ilWACSignedPath::signFolderOfStartFile($med->getLocation());
@@ -371,9 +370,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 					$mpl->setTitle($item["title"]);
 					$mpl->setDescription($item["content"]);
 					$mpl->setForceAudioPreview(true);
-
 					//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", $item["id"]);
-
 					$med_alt = $mob->getMediaItem("VideoAlternative");
 					if (is_object($med_alt))
 					{
@@ -408,6 +405,17 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		
 		$html = $tpl->get();	
 		$this->tpl->setContent($html);
+	}
+
+	/**
+	* Go to selected nugget.
+	*/
+	function goToNugget($referenceId)
+	{
+		$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId);
+		$link = $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent');
+
+		return $link;
 	}
 
 		/**
@@ -464,27 +472,6 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		//$html = $tpl->get();	
 		//$this->tpl->setContent($html);
 	}
-
-	/**
-	protected function showExam() {
-		$this->tabs->activateTab("exam");
-		$form = new ilPropertyFormGUI();
-		$form->setTitle($this->plugin->txt("obj_xpal"));
-		$this->addValuesToForm($form);
-		$tpl = new ilTemplate("tpl.upload.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject");
-		$tpl->setCurrentBlock("paluno_block");
-		//$tpl->setVariable("TYP", $this->txt("obj_xpal"));
-		$tpl->setVariable("TYP", $form->getHTML());
-		$tpl->parseCurrentBlock();
-		//$tpl->setCurrentBlock("addpic");
-		//$tpl->setVariable("SRC_ADDNEW", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/icon_xpal.svg");
-		//$tpl->setVariable("TYP", $this->object->getID());
-		//$tpl->parseCurrentBlock();
-		//$tpl->show();
-		$html = $tpl->get();	
-		$this->tpl->setContent($html);
-	}
-	*/
 
 	/**
 	* Add video
@@ -595,20 +582,6 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		//$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "saveVideo"));
 	}
 
-	/**
-	* Save new video
-	function saveVideoObject()
-	{
-		global $tpl, $ilCtrl, $ilUser;
-
-		$this->checkPermission("write");
-		$ilTabs->activateTab("admin");
-		
-		$this->initAddVideoForm();
-		$this->tpl->setContent($this->form_gui->getHTML());
-		ilUtil::sendSuccess($this->txt("obj_xpal"), true);
-	}
-	*/
 	function saveVideo()
 	{
 		global $ilUser;
@@ -956,8 +929,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	function moveToDesktop()
 	{	
 		global $ilUser;
-
-                
+    
         if ($this->object->getRefId())
 		{
 			ilObjUser::_addDesktopItem($ilUser->getId() ,(int) $this->object->getRefId(), $this->object->getType());
