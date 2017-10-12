@@ -1,0 +1,72 @@
+obj_xtxt#:#Text Nugget
+objs_xtxt#:#Text Nuggets
+obj_xtxt_duplicate#:#Kopieren
+objs_xtxt_duplicate#:#Kopiere Text Nuggets
+obj_xtxt_select#:#Wähle Text Nugget
+xtxt_add#:#Text Nugget hinzufügen
+xtxt_new#:#Neues Text Nugget
+xtxt_read#:#Lesezugriff auf Text Nugget
+xtxt_write#:#Text Nugget bearbeiten
+xtxt_delete#:#Text Nugget löschen
+xtxt_visible#:#Text Nugget ist sichtbar
+xtxt_edit_permission#:#Zugriffsrecht bearbeiten
+crs_create_xtxt#:#Erstelle Text Nugget
+grp_create_xtxt#:#Erstelle Text Nugget
+fold_create_xtxt#:#Erstelle Text Nugget
+root_create_xtxt#:#Erstelle Text Nugget
+cat_create_xtxt#:#Erstelle Text Nugget
+title#:#Titel
+description#:#Beschreibung
+online#:#Online
+save#:#Speichern
+update#:#Update
+properties#:#Eigenschaften
+content#:#Inhalt
+exam#:#Pruefung
+copy#:#Kopieren
+edit#:#Bearbeiten
+meta_data#:#Metadaten
+export#:#Export
+set_not_attempted#:#Setze Lernfortschritt auf "Nicht Versucht"
+set_in_progress#:#Setze Lernfortschritt auf "In Bearbeitung"
+set_passed#:#Setze Lernfortschritt auf "Bestanden"
+set_failed#:#Setze Lernfortschritt auf "Nicht Bestanden"
+set_completed#:#Setze Lernfortschritt auf "Durchgeführt"
+lp_status_0#:#Nicht Versucht
+lp_status_1#:#In Bearbeitung
+lp_status_2#:#Durchgeführt
+lp_status_3#:#Nicht Bestanden
+lp_status_#:#Kein Status gesetzt.
+lp_status_info#:#Achtung, wenn Sie den Lernfortschritt ändern so wird der Lernfortschritt für diesen Benutzer bearbeitet UND alle anderen Benutzer auf "Nicht Teilgenommen" gesetzt! Mit der Lucenesuche wird dieses Objekt gefunden, wenn man nach dem Titel, der Beschreibung oder dem Begriff "Repoplugin" sucht.
+offline:#:Offline
+important#:#Wichtig
+online_status#:#Online Status
+lp_status#:#Lernfortschritt
+update_successful#:Die Änderungen wurden gespeichert.
+view#:#User-View
+admin#:#Admin-View
+edit_text#:#Text bearbeiten
+delete#:#Video löschen
+cancel#:#Abbrechen
+duration#:#Laufzeit
+duration_info#:#Wenn kein Wert eingegeben wird, bestimmt IT&me die Laufzeit automatisch.
+xtxt_videoalternative_title#:#Alternatives Videoformat zur Nutzung im Browser
+xtxt_standard_title#:#Standard-Mediendatei
+xtxt_videoportable_title#:#Zusätzliche Video-Datei für portable Geräte
+xtxt_audioportable_title#:#Zusätzliche Audio-Datei für portable Geräte
+xtxt_current_value_info#:#Aktueller Wert des Formats
+value#:#Wert
+url#:#URL
+xtxt_reference_info#:#URL zur Ressource, z.B. HTTP-Adresse.
+xtxt_clear_purpose_title#:#Löschen
+xtxt_mimetype#:#MIME-Type
+xtxt_mimetype_info#:#Wählen Sie einen MIME-Type aus, um das richtige Plugin zu definieren. <br />Hinweis: Bitte berücksichtigen Sie, dass nicht alle Browser alle Plugins installiert haben bzw. unterstützen.
+xtxt_automatic_detection#:#Automatisch
+xtxt_input_either_file_or_url#:#Bitte geben Sie entweder eine Datei oder eine URL an. Achten Sie bei Angabe einer Datei bitte auf die maximal erlaubte Upload-Größe.
+no_content#:#Noch kein Inhalt vorhanden
+save_to_desktop#:#Merken
+check_yourself#:#Pruefe dein Wissen
+added_to_desktop#:#Das Objekt wurde auf den Schreibtisch gelegt.
+removed_from_desktop#:#Das Objekt wurde vom Schreibtisch genommen.
+remove#:#Entfernen
+set_exam_nugget#:#Prüfungs-Nugget auswählen
