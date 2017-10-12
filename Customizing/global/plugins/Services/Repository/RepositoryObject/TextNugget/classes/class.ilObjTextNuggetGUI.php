@@ -30,7 +30,6 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 	/** @var  ilTemplate */
 	public $tpl;
 
-	private $additionalPurposes = array ("VideoPortable", "AudioPortable");
 	private $purposeSuffixes = array ();
 	private $mimeTypes = array();
 	private $examNuggets = array();
