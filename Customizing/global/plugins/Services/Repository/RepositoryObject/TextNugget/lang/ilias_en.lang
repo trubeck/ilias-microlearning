@@ -1,0 +1,71 @@
+obj_xtxt#:#Text Nugget
+objs_xtxt#:#Text Nuggets
+obj_xtxt_duplicate#:#Copy
+objs_xtxt_duplicate#:#Copy Text Nuggets
+obj_xtxt_select#:#Select Text Nugget
+xtxt_add#:#Add Text Nugget
+xtxt_new#:#Add New Text Nugget
+xtxt_read#:#Read access to Text Nugget
+xtxt_write#:#Edit Text Nugget
+xtxt_delete#:#Delete Text Nugget
+xtxt_visible#:#Text Nugget is visible
+xtxt_edit_permission#:#Change permission settings
+crs_create_xtxt#:#Create Text Nugget
+grp_create_xtxt#:#Create Text Nugget
+fold_create_xtxt#:#Create Text Nugget
+root_create_xtxt#:#Create Text Nugget
+cat_create_xtxt#:#Create Text Nugget
+title#:#Title
+description#:#Description
+online#:#Online
+save#:#Save
+update#:#Update
+properties#:#Properties
+content#:#Content
+exam#:#Exam
+copy#:#Copy
+edit#:#Edit
+meta_data#:#Metadata
+export#:#Export
+set_not_attempted#:#Set LP Status to not attempted
+set_in_progress#:#Set LP Status to in progress
+set_passed#:#Set LP Status to not completed
+set_failed#:#Set LP Status to not failed
+set_completed#:#Set LP Status to completed
+lp_status_0#:#Not Attempted
+lp_status_1#:#In Progress
+lp_status_2#:#Completed
+lp_status_3#:#Failed
+lp_status_#:#No state yet.
+lp_status_info#:#Attention: Setting the LP Status will set the LP status of the currently logged in user to the chosen status. THE STATUS OF EVERY OTHER USER WILL BE SET TO NOT ATTEMPTED! You will find this repository object by searching for its title, its description or the expression "Repoplugin".
+offline:#:Offline
+important#:#Important
+online_status#:#Online Status
+lp_status#:#Learning Progress
+update_successful#:Update Successful
+view#:#User-View
+admin#:#Admin-View
+edit_text#:#Edit Text
+delete#:#Delete video
+cancel#:#Cancel
+duration#:#Play Time
+duration_info#:#If no value is entered, IT&me tries do determine the play time automatically.
+xtxt_videoalternative_title#:#Alternative Video File (Use in Browser)
+xtxt_standard_title#:#Standard Media File
+xtxt_videoportable_title#:#Additional Video File for Portable Devices
+xtxt_audioportable_title#:#Additional Audio File for Portable Devices
+xtxt_current_value_info#:#Shows the current value of this format.
+value#:#Value
+url#:#URL
+xtxt_reference_info#:#Provide URL pointing to resource
+xtxt_clear_purpose_title#:#Delete
+xtxt_mimetype#:#Mime Type
+xtxt_mimetype_info#:#Select mime type to control plugin used for playback.<br>Please note: Be aware that not every browser contains the plugin you intend to use.
+xtxt_automatic_detection#:#Automatic Detection
+xtxt_input_either_file_or_url#:#Please specify a file or an URL. If you provide a file, please note the maximum allowed upload file size.
+no_content#:#Noch kein Inhalt vorhanden
+save_to_desktop#:#Merken
+check_yourself#:#Pruefe dein Wissen
+added_to_desktop#:#The item has been added to the desktop.
+removed_from_desktop#:#The item has been removed from the desktop.
+set_exam_nugget#:#Set exam nugget

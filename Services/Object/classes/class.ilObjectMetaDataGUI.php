@@ -138,6 +138,7 @@ class ilObjectMetaDataGUI
 			in_array($type, array(
 				"crs",
 				"xpal",
+				"xtxt",
 				"file", 
 				"glo", "glo:gdf", 
 				"svy", "spl", 

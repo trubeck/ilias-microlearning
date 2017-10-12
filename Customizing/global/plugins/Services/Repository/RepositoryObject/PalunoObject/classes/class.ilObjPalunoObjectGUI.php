@@ -28,8 +28,11 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	public $tpl;
 
 	private $additionalPurposes = array ("VideoPortable", "AudioPortable");
+
+	//media types
 	private $purposeSuffixes = array ();
 	private $mimeTypes = array();
+
 	private $examNuggets = array();
 	private $tstObjects = array();
 
@@ -42,8 +45,6 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$this->ctrl = $ilCtrl;
 		$this->tabs = $ilTabs;
 		$this->tpl = $tpl;
-		//$this->ctrl->saveParameter($this, "ref_item_id");
-		//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "item_id", "");
 
 		include_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/classes/class.ilPalunoObjectSettings.php');
 		$settings = ilPalunoObjectSettings::_getInstance();
