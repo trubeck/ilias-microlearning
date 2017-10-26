@@ -198,6 +198,34 @@ class ilMD extends ilMDBase
 		return $rel;
 	}
 
+	function &getSituationModelIds()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDSituationModel.php';
+
+		return ilMDSituationModel::_getIds($this->getRBACId(),$this->getObjId());
+	}
+	function &getSituationModel($a_situation_model_id)
+	{
+		include_once 'Services/MetaData/classes/class.ilMDSituationModel.php';
+
+		if(!$a_situation_model_id)
+		{
+			return false;
+		}
+
+		$rel = new ilMDSituationModel();
+		$rel->setMetaId($a_situation_model_id);
+		
+		return $rel;
+	}
+	function &addSituationModel()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDSituationModel.php';
+
+		$rel = new ilMDSituationModel($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		
+		return $rel;
+	}
 
 	function &getAnnotationIds()
 	{
@@ -318,6 +346,13 @@ class ilMD extends ilMDBase
 			$rel->toXML($writer);
 		}
 
+		// Situation Models
+		foreach($this->getSituationModelIds() as $id)
+		{
+			$sm =& $this->getSituationModel($id);
+			$sm->toXML($writer);
+		}
+
 		// Annotations
 		foreach($this->getAnnotationIds() as $id)
 		{
@@ -387,6 +422,7 @@ class ilMD extends ilMDBase
 						'il_meta_relation',
 						'il_meta_requirement',
 						'il_meta_rights',
+						'il_meta_situation_model',
 						'il_meta_taxon',
 						'il_meta_taxon_path',
 						'il_meta_technical',

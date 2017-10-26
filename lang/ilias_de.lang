@@ -8819,6 +8819,7 @@ meta#:#meta_name#:#Name
 meta#:#meta_narrative_text#:#Erzählender Text
 meta#:#meta_networked#:#Vernetzt
 meta#:#meta_new_element#:#Neues Element
+meta#:#meta_next#:#Nachfolge-Nugget
 meta#:#meta_no#:#Nein
 meta#:#meta_no_annotation#:#Keine Metadaten für den Bereich 'Anmerkung' vorhanden.
 meta#:#meta_no_classification#:#Keine Metadaten für den Bereich 'Klassifizierung' vorhanden.
@@ -8827,6 +8828,7 @@ meta#:#meta_no_lifecycle#:#Keine Metadaten für den Bereich 'Lebenszyklus' vorha
 meta#:#meta_no_meta_metadata#:#Keine Metadaten für den Bereich 'Meta-Metadaten' vorhanden.
 meta#:#meta_no_relation#:#Keine Metadaten für den Bereich 'Beziehungen' vorhanden.
 meta#:#meta_no_rights#:#Keine Metadaten für den Bereich 'Rechte und Lizenzen' vorhanden.
+meta#:#meta_no_situation_model#:#Keine Metadaten für den Bereich 'Situationsmodell' vorhanden.
 meta#:#meta_no_technical#:#Keine Metadaten für den Bereich 'Technische Angaben' vorhanden.
 meta#:#meta_none#:#Keins###deprecated 
 meta#:#meta_operating_system#:#Betriebssystem
@@ -8837,6 +8839,7 @@ meta#:#meta_pc_dos#:#PC-DOS
 meta#:#meta_please_select#:#Bitte wählen Sie
 meta#:#meta_pointofcontact#:#Kontakt
 meta#:#meta_prerequisite#:#Voraussetzung
+meta#:#meta_previous#:#Vorgänger-Nugget
 meta#:#meta_problem_statement#:#Problemstellung
 meta#:#meta_publisher#:#Herausgeber
 meta#:#meta_purpose#:#Zweck
@@ -8857,6 +8860,7 @@ meta#:#meta_security_level#:#Sicherheitsstufe
 meta#:#meta_self_assessment#:#Selbsttest
 meta#:#meta_semantic_density#:#Semantische Dichte
 meta#:#meta_simulation#:#Simulation
+meta#:#meta_situation_model#:#Situations-Modell
 meta#:#meta_size#:#Größe
 meta#:#meta_skill_level#:#Stufe der Kompetenz
 meta#:#meta_slide#:#Folie
