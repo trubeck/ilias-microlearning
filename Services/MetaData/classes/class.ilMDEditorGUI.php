@@ -2588,6 +2588,7 @@ class ilMDEditorGUI
 		$this->tpl->addBlockFile('MD_CONTENT','md_content','tpl.md_relation.html','Services/MetaData');
 
 		$rel_ids = $this->md_obj->getRelationIds();
+		ilUtil::sendSuccess("Rel-IDS: ".$rel_ids[0], true);
 		if (!is_array($rel_ids) || count($rel_ids) == 0)
 		{
 			$this->tpl->setCurrentBlock("no_relation");
@@ -2751,6 +2752,82 @@ class ilMDEditorGUI
 		}
 		
 		$this->callListeners('Relation');
+		ilUtil::sendSuccess($this->lng->txt("saved_successfully"));
+		$this->listSection();
+	}
+
+	/*
+	 * list situationModel section
+	 */
+	function listSituationModel()
+	{
+		$this->tpl->addBlockFile('ADM_CONTENT','adm_content','tpl.md_editor.html','Services/MetaData');
+		$this->__setTabs('meta_situation_model');
+		$this->tpl->addBlockFile('MD_CONTENT','md_content','tpl.md_situation_model.html','Services/MetaData');
+
+		$sm_ids = $this->md_obj->getSituationModelIds();
+		if (!is_array($sm_ids) || count($sm_ids) == 0)
+		{
+			$this->tpl->setCurrentBlock("no_situation_model");
+			$this->tpl->setVariable("TXT_NO_SITUATION_MODEL", $this->lng->txt("meta_no_situation_model"));
+			$this->tpl->setVariable("TXT_ADD_SITUATION_MODEL", $this->lng->txt("meta_add"));
+			$this->ctrl->setParameter($this, "section", "meta_situation_model");
+			$this->tpl->setVariable("ACTION_ADD_SITUATION_MODEL",
+									$this->ctrl->getLinkTarget($this, "addSection"));
+			$this->tpl->parseCurrentBlock();
+		}
+		else
+		{
+			foreach($sm_ids as $sm_id)
+			{
+				$this->ctrl->setParameter($this, 'meta_index', $sm_id);
+				$this->ctrl->setParameter($this, "section", "meta_situation_model");
+
+				$this->md_section = $this->md_obj->getSituationModel($sm_id);
+								
+				$this->tpl->setCurrentBlock("situation_model_loop");
+				$this->tpl->setVariable("SITUATION_MODEL_ID", $sm_id);
+				$this->tpl->setVariable("TXT_SITUATION_MODEL", $this->lng->txt("meta_situation_model"));				
+				$this->ctrl->setParameter($this, "meta_index", $sm_id);
+				$this->tpl->setVariable("ACTION_DELETE",
+					$this->ctrl->getLinkTarget($this, "deleteSection"));
+				//$this->ctrl->setParameter($this, "section", "meta_situation_model");
+				$this->tpl->setVariable("TXT_DELETE", $this->lng->txt("meta_delete"));
+				
+				$this->tpl->setVariable("TXT_PREVIOUS", $this->lng->txt("meta_previous"));
+				$this->tpl->setVariable("VAL_PREVIOUS", $this->__showNuggetSelect('situation_model['.$sm_id.'][Previous]', 
+													$this->md_section->getPrevious()));
+				$this->tpl->setVariable("TXT_NEXT", $this->lng->txt("meta_next"));
+				//$this->tpl->setVariable("VAL_NEXT", ilUtil::prepareFormOutput($this->md_section->getNext()));
+				$this->tpl->setVariable("VAL_NEXT", $this->__showNuggetSelect('situation_model['.$sm_id.'][Next]', 
+													$this->md_section->getNext()));
+	
+				$this->tpl->parseCurrentBlock();
+			}
+			
+			$this->tpl->setCurrentBlock("situation_model");
+			$this->tpl->setVariable("EDIT_ACTION",$this->ctrl->getFormAction($this));
+			$this->tpl->setVariable("TXT_SAVE", $this->lng->txt("save"));
+			$this->tpl->parseCurrentBlock();
+		}
+	}		
+
+	function updateSituationModel()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDLanguageItem.php';
+
+		// relation
+		foreach($ids = $this->md_obj->getSituationModelIds() as $id)
+		{
+			// entity
+			$situationModel = $this->md_obj->getSituationModel($id);
+			$situationModel->setPrevious(ilUtil::stripSlashes($_POST['situation_model'][$id]['Previous']));
+			$situationModel->setNext(ilUtil::stripSlashes($_POST['situation_model'][$id]['Next']));
+			
+			$situationModel->update();
+		}
+		
+		$this->callListeners('SituationModel');
 		ilUtil::sendSuccess($this->lng->txt("saved_successfully"));
 		$this->listSection();
 	}
@@ -3161,6 +3238,11 @@ class ilMDEditorGUI
 				$des = $this->md_section->addDescription();
 				$des->save();
 				break;
+
+			case 'meta_situation_model':
+				$this->md_section = $this->md_obj->addSituationModel();
+				$this->md_section->save();
+				break;
 				
 			case 'meta_annotation':
 				$this->md_section = $this->md_obj->addAnnotation();
@@ -3287,6 +3369,16 @@ class ilMDEditorGUI
 				$rel = $this->md_obj->getRelation($_GET['meta_index']);
 				$md_new = $rel->addDescription();
 				break;
+
+			case 'situation_model_resource_identifier':
+				$sm = $this->md_obj->getSituationModel($_GET['meta_index']);
+				$md_new = $sm->addIdentifier_();
+				break;
+				
+			case 'situation_model_resource_description':
+				$sm = $this->md_obj->getSituationModel($_GET['meta_index']);
+				$md_new = $sm->addDescription();
+				break;
 				
 			case 'TaxonPath':
 				$md_new = $this->md_section->addTaxonPath();
@@ -3335,6 +3427,9 @@ class ilMDEditorGUI
 			case 'meta_relation':
 				return $this->listRelation();
 
+			case 'meta_situation_model':
+				return $this->listSituationModel();
+
 			case 'meta_annotation':
 				return $this->listAnnotation();
 
@@ -3382,6 +3477,7 @@ class ilMDEditorGUI
 					  'meta_educational' => 'listEducational',
 					  'meta_rights' => 'listRights',
 					  'meta_relation' => 'listRelation',
+					  'meta_situation_model' => 'listSituationModel',
 					  'meta_annotation' => 'listAnnotation',
 					  'meta_classification' => 'listClassification');
 
@@ -3446,6 +3542,72 @@ class ilMDEditorGUI
 		unset($tpl);
 
 		return $return;
+	}
+
+	/**
+	* shows nugget select box
+	*/
+	function __showNuggetSelect($a_name, $a_value = 0)
+	{		
+		$tpl = new ilTemplate("tpl.nugget_selection.html", true, true,
+			"Services/MetaData");
+
+		$options = array("");
+    	$options = $this->getNuggets();
+
+		foreach($options as $option => $text)
+		{
+			$tpl->setCurrentBlock("ng_option");
+			$tpl->setVariable("VAL_NG", $text);
+			$tpl->setVariable("TXT_NG", $this->getNuggetNameByObjId($text));
+
+			if ($a_value != "" &&
+				$a_value == $text)
+			{
+				$tpl->setVariable("SELECTED", "selected");
+			}
+
+			$tpl->parseCurrentBlock();
+		}
+		$tpl->setVariable("TXT_PLEASE_SELECT", $this->lng->txt("meta_please_select"));
+		$tpl->setVariable("SEL_NAME", $a_name);
+
+		$return = $tpl->get();
+		unset($tpl);
+
+		return $return;
+	}
+
+	/**
+	* Get Nuggets.
+	*/
+	function getNuggets()
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_reference WHERE ref_id >= 67 AND deleted IS NULL");
+		
+		$tstNuggets = array();
+		while($data = $ilDB->fetchAssoc($result))
+        {
+			$tstNuggets[] = $data["obj_id"];
+        }
+		
+		return $tstNuggets;
+	}
+
+	/**
+	* Get Nugget name by object ID.
+	*/
+	function getNuggetNameByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["title"];
+
+		return $entry;
 	}
 
 	function __buildMonthsSelect($sel_month)

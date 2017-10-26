@@ -7733,6 +7733,7 @@ meta#:#meta_name#:#Name
 meta#:#meta_narrative_text#:#Narrative Text
 meta#:#meta_networked#:#Networked
 meta#:#meta_new_element#:#New Element
+meta#:#meta_next#:#Next Nugget
 meta#:#meta_no_annotation#:#No metadata available for the Annotation section.
 meta#:#meta_no_classification#:#No metadata available for the Classification section.
 meta#:#meta_no_educational#:#No metadata available for the Educational section.
@@ -7740,6 +7741,7 @@ meta#:#meta_no_lifecycle#:#No metadata available for the Lifecycle section.
 meta#:#meta_no_meta_metadata#:#No metadata available for the Meta-Metadata section.
 meta#:#meta_no_relation#:#No metadata available for the Relation section.
 meta#:#meta_no_rights#:#No metadata available for the Rights section.
+meta#:#meta_no_situation_model#:#No metadata available for the Situation Model section.
 meta#:#meta_no_technical#:#No metadata available for the Technical section.
 meta#:#meta_no#:#No
 meta#:#meta_none#:#None###deprecated 
@@ -7751,6 +7753,7 @@ meta#:#meta_pc_dos#:#PC-DOS
 meta#:#meta_please_select#:#Please select
 meta#:#meta_pointofcontact#:#Point(s) of Contact
 meta#:#meta_prerequisite#:#Prerequisite
+meta#:#meta_previous#:#Previous Nugget
 meta#:#meta_problem_statement#:#Problem Statement
 meta#:#meta_publisher#:#Publisher
 meta#:#meta_purpose#:#Purpose
@@ -7771,6 +7774,7 @@ meta#:#meta_security_level#:#Security Level
 meta#:#meta_self_assessment#:#Self Assessment
 meta#:#meta_semantic_density#:#Semantic Density
 meta#:#meta_simulation#:#Simulation
+meta#:#meta_situation_model#:#Situation Model
 meta#:#meta_size#:#Size
 meta#:#meta_skill_level#:#Competence Level
 meta#:#meta_slide#:#Slide
