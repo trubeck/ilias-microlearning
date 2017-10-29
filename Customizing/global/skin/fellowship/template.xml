@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="http://www.w3.org" version="1" name="Fellowship Skin">
+  <style id="student" name="Student Style" image_directory="images" css_file="student" sound_directory="sound" font_directory="fonts"/>
+</template>

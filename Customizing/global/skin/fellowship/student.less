@@ -1,0 +1,68 @@
+@import "../../../../templates/default/delos";
+// Import Custom Less Files here
+@import "student-variables.less";
+
+#mm_pd_crs_grp, #mm_pd_bookm, #mm_pd_notes, #mm_pd_wsp, #mm_pd_port, #mm_pd_cal, #mm_pd_mail, #mm_pd_contacts, #mm_pd_profile, #mm_pd_sett, #il_right_col,  .divider, #imgtree, .btn-group li{
+  display: none;
+}
+
+#il_center_col{
+  width: 100%;
+}
+
+.ilBlockContent, .ilObjListRow{
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+@media (min-width: 1200px) {
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .ilContainerBlockHeader{
+    grid-column: 1 / span 5;
+  }
+}
+
+@media (max-width: 1199px){
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 15px;
+  }
+  .ilContainerBlockHeader{
+    grid-column: 1 / span 4;
+  }
+}
+
+@media (max-width: 991px){
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .ilContainerBlockHeader {
+    grid-column: 1 / span 3;
+  }
+}
+
+@media (max-width: 767px){
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ilContainerBlockHeader {
+    grid-column: 1 / span 2;
+  }
+}
+
+.ilObjListRow{
+  width: 200px;
+  height: 200px;
+  margin-left: 7px;
+  margin-right: 7px;
+}
