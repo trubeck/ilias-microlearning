@@ -283,6 +283,8 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	 */
 	protected function showContent() 
 	{
+		global $ilLog; 	
+
 		//tpl->addJavascript("./Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/js/PalunoObject.js");
 		
 		$this->tabs->activateTab("content");
@@ -320,6 +322,9 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				}
 				$tpl->setVariable("FORM", $form->getHTML());
 
+				include_once("./Services/NuggetNavigation/classes/class.ilNuggetNavigation.php");
+				$navigation = new ilNuggetNavigation();
+
 				$nuggetObjIds = $this->getRandomNuggetObjIds(3);
 				$nugget1 = $this->object->getNuggetNameByObjId($nuggetObjIds[0]);
 				$nugget2 = $this->object->getNuggetNameByObjId($nuggetObjIds[1]);
@@ -328,11 +333,44 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				$referenceId2 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[1]);
 				$referenceId3 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[2]);
 				//Nugget 1
-				$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				$result1 = $navigation->getPreviousNugget($this->object->getId());
+				include_once "Services/Logging/classes/class.ilLog.php";
+				$ilLog->write("Funktion: ".$result1);
+				if($result1 != null)
+				{
+					$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/previous-placeholder-thumbnail.png");
+					$ilLog->write("if: ".$result1);
+					$nugget1 = $this->object->getNuggetNameByObjId($result1);
+					$referenceId1 = $this->object->getRefIdFromExamByObjId($result1);
+				}
+				else
+				{
+					$ilLog->write("else: ".$result1);
+					$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				}
+
+				//Nugget 2
+				$result2 = $navigation->getNextNugget($this->object->getId());
+				include_once "Services/Logging/classes/class.ilLog.php";
+				$ilLog->write("Funktion: ".$result2);
+				if($result2 != null)
+				{
+					$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/next-placeholder-thumbnail.png");
+					$ilLog->write("if: ".$result2);
+					$nugget2 = $this->object->getNuggetNameByObjId($result2);
+					$referenceId2 = $this->object->getRefIdFromExamByObjId($result2);
+				}
+				else
+				{
+					$ilLog->write("else: ".$result2);
+					$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				}
+
+				//$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
 				$tpl->setVariable('LINK_NUG1', $this->goToNugget($referenceId1));
 				$tpl->setVariable("NAME_1", $nugget1);
 				//Nugget 2
-				$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+				//$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
 				$tpl->setVariable('LINK_NUG2', $this->goToNugget($referenceId2));
 				$tpl->setVariable("NAME_2", $nugget2);
 				//Nugget 3
@@ -344,6 +382,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 				$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
 				$tpl->setVariable("TITLE", $item["title"]);
 				$tpl->setVariable("DESCRIPTION", $item["content"]);
+				$this->tpl->setVariable("EDIT_ACTION",$this->ctrl->getFormAction($this));
 				//$this->ctrl->setParameter($this, "item_ref_id", $this->object->getRefId());
 				
 				// player
@@ -961,9 +1000,11 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 	*/
 	function goToExam()
 	{
-		$referenceIdFromExam = $this->object->getRefIdFromExam();
-		$this->ctrl->setParameterByClass("ilObjTestGUI", "ref_id", 72);
-		$this->ctrl->redirectByClass("ilObjTestGUI", "");
+		//$referenceIdFromExam = $this->object->getRefIdFromExam();
+		//$this->ctrl->setParameterByClass("ilObjTestGUI", "ref_id", 72);
+		//$this->ctrl->redirectByClass("ilObjTestGUI", "");
+		$this->ctrl->setParameterByClass("ilObjTextNuggetGUI", "ref_id", 75);
+		$this->ctrl->redirectByClass("ilObjTextNuggetGUI", "showContent");
 	}
 
 	/**
@@ -1007,11 +1048,23 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 
 	function makeTest()
 	{
-		//ilUtil::sendSuccess("eins", true);
-		$result = $this->getRandomNuggetObjIds(3);
-		ilUtil::sendSuccess($result[2], true);
+		global $ilDB;
 
-		$this->ctrl->redirect($this, "showContent");
+		$result = $ilDB->query("SELECT previous FROM il_meta_situation_model WHERE obj_id = 278");
+		$data = $ilDB->fetchAssoc($result);
+		if($data == null)
+		{
+			ilUtil::sendSuccess("nicht vorhanden", true);
+		}
+		else
+		{
+			ilUtil::sendSuccess($data["previous"], true);
+		}
+			
+		//$result = $this->getRandomNuggetObjIds(3);
+		//ilUtil::sendSuccess($result[2], true);
+
+		//$this->ctrl->redirect($this, "showContent");
 	}
 	
 	/**

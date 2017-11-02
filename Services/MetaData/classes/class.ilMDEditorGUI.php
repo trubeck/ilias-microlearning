@@ -3547,7 +3547,7 @@ class ilMDEditorGUI
 	/**
 	* shows nugget select box
 	*/
-	function __showNuggetSelect($a_name, $a_value = 0)
+	function __showNuggetSelect($a_name, $a_value)
 	{		
 		$tpl = new ilTemplate("tpl.nugget_selection.html", true, true,
 			"Services/MetaData");
@@ -3561,7 +3561,7 @@ class ilMDEditorGUI
 			$tpl->setVariable("VAL_NG", $text);
 			$tpl->setVariable("TXT_NG", $this->getNuggetNameByObjId($text));
 
-			if ($a_value != "" &&
+			if ($a_value != 0 &&
 				$a_value == $text)
 			{
 				$tpl->setVariable("SELECTED", "selected");
