@@ -2796,7 +2796,7 @@ class ilMDEditorGUI
 				
 				$this->tpl->setVariable("TXT_PREVIOUS", $this->lng->txt("meta_previous"));
 				$this->tpl->setVariable("VAL_PREVIOUS", $this->__showNuggetSelect('situation_model['.$sm_id.'][Previous]', 
-													$this->md_section->getPrevious()));
+													$this->md_section->getNext()));
 				$this->tpl->setVariable("TXT_NEXT", $this->lng->txt("meta_next"));
 				//$this->tpl->setVariable("VAL_NEXT", ilUtil::prepareFormOutput($this->md_section->getNext()));
 				$this->tpl->setVariable("VAL_NEXT", $this->__showNuggetSelect('situation_model['.$sm_id.'][Next]', 
