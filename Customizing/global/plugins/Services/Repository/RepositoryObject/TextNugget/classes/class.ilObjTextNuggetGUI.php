@@ -15,7 +15,7 @@ require_once("./Services/Form/classes/class.ilNonEditableValueGUI.php");
 /**
  * @ilCtrl_isCalledBy ilObjTextNuggetGUI: ilRepositoryGUI, ilAdministrationGUI, ilObjPluginDispatchGUI
  * @ilCtrl_Calls ilObjTextNuggetGUI: ilPermissionGUI, ilInfoScreenGUI, ilObjectCopyGUI, ilCommonActionDispatcherGUI, ilExportGUI
- * @ilCtrl_Calls ilObjTextNuggetGUI: ilObjectMetaDataGUI, ilPersonalDesktopGUI, ilTextEditorGUI, ilObjStyleSheetGUI, ilObjTestGUI, ilObjPalunoObjectGUI
+ * @ilCtrl_Calls ilObjTextNuggetGUI: ilObjectMetaDataGUI, ilPersonalDesktopGUI, ilTextEditorGUI, ilObjStyleSheetGUI, ilObjTestGUI
  */
 class ilObjTextNuggetGUI extends ilObjectPluginGUI
 {
