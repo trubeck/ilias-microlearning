@@ -37,7 +37,6 @@ class ilNuggetNavigation
 
 		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
 		$data = $ilDB->fetchAssoc($result);
-		$parse = implode(",", $data);
 		$ilLog->write("usdgkasgaks ".$data["previous"]);
 		if($data == null || $data["previous"] == 0)
 		{
