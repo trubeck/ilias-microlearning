@@ -3583,17 +3583,11 @@ class ilMDEditorGUI
 	*/
 	function getNuggets()
 	{
-		global $ilDB;
+		include_once("Services/NuggetRecommender/classes/class.ilNuggetRecommender.php");
+		$recommender = new ilNuggetRecommender();
+		$nuggets = $recommender->getNuggetIDs();
 
-		$result = $ilDB->query("SELECT * FROM object_reference WHERE ref_id >= 67 AND deleted IS NULL");
-		
-		$tstNuggets = array();
-		while($data = $ilDB->fetchAssoc($result))
-        {
-			$tstNuggets[] = $data["obj_id"];
-        }
-		
-		return $tstNuggets;
+		return $nuggets;
 	}
 
 	/**

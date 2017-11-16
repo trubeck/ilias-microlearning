@@ -14,14 +14,57 @@ class ilNuggetNavigation
     }
 
 	/**
+	* Get Nugget name by object ID.
+	*/
+	function getNuggetNameByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["title"];
+
+		return $entry;
+	}
+
+	/**
+	* Get Ref Id from Exam by object ID.
+	*/
+	function getRefIdFromExamByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_reference WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$refIdFromNugget = $data["ref_id"];
+
+		return $refIdFromNugget;
+	}
+
+	/**
 	* Get link to selected nugget.
 	*/
-	function getLinkToNugget($referenceId)
+	function getLinkToNugget($obj_id)
 	{
-		ilUtil::sendSuccess("hallo");
-		//require_once("./Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/classes/class.ilPalunoObjectPlugin.php");
-		$ilCtrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId);
-		$link = $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent');
+		global $ilDB;
+		
+		$referenceId = $this->getRefIdFromExamByObjId($obj_id);
+		$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$nuggetType = $data["type"];
+
+		switch ($nuggetType) {
+			case 'xpal':
+				$cmdClass = "ilobjpalunoobjectgui";
+				$cmdNode = "jt:jq";
+				break;
+			case 'xtxt':
+				$cmdClass = "ilobjtextnuggetgui";
+				$cmdNode = "jt:lu";
+				break;
+		}
+
+		$link = "ilias.php?ref_id=".$referenceId."&cmd=showContent&cmdClass=".$cmdClass."&cmdNode=".$cmdNode."&baseClass=ilObjPluginDispatchGUI";
 
 		return $link;
 	}
@@ -31,20 +74,17 @@ class ilNuggetNavigation
 	*/
 	function getPreviousNugget($obj_id)
 	{	
-		global $ilDB, $ilLog;
-
-		include_once "Services/Logging/classes/class.ilLog.php";
+		global $ilDB;
 
 		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
 		$data = $ilDB->fetchAssoc($result);
-		$ilLog->write("usdgkasgaks ".$data["previous"]);
-		if($data == null || $data["previous"] == 0)
+		$objIdPrevious = $data["previous"];
+		if($this->isObjectDeleted($objIdPrevious) || $data == null || $objIdPrevious == 0)
 		{
-			$ilLog->write("null");
 			return null;
 		}
 		
-		return $data["previous"];
+		return $objIdPrevious;
 	}
 
 	/**
@@ -56,14 +96,33 @@ class ilNuggetNavigation
 
 		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
 		$data = $ilDB->fetchAssoc($result);
-		if($data == null || $data["next"] == 0)
+		$objIdNext = $data["next"];
+		if($this->isObjectDeleted($objIdNext) || $data == null || $objIdNext == 0)
 		{
 			return null;
 		}
 		
-		return $data["next"];
+		return $objIdNext;
 	}
 
+	/**
+	* checks if object is deleted
+	*/
+	function isObjectDeleted($obj_id)
+	{	
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_reference WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		if($data["deleted"] == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 
     function getNuggetIDs()
     {
@@ -96,17 +155,6 @@ class ilNuggetNavigation
 
         return $data["title"];
 
-    }
-
-    function getRefIDFromObjID($objID)
-    {
-        global $ilDB;
-
-        $result = $ilDB->query("SELECT ref_id FROM object_reference WHERE obj_id = ".$ilDB->quote($objID, "integer"));
-
-        $data = $ilDB->fetchAssoc($result);
-
-        return $data["ref_id"];
     }
 
     function getRandom($count)
