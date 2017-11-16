@@ -19,11 +19,18 @@ class ilNuggetRecommender
         global $ilDB, $ilUser;
 
         //$user_id = $ilUser->getId();
-        $type = "xpal";
-        $result = $ilDB->query("SELECT DISTINCT obj_id FROM object_data NATURAL JOIN object_reference WHERE type = ".$ilDB->quote($type, "text")  . "AND deleted IS NULL");
+        $type1 = "xpal";
+		$type2 = "xtxt";
+        $result1 = $ilDB->query("SELECT DISTINCT obj_id FROM object_data NATURAL JOIN object_reference WHERE type = ".$ilDB->quote($type1, "text")  . "AND deleted IS NULL");
+		$result2 = $ilDB->query("SELECT DISTINCT obj_id FROM object_data NATURAL JOIN object_reference WHERE type = ".$ilDB->quote($type2, "text")  . "AND deleted IS NULL");
 
         $entry = "";
-        while($data = $ilDB->fetchAssoc($result))
+        while($data = $ilDB->fetchAssoc($result1))
+        {
+            $entry .= $data["obj_id"] . ",";
+        }
+
+		while($data = $ilDB->fetchAssoc($result2))
         {
             $entry .= $data["obj_id"] . ",";
         }

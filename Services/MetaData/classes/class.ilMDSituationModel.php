@@ -64,8 +64,8 @@ class ilMDSituationModel extends ilMDBase
 	
 	function save()
 	{
-		global $ilDB; 
-		
+		global $ilDB;
+
 		$fields = $this->__getFields();
 		$fields['meta_situation_model_id'] = array('integer',$next_id = $ilDB->nextId('il_meta_situation_model'));
 		
@@ -80,17 +80,218 @@ class ilMDSituationModel extends ilMDBase
 	function update()
 	{
 		global $ilDB;
-		
+
 		if($this->getMetaId())
 		{
+			$objIdOldPreviousNugget = $this->getObjIdOfOldPreviousNugget($this->getPrevious());
+			//check if chosen objId is set in another nugget as previous
+			if($objIdOldPreviousNugget != null)
+			{
+				//set field 'previous' of old previous nugget to 0
+				$query = "UPDATE il_meta_situation_model SET previous=0 WHERE obj_id = ".$ilDB->quote($objIdOldPreviousNugget ,'integer');
+				$res = $ilDB->manipulate($query);
+			}
+
+			$objIdOldNextNugget = $this->getObjIdOfOldNextNugget($this->getNext());
+			//check if chosen objId is set in another nugget as next
+			if($objIdOldNextNugget != null)
+			{
+				//set field 'previous' of old previous nugget to 0
+				$query = "UPDATE il_meta_situation_model SET next=0 WHERE obj_id = ".$ilDB->quote($objIdOldNextNugget ,'integer');
+				$res = $ilDB->manipulate($query);
+			}
+
 			if($this->db->update('il_meta_situation_model',
 									$this->__getFields(),
 									array("meta_situation_model_id" => array('integer',$this->getMetaId()))))
 			{
-				return true;
+			
+			$this->resetPossibleNextConnection();
+			$this->updateEntryOfPreviousNugget($this->getPrevious());
+			$this->resetPossiblePreviousConnection();
+			$this->updateEntryOfNextNugget($this->getNext());
+				
+			return true;
 			}
 		}
 		return false;
+	}
+
+	function resetPossibleNextConnection()
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE next = ".$ilDB->quote($this->getObjId(), "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["obj_id"];
+		$query = "UPDATE il_meta_situation_model SET next=0 WHERE obj_id = ".$ilDB->quote($entry ,'integer');
+		$res = $ilDB->manipulate($query);
+	}
+
+	function updateEntryOfPreviousNugget($obj_id)
+	{
+		global $ilDB;
+
+		$obj_type = $this->getNuggetTypeByObjId($obj_id);
+		$previousprevious = $this->getPreviousNuggetOfPreviousNuggetByObjId($obj_id);
+
+		//fields of previous nugget to be stored in database
+		$array = array('rbac_id'	=> array('integer',$obj_id),
+					'obj_id'	=> array('integer',$obj_id),
+					'obj_type'	=> array('text',$obj_type),
+					'previous'	=> array('integer',$previousprevious),
+					'next'		=> array('integer',$this->getObjId()));
+		
+		//if previous is set
+		if($this->getPrevious() != 0)
+		{
+			if(!$this->getMetaIdByObjId($obj_id))
+			{
+				//insert new entry if no metaId was found
+				$array['meta_situation_model_id'] = array('integer',$next_id = $ilDB->nextId('il_meta_situation_model'));
+				$this->db->insert('il_meta_situation_model',$array);
+			}
+
+			//update entry
+			$this->db->update('il_meta_situation_model',
+						$array,
+						array("meta_situation_model_id" => array('integer',$this->getMetaIdByObjId($obj_id))));
+		}
+		else 
+		{
+			$this->resetPossibleNextConnection();
+		}
+	}
+
+	/**
+	* Get ObjId of Old Previous Nugget.
+	*/
+	function getObjIdOfOldPreviousNugget($previous)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE previous = ".$ilDB->quote($previous, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["obj_id"];
+
+		return $entry;
+	}
+
+	function resetPossiblePreviousConnection()
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE previous = ".$ilDB->quote($this->getObjId(), "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["obj_id"];
+		$query = "UPDATE il_meta_situation_model SET previous=0 WHERE obj_id = ".$ilDB->quote($entry ,'integer');
+		$res = $ilDB->manipulate($query);
+	}
+
+	function updateEntryOfNextNugget($obj_id)
+	{
+		global $ilDB;
+
+		$obj_type = $this->getNuggetTypeByObjId($obj_id);
+		$nextnext = $this->getNextNuggetOfNextNuggetByObjId($obj_id);
+
+		//fields of next nugget to be stored in database
+		$array = array('rbac_id'	=> array('integer',$obj_id),
+						'obj_id'	=> array('integer',$obj_id),
+						'obj_type'	=> array('text',$obj_type),
+						'previous'	=> array('integer',$this->getObjId()),
+						'next'		=> array('integer',$nextnext));
+		
+		//if next is set
+		if($this->getNext() != 0)
+		{
+			if(!$this->getMetaIdByObjId($obj_id))
+			{
+				//insert new entry if no metaId was found
+				$array['meta_situation_model_id'] = array('integer',$next_id = $ilDB->nextId('il_meta_situation_model'));
+				$this->db->insert('il_meta_situation_model',$array);
+			}
+
+			//update entry
+			$this->db->update('il_meta_situation_model',
+						$array,
+						array("meta_situation_model_id" => array('integer',$this->getMetaIdByObjId($obj_id))));
+		}
+		else 
+		{
+			//set field 'previous' of old next nugget to 0
+			$this->resetPossiblePreviousConnection();
+		}
+	}
+
+	/**
+	* Get ObjId of Old Next Nugget.
+	*/
+	function getObjIdOfOldNextNugget($next)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE next = ".$ilDB->quote($next, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["obj_id"];
+
+		return $entry;
+	}
+
+	/**
+	* Get Nugget type by object ID.
+	*/
+	function getNuggetTypeByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["type"];
+
+		return $entry;
+	}
+
+	/**
+	* Get Previous Nugget of Previous Nugget.
+	*/
+	function getPreviousNuggetOfPreviousNuggetByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["previous"];
+
+		return $entry;
+	}
+
+	/**
+	* Get Next Nugget of Next Nugget.
+	*/
+	function getNextNuggetOfNextNuggetByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["next"];
+
+		return $entry;
+	}
+
+	/**
+	* Get Previous Nugget of Previous Nugget.
+	*/
+	function getMetaIdByObjId($obj_id)
+	{
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_situation_model WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
+		$data = $ilDB->fetchAssoc($result);
+		$entry = $data["meta_situation_model_id"];
+
+		return $entry;
 	}
 
 	function delete()
@@ -107,7 +308,21 @@ class ilMDSituationModel extends ilMDBase
 		}
 		return false;
 	}
+	
+	function deleteEntryOf()
+	{
+		global $ilDB;
+		
+		if($this->getMetaId())
+		{
+			$query = "DELETE FROM il_meta_situation_model ".
+				"WHERE meta_situation_model_id = ".$ilDB->quote($this->getMetaId() ,'integer');
+			$res = $ilDB->manipulate($query);
 			
+			return true;
+		}
+		return false;
+	}
 
 	function __getFields()
 	{
