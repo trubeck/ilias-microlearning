@@ -61,20 +61,6 @@ class ilObjPalunoObject extends ilObjectPlugin implements ilLPStatusPluginInterf
 	}
 
 	/**
-	* Get Nugget name by object ID.
-	*/
-	function getNuggetNameByObjId($obj_id)
-	{
-		global $ilDB;
-
-		$result = $ilDB->query("SELECT * FROM object_data WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
-		$data = $ilDB->fetchAssoc($result);
-		$entry = $data["title"];
-
-		return $entry;
-	}
-
-	/**
 	* Set Ref Id from Exam.
 	*/
 	function setRefIdFromExam($obj_id)

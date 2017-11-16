@@ -324,66 +324,51 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 
 				include_once("./Services/NuggetNavigation/classes/class.ilNuggetNavigation.php");
 				$navigation = new ilNuggetNavigation();
-
-				$nuggetObjIds = $this->getRandomNuggetObjIds(3);
-				$nugget1 = $this->object->getNuggetNameByObjId($nuggetObjIds[0]);
-				$nugget2 = $this->object->getNuggetNameByObjId($nuggetObjIds[1]);
-				$nugget3 = $this->object->getNuggetNameByObjId($nuggetObjIds[2]);
-				$referenceId1 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[0]);
-				$referenceId2 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[1]);
-				$referenceId3 = $this->object->getRefIdFromExamByObjId($nuggetObjIds[2]);
+				$randomNuggetObjIds = $this->getRandomNuggetObjIds(3);
+				
 				//Nugget 1
-				$result1 = $navigation->getPreviousNugget($this->object->getId());
-				include_once "Services/Logging/classes/class.ilLog.php";
-				$ilLog->write("Funktion: ".$result1);
-				if($result1 != null)
+				$objIdPrevious = $navigation->getPreviousNugget($this->object->getId());
+				if($objIdPrevious != null)
 				{
 					$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/previous-placeholder-thumbnail.png");
-					$ilLog->write("if: ".$result1);
-					$nugget1 = $this->object->getNuggetNameByObjId($result1);
-					$referenceId1 = $this->object->getRefIdFromExamByObjId($result1);
+					$nameNugget1 = $navigation->getNuggetNameByObjId($objIdPrevious);
+					$tpl->setVariable('LINK_NUG1', $navigation->getLinkToNugget($objIdPrevious));
 				}
 				else
 				{
-					$ilLog->write("else: ".$result1);
 					$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+					$nameNugget1 = $navigation->getNuggetNameByObjId($randomNuggetObjIds[0]);
+					$tpl->setVariable('LINK_NUG1', $navigation->getLinkToNugget($randomNuggetObjIds[0]));
 				}
+				$tpl->setVariable("NAME_1", $nameNugget1);
 
 				//Nugget 2
-				$result2 = $navigation->getNextNugget($this->object->getId());
-				include_once "Services/Logging/classes/class.ilLog.php";
-				$ilLog->write("Funktion: ".$result2);
-				if($result2 != null)
+				$objIdNext = $navigation->getNextNugget($this->object->getId());
+				if($objIdNext != null)
 				{
 					$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/next-placeholder-thumbnail.png");
-					$ilLog->write("if: ".$result2);
-					$nugget2 = $this->object->getNuggetNameByObjId($result2);
-					$referenceId2 = $this->object->getRefIdFromExamByObjId($result2);
+					$nameNugget2 = $navigation->getNuggetNameByObjId($objIdNext);
+					$tpl->setVariable('LINK_NUG2', $navigation->getLinkToNugget($objIdNext));
 				}
 				else
 				{
-					$ilLog->write("else: ".$result2);
 					$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+					$nameNugget2 = $navigation->getNuggetNameByObjId($randomNuggetObjIds[1]);
+					$tpl->setVariable('LINK_NUG2', $navigation->getLinkToNugget($randomNuggetObjIds[1]));
 				}
+				$tpl->setVariable("NAME_2", $nameNugget2);
 
-				//$tpl->setVariable("NUGGET_1", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
-				$tpl->setVariable('LINK_NUG1', $this->goToNugget($referenceId1));
-				$tpl->setVariable("NAME_1", $nugget1);
-				//Nugget 2
-				//$tpl->setVariable("NUGGET_2", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
-				$tpl->setVariable('LINK_NUG2', $this->goToNugget($referenceId2));
-				$tpl->setVariable("NAME_2", $nugget2);
 				//Nugget 3
+				$nameNugget3 = $navigation->getNuggetNameByObjId($randomNuggetObjIds[2]);
 				$tpl->setVariable("NUGGET_3", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
-				$tpl->setVariable('LINK_NUG3', $this->goToNugget($referenceId3));
-				$tpl->setVariable("NAME_3", $nugget3);
+				$tpl->setVariable('LINK_NUG3', $navigation->getLinkToNugget($randomNuggetObjIds[2]));
+				$tpl->setVariable("NAME_3", $nameNugget3);
 
 				$tpl->setVariable("ARROW_LEFT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow left.png");
 				$tpl->setVariable("ARROW_RIGHT", "Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/arrow right.png");
 				$tpl->setVariable("TITLE", $item["title"]);
 				$tpl->setVariable("DESCRIPTION", $item["content"]);
 				$this->tpl->setVariable("EDIT_ACTION",$this->ctrl->getFormAction($this));
-				//$this->ctrl->setParameter($this, "item_ref_id", $this->object->getRefId());
 				
 				// player
 				if (is_object($med))
@@ -432,31 +417,22 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			$tpl->parseCurrentBlock();
 		}
 
-		//$parse = implode(",", $med_items);
-		//$parse = $med_items["mob_id"];
-		
-		//$mob = new ilObjMediaObject($item["mob_id"]);
-		//$med = $mob->getMediaItem("Standard");
-			
-		//$tpl->setCurrentBlock("paluno_block");
-		//$tpl->setVariable("TYP", $parse);
-		
-		//$tpl->parseCurrentBlock();
-		
 		$html = $tpl->get();	
 		$this->tpl->setContent($html);
 	}
 
 	/**
 	* Go to selected nugget.
-	*/
+	
 	function goToNugget($referenceId)
 	{
 		$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $referenceId);
 		$link = $this->ctrl->getLinkTargetByClass('ilobjpalunoobjectgui', 'showContent');
+		$ref = $referenceId;
 
 		return $link;
 	}
+	*/
 
 		/**
 	 * set content subtabs

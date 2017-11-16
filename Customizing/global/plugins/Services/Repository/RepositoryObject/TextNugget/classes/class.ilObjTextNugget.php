@@ -131,13 +131,25 @@ class ilObjTextNugget extends ilObjectPlugin implements ilLPStatusPluginInterfac
 	 */
 	function doDelete()
 	{
-		global $ilDB;
+		global $ilDB, $ilLog;
+		include_once "Services/Logging/classes/class.ilLog.php";
+		$ilLog->write("was geht ");
 
 		$this->deleteMetaData();
 
 		$ilDB->manipulate("DELETE FROM rep_robj_xtxt_data WHERE ".
 			" id = ".$ilDB->quote($this->getId(), "integer")
 		);
+
+		//delete situationmodel metadata
+		include_once("./Services/MetaData/classes/class.ilMDSituationModel.php");
+		$situationModel = new ilMDSituationModel();
+		$metaId = $situationModel->getMetaIdByObjId($this->getId());
+		$ilLog->write("delete ".$metaId);
+
+		$query = "DELETE FROM il_meta_situation_model ".
+				"WHERE meta_situation_model_id = ".$ilDB->quote($metaId ,'integer');
+		$res = $ilDB->manipulate($query);
 	}
 
 	/**
