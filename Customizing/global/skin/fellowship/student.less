@@ -1,0 +1,293 @@
+@import "../../../../templates/default/delos";
+// Import Custom Less Files here
+@import "student-variables.less";
+
+#mm_pd_crs_grp, #mm_pd_bookm, #mm_pd_notes, #mm_pd_wsp, #mm_pd_port, #mm_pd_cal, #mm_pd_mail, #mm_pd_contacts, #mm_pd_profile, #mm_pd_sett, #il_right_col,  .divider, #imgtree, #tab_info_short, [id^="search"] thead{
+  display: none;
+}
+
+body{
+  background-image: url("images/Background2.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.il_ContainerItemTitle{
+  word-wrap: break-word;
+}
+
+.il_ContainerItemTitle, :not(table[id^='search'] .il_ContainerItemTitle){
+  max-width: none;
+  width: 135px;
+}
+div.ilContainerListItemOuter{
+  height: 198px;
+}
+
+div.ilListItemSection{
+  max-width: none;
+  width: 175px;
+  height: auto;
+  padding-top: 15px;
+  margin-left: -40px
+}
+
+.btn-default, .btn-default:hover{
+  color: @mid-gray;
+}
+
+.navbar-brand img{
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 4px;
+}
+
+.form-group, .il_InfoScreenPropertyValue{
+  color: @mid-gray !important;
+  background-color: transparent !important;
+}
+
+.form-horizontal, .ilFormFooter, .ilFormHeader{
+  background-color: transparent;
+
+}
+
+.form-horizontal .control-label, .form-horizontal .help-block {
+  color: darken(@mid-gray, 20%);
+}
+
+
+
+#ilTopNav .navbar-nav  li  a{
+  border: none;
+  color: #e2e2e2;
+  background-color: @mid-gray;
+}
+
+#current_perma_link{
+  color: black;
+}
+
+h3.ilHeader{
+  color: @mid-gray;
+}
+
+#ilTopNav .navbar-nav > .active > a, #ilTopNav .navbar-nav > .open > a, #ilTopNav .navbar-nav > .active > a:hover, #ilTopNav .navbar-nav > .open > a:hover, #ilTopNav .navbar-nav > .active > a:active, #ilTopNav .navbar-nav > .open > a:active, #ilTopNav .navbar-nav > .active > a:focus, #ilTopNav .navbar-nav > .open > a:focus{
+  background-color: @mid-gray;
+}
+
+.dropdown-header, .dropdown-menu, #ilTopNav .navbar-nav > .open > a{
+  background-color: @mid-gray;
+  color: white;
+}
+
+#ilTopBarNav .dropdown-menu{
+  background-color: @mid-gray;
+}
+.dropdown-menu li > a{
+  color: white;
+}
+
+.form-control{
+  color: white;
+}
+
+.ilMainHeader{
+  background-color: @mid-gray;
+
+  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+}
+
+
+#il_center_col{
+  width: 100%;
+}
+
+.ilCLI.ilObjListRow.row{
+  margin-top: 10px;
+}
+
+div.il_Block{
+  background-color: transparent !important;
+}
+
+div.ilBlockHeader{
+  border: none;
+}
+
+div.ilBlockContent, .ilObjListRow{
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 8px;
+
+  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+  background-color: @mid-gray !important;
+
+}
+
+#ilPDIntro{
+  margin-left: 10px;
+}
+
+div[id^="block_pditems"] .ilObjListRow{
+  float: left;
+
+  margin-top: 30px;
+  margin-right: 20px;
+}
+
+button[id^="ilAdvSelListAnchorText_block_dd_pditems"]{
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .ilContainerBlockHeader, thead{
+    grid-column: 1 / span 5;
+  }
+
+  div.il_ContainerListItem{
+    width: @card-title-width;
+  }
+}
+
+@media (max-width: 1199px){
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 15px;
+  }
+  .ilContainerBlockHeader{
+    grid-column: 1 / span 4;
+  }
+}
+
+@media (max-width: 991px){
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .ilContainerBlockHeader {
+    grid-column: 1 / span 3;
+  }
+}
+
+@media (max-width: 767px){
+  .ilContainerBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ilContainerBlockHeader {
+    grid-column: 1 / span 2;
+  }
+}
+
+.ilObjListRow{
+  width: @card-size;
+  height: @card-size;
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+
+// BEGINN SUCHE #####################################
+
+table[id^='search'] div.ilContainerListItemOuterm, table[id^='search'] div.ilContainerListItemContent{
+  width: 70vw;
+}
+
+table[id^='search'] div.il_ContainerListItem{
+  width: inherit;
+
+}
+
+table[id^='search'] div.ilListItemSection{
+  margin-left: 0px;
+}
+
+table[id^='search'] ol.breadcrumb{
+  display: none;
+}
+
+table[id^='search'] .ilObjListRow, table[id^='search'] div.ilContainerListItemOuter{
+  height: 100px;
+}
+
+table {
+  background-color: transparent !important;
+  border-spacing: 0 12px;
+}
+
+tr {
+  background-color: transparent !important;
+}
+
+.ilTableOuter td {
+  background-color: @mid-gray !important;
+}
+
+div.ilTableOuter{
+  background-color: transparent;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+  border-top: transparent;
+
+  background-clip: padding-box;
+  padding-bottom: 30px;
+}
+
+td { border: solid 0 transparent }
+tr td:first-child { border-top-left-radius: 8px; }
+tr td:last-child { border-top-right-radius: 8px; }
+tr td:first-child { border-bottom-left-radius: 8px; }
+tr td:last-child { border-bottom-right-radius: 8px; }
+
+table[id^='search'] .ilObjListRow{
+  background: transparent !important;
+}
+
+.table-responsive{
+  border: none;
+}
+
+.table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td{
+  white-space: normal;
+}
+
+// END SUCHE #####################################
+
+
+/*
+.ilContainerListItemOuter{
+  height: 100%;
+}
+.ilContainerListItemContent{
+  height: 200%;
+}
+
+.il_ContainerListItem{
+  height: 100%;
+  width: 80%;
+}
+
+.il_ContainerItemTitle.form-inline{
+  margin-top: 80%;
+}
+
+div.ilContainerListItemIcon{
+  position: absolute;
+}*/
