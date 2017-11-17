@@ -12,8 +12,8 @@
 		ILIAS 4 MainMenu Color: #c8e6ff;
 */
 
-@brand-primary:		#4c6586;
-@brand-secondary:		#6ea03c;
+@brand-primary: @mid-gray;
+@brand-secondary:		@gray-dark;//#6ea03c;
 @brand-success:		#6ea03c;
 @brand-info:		#dcb496;
 @brand-warning:		#fa8228;
@@ -32,10 +32,10 @@
 @web-font-path:		"fonts/";
 
 @mid-gray:		#434343;
-@il-primary-container-bg:		white;
-@il-secondary-container-bg:		white;
+@il-primary-container-bg:		@mid-gray;
+@il-secondary-container-bg:		transparent;
 
-@il-highlight-bg:		white;
+@il-highlight-bg:		@mid-gray;
 /* @il-highlight-bg: saturate(lighten(@brand-warning, 34%), 80%); */
 /* @il-highlight-bg: lighten(@brand-secondary, 44%); */
 /* @il-highlight-bg: lighten(#21c5d8, 40%); */
@@ -45,57 +45,57 @@
 //== Scaffolding
 //
 //##
-@body-bg:		white;
-@text-color:		@gray-dark;
-@link-color:		lighten(@brand-primary, 5%);
+@body-bg:		@mid-gray;
+@text-color:		white;
+@link-color: #2dcab9;//lighten(@brand-primary, 5%);
 @link-hover-color:		darken(@link-color, 15%);
 
-@component-active-color:		white;
-@btn-primary-color:		white;
-@btn-success-color:		white;
-@btn-info-color:		white;
-@btn-warning-color:		white;
-@btn-danger-color:		white;
-@input-bg:		white;
+@component-active-color:		@mid-gray;
+@btn-primary-color:		@mid-gray;
+@btn-success-color:		@mid-gray;
+@btn-info-color:		@mid-gray;
+@btn-warning-color:		@mid-gray;
+@btn-danger-color:		@mid-gray;
+@input-bg:		@mid-gray;
 
-@dropdown-bg:		white;
+@dropdown-bg:		@mid-gray;
 
-@navbar-inverse-link-hover-color:		white;
-@navbar-inverse-brand-hover-color:		white;
-@navbar-inverse-toggle-icon-bar-bg:		white;
+@navbar-inverse-link-hover-color:		@mid-gray;
+@navbar-inverse-brand-hover-color:		@mid-gray;
+@navbar-inverse-toggle-icon-bar-bg:		@mid-gray;
 
-@nav-open-link-hover-color:		white;
+@nav-open-link-hover-color:		@mid-gray;
 
-@pagination-bg:		white;
-@pagination-active-color:		white;
-@pagination-disabled-bg:		white;
+@pagination-bg:		@mid-gray;
+@pagination-active-color:		@mid-gray;
+@pagination-disabled-bg:		@mid-gray;
 
-@tooltip-color:		white;
+@tooltip-color:		@mid-gray;
 @tooltip-bg:		black;
 
-@popover-bg:		white;
-@popover-arrow-color:		white;
+@popover-bg:		@mid-gray;
+@popover-arrow-color:		@mid-gray;
 
-@label-color:		white;
-@label-link-hover-color:		white;
+@label-color:		@mid-gray;
+@label-link-hover-color:		@mid-gray;
 
-@modal-content-bg:		white;
+@modal-content-bg:		@mid-gray;
 @modal-backdrop-bg:		black;
 
-@progress-bar-color:		white;
+@progress-bar-color:		@mid-gray;
 
-@list-group-bg:		white;
+@list-group-bg:		@mid-gray;
 
-@panel-bg:		white;
+@panel-bg:		@mid-gray;
 @panel-primary-text:		white;
 
-@carousel-control-color:		white;
-@carousel-indicator-active-bg:		white;
-@carousel-indicator-border-color:		white;
-@carousel-caption-color:		white;
+@carousel-control-color:		@mid-gray;
+@carousel-indicator-active-bg:		@mid-gray;
+@carousel-indicator-border-color:		@mid-gray;
+@carousel-caption-color:		@mid-gray;
 
 @close-text-shadow:		0 1px 0 white;
-@kbd-color:		white;
+@kbd-color:		@mid-gray;
 
 
 //== Typography
@@ -202,13 +202,13 @@
 //
 //##
 
-@badge-color:		white;
+@badge-color:		@mid-gray;
 //** Linked badge text color on hover
-@badge-link-hover-color:		white;
+@badge-link-hover-color:		@mid-gray;
 @badge-bg:		darken(@brand-warning, 10%);
 
 //** Badge text color in active nav link
-@badge-active-color:		white;
+@badge-active-color:		@mid-gray;
 //** Badge background color in active nav link
 @badge-active-bg:		darken(@brand-warning, 10%);
 
@@ -225,14 +225,14 @@
 @ilFormInputFontSize:		@font-size-small;
 @input-height-base:		(floor((@ilFormInputFontSize * @line-height-base)) + (@padding-base-vertical * 2) + 2);
 
-@ilFormColor:		#808080;
-@ilFormBgColor:		#fdfdfd;
+@ilFormColor:		white;
+@ilFormBgColor:		@mid-gray;
 
 /* ILIAS variables candidates */
-@ilMainMenuColor:		lighten(@brand-primary, 10%);
+@ilMainMenuColor:		darken(@brand-primary, 10%);
 @ilButtonFontSize:		@font-size-small;
 
-@input-color-placeholder:		lighten(@gray-light, 30%);
+@input-color-placeholder:		darken(@gray-light, 30%);
 
 //== Panels
 //
@@ -277,7 +277,7 @@
 //** Default background color used for all tables.
 @table-bg:		transparent;
 //** Background color used for `.table-striped`.
-@table-bg-accent:		white;
+@table-bg-accent:		@mid-gray;
 
 //** Border color for table and cell borders.
 @table-border-color:		#ddd;
@@ -334,7 +334,7 @@
 //== Status Counter
 //
 //##
-@il-counter-status-bg:		lighten(@mid-gray, 40%);
+@il-counter-status-bg:		darken(@mid-gray, 40%);
 @il-counter-status-margin-top:		10px;
 
 //== Novelty Counter
@@ -342,3 +342,8 @@
 //##
 @il-counter-novelty-bg:		@brand-warning;
 @il-counter-novelty-margin-top:		-5px;
+
+
+//Card Sizes
+@card-title-width: 143px;
+@card-size: 200px;
