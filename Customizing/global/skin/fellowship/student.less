@@ -6,11 +6,20 @@
   display: none;
 }
 
-body{
-  background-image: url("images/Background2.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  body {
+    background-image: url("images/Background2_klein.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+@media (max-width: 767px) {
+  body {
+    background-image: url("images/Background2.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 }
 
 .il_ContainerItemTitle{
@@ -216,6 +225,7 @@ table[id^='search'] div.il_ContainerListItem{
 
 table[id^='search'] div.ilListItemSection{
   margin-left: 0px;
+  width: auto;
 }
 
 table[id^='search'] ol.breadcrumb{
@@ -270,6 +280,56 @@ table[id^='search'] .ilObjListRow{
 
 // END SUCHE #####################################
 
+
+// Textnugget ####################################
+
+#textnugget{
+  background-color: @mid-gray;
+  border-radius: 10px;
+  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+}
+
+#textnugget .top_buttons{
+  width: 100%;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#textnugget hr{
+  display: block;
+  border: 1px inset;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#textnugget .top_buttons .ilFormHeader, #textnugget .top_buttons .ilFormFooter{
+  //float: left;
+  width: 30%;
+
+}
+
+#textnugget .top_buttons .ilFormFooter{
+  margin-right: 0;
+}
+
+#textnugget .row{
+  margin: 0;
+}
+
+#textnugget h3.ilHeader{
+  color: white;
+}
+
+ul#ilTab, .media.il_HeaderInner{
+  display: none;
+}
+
+
+
+// END Textnugget
 
 /*
 .ilContainerListItemOuter{
