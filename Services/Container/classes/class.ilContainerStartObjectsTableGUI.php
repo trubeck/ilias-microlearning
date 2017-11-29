@@ -125,7 +125,7 @@ class ilContainerStartObjectsTableGUI extends ilTable2GUI
 	}
 
 	public function fillRow($a_set)
-	{				
+	{
 		if($this->getParentCmd() == 'listStructure')
 		{
 			$this->tpl->setCurrentBlock('pos_bl');

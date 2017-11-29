@@ -126,83 +126,35 @@ class ilNuggetNavigation
 		}
 	}
 
-    function getNuggetIDs()
-    {
-        global $ilDB, $ilUser;
+		/**
+	* checks if object has a previe picture
+	*/
+	function hasPreviewPicture($obj_id)
+	{	
+		global $ilDB;
 
-        //$user_id = $ilUser->getId();
-        $type = "xpal";
-        $result = $ilDB->query("SELECT DISTINCT obj_id FROM object_data NATURAL JOIN object_reference WHERE type = ".$ilDB->quote($type, "text")  . "AND deleted IS NULL");
+        $type = "mob";
+        $result = $ilDB->query("SELECT * FROM object_data WHERE type = ".$ilDB->quote($type, "text"));
 
-        $entry = "";
+        $mobObjIds = "";
         while($data = $ilDB->fetchAssoc($result))
         {
-            $entry .= $data["obj_id"] . ",";
+            $mobObjIds .= $data["obj_id"] . ",";
         }
 
-        $entry = explode(",", substr($entry, 0, -1));
+        $mobObjIds = explode(",", substr($mobObjIds, 0, -1));
 
+		include_once("./Services/MediaObjects/classes/class.ilObjMediaObjectGUI.php");
+		foreach($mobObjIds as $id)
+		{
+			$mob = new ilObjMediaObject($id);
+			if($mob->getImportId() == $obj_id)
+			{
+				return $mob->getId();
+			}
+		}
 
-        return $entry;
-
-    }
-
-    function getTitleByID($id)
-    {
-        global $ilDB;
-
-        $result = $ilDB->query("SELECT title FROM object_data WHERE obj_id = ".$ilDB->quote($id, "integer"));
-
-        $data = $ilDB->fetchAssoc($result);
-
-        return $data["title"];
-
-    }
-
-    function getRandom($count)
-    {
-        $ids = $this->getNuggetIDs();
-
-        $result = array();
-
-        if(count($ids) <= $count)
-        {
-            $result = $ids;
-        }
-
-        else
-        {
-            while(count($result) != $count)
-            {
-                $random = mt_rand(0, count($ids)-1);
-                $result[] = $ids[$random];
-                unset($ids[$random]);
-                $ids = array_values($ids);
-            }
-
-
-        }
-
-        return $result;
-
-
-    }
-
-    function recommend($count)
-    {
-        $result = array();
-        $objIDs = $this->getRandom($count);
-
-
-        for($i = 0; $i<count($objIDs); $i++)
-        {
-            $result[$this->getRefIDFromObjID($objIDs[$i])] = $this->getTitleByID($objIDs[$i]);
-        }
-
-
-        return $result;
-
-    }
-
+		return 0;
+	}
 
 }

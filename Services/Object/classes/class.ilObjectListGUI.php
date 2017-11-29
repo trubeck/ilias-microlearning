@@ -3269,7 +3269,7 @@ class ilObjectListGUI
 	/**
 	* Insert icons and checkboxes
 	*/
-	function insertIconsAndCheckboxes()
+	function insertIconsAndCheckboxes($obj_id)
 	{
 		global $lng, $objDefinition;
 		
@@ -3352,6 +3352,19 @@ class ilObjectListGUI
 				include_once("Services/Component/classes/class.ilPlugin.php");
 				$this->tpl->setVariable("ALT_ICON", $lng->txt("icon")." ".
 					ilObjectPlugin::lookupTxtById($this->getIconImageType(), "obj_".$this->getIconImageType()));
+			}
+
+			include_once("./Services/NuggetNavigation/classes/class.ilNuggetNavigation.php");
+			$navigation = new ilNuggetNavigation();
+			
+			$previewId = $navigation->hasPreviewPicture($obj_id);
+			if($previewId == 0)
+			{
+				$this->tpl->setVariable("PREVIEW_IMG", "./Customizing/global/plugins/Services/Repository/RepositoryObject/PalunoObject/templates/images/video-placeholder-thumbnail.png");
+			}
+			else
+			{
+				$this->tpl->setVariable("PREVIEW_IMG", "./data/myclient/mobs/mm_".$previewId."/mob_vpreview.jpg");
 			}
 
 			$this->tpl->setVariable("SRC_ICON",
@@ -3588,7 +3601,7 @@ class ilObjectListGUI
 		$ilBench->stop("ilObjectListGUI", "8500_item_detail_links");
 
 		// icons and checkboxes
-		$this->insertIconsAndCheckboxes();
+		$this->insertIconsAndCheckboxes($a_obj_id);
 		
 		// input field for position
 		$this->insertPositionField();
