@@ -147,7 +147,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 			case "handlePlayerEvent":
 			case "moveToDesktop":
 			case "removeFromDesktop":
-			case "goToExam":
+			//case "goToExam":
 			case "isObjectOnDesktop":
 				$this->checkPermission("read");
 				$this->$cmd();
@@ -308,9 +308,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 
 				//Merken-Button
 				$form = new ilPropertyFormGUI();
-				$form->setTitle($item["title"]);
 				$form->setFormAction($this->ctrl->getFormAction($this));
-				$form->addCommandButton("goToExam", $this->plugin->txt("check_yourself"));
 				if(!$this->isObjectOnDesktop())
 				{
 					//$this->ctrl->setParameterByClass("ilobjpalunoobjectgui", "ref_id", $this->object->getRefId());
@@ -324,6 +322,11 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 
 				include_once("./Services/NuggetNavigation/classes/class.ilNuggetNavigation.php");
 				$navigation = new ilNuggetNavigation();
+
+				$tpl->setVariable("TITLE", $this->object->getTitle());
+				$tpl->setVariable("EXAM", $this->plugin->txt("check_yourself"));
+				$tpl->setVariable('LINK_EXAM', $navigation->getLinkToNugget(278));
+
 				$randomNuggetObjIds = $this->getRandomNuggetObjIds(3);
 				
 				//Nugget 1
@@ -973,7 +976,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 
 	/**
 	* Go to exam.
-	*/
+	
 	function goToExam()
 	{
 		//$referenceIdFromExam = $this->object->getRefIdFromExam();
@@ -982,6 +985,7 @@ class ilObjPalunoObjectGUI extends ilObjectPluginGUI
 		$this->ctrl->setParameterByClass("ilObjTextNuggetGUI", "ref_id", 75);
 		$this->ctrl->redirectByClass("ilObjTextNuggetGUI", "showContent");
 	}
+	*/
 
 	/**
 	* Confirmation Screen.
