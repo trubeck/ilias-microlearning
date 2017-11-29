@@ -469,7 +469,7 @@ class ilContainerRenderer
 	 * @return boolean
 	 */
 	protected function renderHelperGeneric(ilTemplate $a_block_tpl, $a_block_id, array $a_block, $a_is_single = false)
-	{					
+	{	
 		if(!in_array($a_block_id, $this->rendered_blocks))
 		{	
 			$this->rendered_blocks[] = $a_block_id;

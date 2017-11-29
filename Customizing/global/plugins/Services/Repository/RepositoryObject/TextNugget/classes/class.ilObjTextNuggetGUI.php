@@ -114,6 +114,8 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 			case "showAdmin":
 			case "editText":
 			case "setTstNuggets":
+			case "setPreviewPicture":
+			case "savePreviewPicture":
 			case "saveExamNugget":
 			case "confirmDeletion":
 			case "makeTest":
@@ -416,6 +418,7 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 		$this->tabs->activateSubTab("admin");
 		
 		$ilToolbar->addButton($this->txt("exam"), $this->ctrl->getLinkTarget($this, "setTstNuggets"));
+		$ilToolbar->addButton($this->txt("set_preview_picture"), $this->ctrl->getLinkTarget($this, "setPreviewPicture"));
 		$ilToolbar->addButton($this->txt("edit_text"), $this->ctrl->getLinkTarget($this, "editText"));
 	}
 		
@@ -498,6 +501,125 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 		$this->form_gui->setTitle($this->txt("set_exam_nugget"));
 		$this->tpl->setContent($this->form_gui->getHTML());
 		*/
+	}
+
+		/**
+	* Set Preview Picture
+	*/
+	function setPreviewPicture()
+	{
+		global $tpl, $lng;
+
+		$this->checkPermission("write");
+		$this->tabs->activateTab("admin");
+
+		include_once("Services/Form/classes/class.ilPropertyFormGUI.php");
+		$this->form_gui = new ilPropertyFormGUI();
+		$this->form_gui->setMultipart(true);
+
+		$this->form_gui->setTitle($this->txt("set_preview_picture"));
+
+		// preview picture selection
+		$pp = new ilImageFileInputGUI($this->txt("set_preview_picture"), "preview_pic");
+    	$pp->setSuffixes(array("png", "jpeg", "jpg"));
+    	$this->form_gui->addItem($pp);
+    	
+		//save/cancel
+		if($this->hasPreviewPicture())
+		{
+			$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "showAdmin"));
+		}
+		else
+		{
+			$this->form_gui->addCommandButton("savePreviewPicture", $this->txt("save"));
+			$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "savePreviewPicture"));
+		}
+		
+		$this->form_gui->addCommandButton("showAdmin", $this->txt("cancel"));
+
+		$this->tpl->setContent($this->form_gui->getHTML());
+	}
+
+	function savePreviewPicture()
+	{
+		global $ilLog; 	
+
+		$this->setPreviewPicture();
+
+		if (!$this->form_gui->checkInput())
+		{
+			ilUtil::sendFailure($this->txt("xtxt_input_picture"));
+		}
+		else
+		{
+			// create dummy object in db (we need an id)
+			include_once("./Services/MediaObjects/classes/class.ilObjMediaObjectGUI.php");
+			$mob = new ilObjMediaObject();
+			$mob->create();
+
+			// save preview pic
+			$prevpic = $this->form_gui->getInput("preview_pic");
+			if ($prevpic["size"] > 0)
+			{
+				$mob->uploadVideoPreviewPic($prevpic);
+			}
+
+			//save obj_id in database (importId is never in use)
+			$mob->setImportId($this->object->getId());
+			$mob->update();
+
+			if ($prevpic["size"] == 0)
+			{
+				// re-read media object
+				$mob = new ilObjMediaObject($mob->getId());
+				$mob->generatePreviewPic(320, 240);
+			}
+
+			$boool = $this->hasPreviewPicture();
+			include_once "Services/Logging/classes/class.ilLog.php";
+			if($boool)
+			{
+				$ilLog->write("ja");
+			}
+			else
+			{
+				$ilLog->write("nein");
+			}
+
+			$this->ctrl->redirect($this, "showContent");
+		}
+	}
+
+	/**
+	* Does object have a previe picture?
+	*/
+	function hasPreviewPicture()
+	{	
+		global $ilDB;
+
+		include_once "Services/Logging/classes/class.ilLog.php";
+        $type = "mob";
+        $result = $ilDB->query("SELECT * FROM object_data WHERE type = ".$ilDB->quote($type, "text"));
+
+        $mobObjIds = "";
+        while($data = $ilDB->fetchAssoc($result))
+        {
+            $mobObjIds .= $data["obj_id"] . ",";
+        }
+
+        $mobObjIds = explode(",", substr($mobObjIds, 0, -1));
+
+		include_once("./Services/MediaObjects/classes/class.ilObjMediaObjectGUI.php");
+		foreach($mobObjIds as $id)
+		{
+			$mob = new ilObjMediaObject($id);
+			if($mob->getImportId() == $this->object->getId())
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

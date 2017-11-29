@@ -523,7 +523,7 @@ class ilObjMediaCastGUI extends ilObjectGUI
 	public function getCastItemValues()
 	{
 		global $lng;
-		
+
 		// get mob
 		$this->mcst_item = new ilNewsItem($_GET["item_id"]);
 		include_once("./Services/MediaObjects/classes/class.ilObjMediaObjectGUI.php");
@@ -1019,7 +1019,7 @@ class ilObjMediaCastGUI extends ilObjectGUI
 	function infoScreen()
 	{
 		global $ilAccess, $ilUser, $ilTabs;
-		
+
 		$ilTabs->activateTab("id_info");
 
 		if (!$ilAccess->checkAccess("visible", "", $this->object->getRefId()))
@@ -1532,7 +1532,7 @@ class ilObjMediaCastGUI extends ilObjectGUI
 	function showGallery()
 	{
 		global $tpl, $ilTabs, $ilCtrl;
-		
+
 		$tpl->addJavascript("./Modules/MediaCast/js/MediaCast.js");
 		
 		$ilTabs->activateTab("content");

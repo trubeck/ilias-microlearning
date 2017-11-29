@@ -45,6 +45,8 @@ lp_status#:#Lernfortschritt
 update_successful#:Die Änderungen wurden gespeichert.
 view#:#User-View
 admin#:#Admin-View
+set_preview_picture#:#Vorschaubild setzen
+xtxt_input_picture#:#Bitte geben Sie eine Datei an. Achten Sie bitte auf die maximal erlaubte Upload-Größe.
 edit_text#:#Text bearbeiten
 delete#:#Video löschen
 cancel#:#Abbrechen

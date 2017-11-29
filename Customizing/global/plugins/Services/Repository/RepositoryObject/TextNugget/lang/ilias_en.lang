@@ -45,6 +45,8 @@ lp_status#:#Learning Progress
 update_successful#:Update Successful
 view#:#User-View
 admin#:#Admin-View
+set_preview_picture#:#Set Preview Picture
+xtxt_input_picture#:#Please specify a file. Note the maximum allowed upload file size.
 edit_text#:#Edit Text
 delete#:#Delete video
 cancel#:#Cancel
