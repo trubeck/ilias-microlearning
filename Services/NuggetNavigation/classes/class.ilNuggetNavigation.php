@@ -56,12 +56,12 @@ class ilNuggetNavigation
 		switch ($nuggetType) {
 			case 'xpal':
 				$cmdClass = "ilobjpalunoobjectgui";
-				//$cmdNode = "jt:jq";
+				//$cmdNode = "kc:k6";
 				$cmdNode = "js:jp";
 				break;
 			case 'xtxt':
 				$cmdClass = "ilobjtextnuggetgui";
-				//$cmdNode = "jt:lu";
+				//$cmdNode = "kc:md";
 				$cmdNode = "js:lt";
 				break;
 		}
