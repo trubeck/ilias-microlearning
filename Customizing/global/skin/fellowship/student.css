@@ -12988,6 +12988,7 @@ table[id^='search'] .ilObjListRow {
   border: 1px inset;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 30px;
 }
 #textnugget .top_buttons .ilFormHeader,
 #textnugget .top_buttons .ilFormFooter {
@@ -12996,8 +12997,20 @@ table[id^='search'] .ilObjListRow {
 #textnugget .top_buttons .ilFormFooter {
   margin-right: 0;
 }
+#textnugget .top_buttons .ilFormHeader h3.ilHeader {
+  font-style: italic;
+  font-size: 24px;
+}
 #textnugget .row {
   margin: 0;
+}
+#textnugget #description_outer {
+  padding-right: 20px;
+  margin-bottom: 30px;
+}
+#textnugget #suggestions_outer {
+  margin-left: -20px;
+  padding-left: 60px;
 }
 #textnugget h3.ilHeader {
   color: white;
@@ -13005,6 +13018,37 @@ table[id^='search'] .ilObjListRow {
 ul#ilTab,
 .media.il_HeaderInner {
   display: none;
+}
+#textnugget #text_outer {
+  border-width: 2px;
+  border-radius: 5px;
+  height: 500px;
+  background-color: #2a2a2a;
+  margin-bottom: 50px;
+  margin-left: 20px;
+  overflow-y: scroll;
+  overflow-y: auto;
+  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+}
+#textnugget #text_inner {
+  margin-top: 20px;
+}
+#textnugget #suggestions_header {
+  margin-bottom: 20px;
+}
+#textnugget #suggestions_inner > div {
+  margin-top: 10px;
+  width: 100%;
+}
+#textnugget #suggestions_inner .nugget_thumb img {
+  width: 160px;
+  height: 91px;
+}
+#textnugget #suggestions_inner .nugget_thumb_label {
+  overflow-x: scroll;
+  overflow-x: auto;
 }
 /*
 .ilContainerListItemOuter{
