@@ -2765,66 +2765,217 @@ class ilMDEditorGUI
 		$this->__setTabs('meta_situation_model');
 		$this->tpl->addBlockFile('MD_CONTENT','md_content','tpl.md_situation_model.html','Services/MetaData');
 
-		$sm_ids = $this->md_obj->getSituationModelIds();
-		if (!is_array($sm_ids) || count($sm_ids) == 0)
+		$this->ctrl->setParameter($this, "section", "meta_situation_model");
+		if (!is_object($this->md_section = $this->md_obj->getSituationModel()))
 		{
 			$this->tpl->setCurrentBlock("no_situation_model");
 			$this->tpl->setVariable("TXT_NO_SITUATION_MODEL", $this->lng->txt("meta_no_situation_model"));
 			$this->tpl->setVariable("TXT_ADD_SITUATION_MODEL", $this->lng->txt("meta_add"));
-			$this->ctrl->setParameter($this, "section", "meta_situation_model");
-			$this->tpl->setVariable("ACTION_ADD_SITUATION_MODEL",
-									$this->ctrl->getLinkTarget($this, "addSection"));
+			$this->tpl->setVariable("ACTION_ADD_SITUATION_MODEL", $this->ctrl->getLinkTarget($this, "addSection"));
 			$this->tpl->parseCurrentBlock();
+
+			return true;
+		}
+
+		$this->ctrl->setReturn($this,'listSituationModel');
+		$this->ctrl->setParameter($this, 'meta_index', $this->md_section->getMetaId());
+
+		$this->tpl->setCurrentBlock("situation_model");
+		$this->tpl->setVariable("EDIT_ACTION",$this->ctrl->getFormAction($this));
+		$this->tpl->setVariable("TXT_SITUATION_MODEL", $this->lng->txt("meta_situation_model"));
+
+		if(!$this->md_section->getPossibleSubelements())
+		{
+			$this->tpl->setVariable("BUTTON_VISIBILITY", "hidden");
 		}
 		else
 		{
-			foreach($sm_ids as $sm_id)
-			{
-				$this->ctrl->setParameter($this, 'meta_index', $sm_id);
-				$this->ctrl->setParameter($this, "section", "meta_situation_model");
+			$this->tpl->setVariable("BUTTON_VISIBILITY", "visible");
+		}
 
-				$this->md_section = $this->md_obj->getSituationModel($sm_id);
-								
-				$this->tpl->setCurrentBlock("situation_model_loop");
-				$this->tpl->setVariable("SITUATION_MODEL_ID", $sm_id);
-				$this->tpl->setVariable("TXT_SITUATION_MODEL", $this->lng->txt("meta_situation_model"));				
-				$this->ctrl->setParameter($this, "meta_index", $sm_id);
-				$this->tpl->setVariable("ACTION_DELETE",
-					$this->ctrl->getLinkTarget($this, "deleteSection"));
-				//$this->ctrl->setParameter($this, "section", "meta_situation_model");
-				$this->tpl->setVariable("TXT_DELETE", $this->lng->txt("meta_delete"));
-				
-				$this->tpl->setVariable("TXT_PREVIOUS", $this->lng->txt("meta_previous"));
-				$this->tpl->setVariable("VAL_PREVIOUS", $this->__showNuggetSelect('situation_model['.$sm_id.'][Previous]', 
-													$this->md_section->getPrevious()));
-				$this->tpl->setVariable("TXT_NEXT", $this->lng->txt("meta_next"));
-				//$this->tpl->setVariable("VAL_NEXT", ilUtil::prepareFormOutput($this->md_section->getNext()));
-				$this->tpl->setVariable("VAL_NEXT", $this->__showNuggetSelect('situation_model['.$sm_id.'][Next]', 
-													$this->md_section->getNext()));
-	
-				$this->tpl->parseCurrentBlock();
-			}
-			
-			$this->tpl->setCurrentBlock("situation_model");
-			$this->tpl->setVariable("EDIT_ACTION",$this->ctrl->getFormAction($this));
-			$this->tpl->setVariable("TXT_SAVE", $this->lng->txt("save"));
+		$this->tpl->setVariable("ACTION_DELETE",
+								$this->ctrl->getLinkTarget($this, "deleteSection"));
+		$this->tpl->setVariable("TXT_DELETE", $this->lng->txt("meta_delete"));
+		$this->tpl->setVariable("TXT_COMPETENCY_LVL", $this->lng->txt("meta_competency_level"));
+		$this->tpl->setVariable("VAL_COMPETENCY_LVL", $this->__showCompetencyLevelSelect('situation_model['.$this->md_section->getMetaId().'][CompetencyLevel]', 
+													$this->md_section->getCompetencyLevel()));
+		
+		// New element
+		$this->__fillSubelements();
+
+		// Activity
+		foreach(($ids = $this->md_section->getActivityIds()) as $act_id)
+		{
+			$md_act = $this->md_section->getActivity($act_id);
+
+			$this->tpl->setCurrentBlock("activity_loop");
+
+			$this->ctrl->setParameter($this,'meta_index',$act_id);
+			$this->ctrl->setParameter($this,'meta_path','meta_activity');
+			$this->tpl->setVariable("ACTIVITY_LOOP_ACTION_DELETE",$this->ctrl->getLinkTarget($this,'deleteElement'));
+			$this->tpl->setVariable("ACTIVITY_LOOP_TXT_DELETE",$this->lng->txt('delete'));
+
+			$this->tpl->setVariable("ACTIVITY_LOOP_ROWSPAN", 7);
+			$this->tpl->setVariable("ACTIVITY_LOOP_TXT_ACTIVITY", $this->lng->txt("meta_activity"));
+			$this->tpl->setVariable("TXT_PREVIOUS", $this->lng->txt("meta_previous"));
+			$this->tpl->setVariable("VAL_PREVIOUS", $this->__showNuggetSelect('activity['.$md_act->getMetaId().'][Previous]', 
+																			$md_act->getPrevious()));
+			$this->tpl->setVariable("TXT_NEXT", $this->lng->txt("meta_next"));
+			$this->tpl->setVariable("VAL_NEXT", $this->__showNuggetSelect('activity['.$md_act->getMetaId().'][Next]', 
+																			$md_act->getNext()));
+			$this->tpl->setVariable("TXT_CONTAINS", $this->lng->txt("meta_contains"));
+			$this->tpl->setVariable("VAL_CONTAINS", $this->__showNuggetSelect('activity['.$md_act->getMetaId().'][Contains]', 
+																			$md_act->getContains()));
+			$this->tpl->setVariable("TXT_IS_PART_OF", $this->lng->txt("meta_is_part_of"));
+			$this->tpl->setVariable("VAL_IS_PART_OF", $this->__showNuggetSelect('activity['.$md_act->getMetaId().'][IsPartOf]', 
+																			$md_act->getIsPartOf()));
+			$this->tpl->setVariable("TXT_INCLUDED_METHOD", $this->lng->txt("meta_included_method"));
+			$this->tpl->setVariable("VAL_INCLUDED_METHOD", $this->__showNuggetSelect('activity['.$md_act->getMetaId().'][IncludedMethod]', 
+																			$md_act->getIncludedMethod()));
+			$this->tpl->setVariable("ACTIVITY_LOOP_NO", $act_id);
+			$this->tpl->setVariable("TXT_PARTICIPATING", $this->lng->txt("meta_participating"));
+			$this->tpl->setVariable("VAL_PARTICIPATING", ilUtil::prepareFormOutput($md_act->getParticipating()));
+			$this->tpl->setVariable("TXT_RESPONSIBLE", $this->lng->txt("meta_responsible"));
+			$this->tpl->setVariable("VAL_RESPONSIBLE", ilUtil::prepareFormOutput($md_act->getResponsible()));
 			$this->tpl->parseCurrentBlock();
 		}
+
+		// Method
+		foreach(($ids = $this->md_section->getMethodIds()) as $met_id)
+		{
+			$md_met = $this->md_section->getMethod($met_id);
+
+			$this->tpl->setCurrentBlock("method_loop");
+
+			$this->ctrl->setParameter($this,'meta_index',$met_id);
+			$this->ctrl->setParameter($this,'meta_path','meta_method');
+			$this->tpl->setVariable("METHOD_LOOP_ACTION_DELETE",$this->ctrl->getLinkTarget($this,'deleteElement'));
+			$this->tpl->setVariable("METHOD_LOOP_TXT_DELETE",$this->lng->txt('delete'));
+
+			$this->tpl->setVariable("METHOD_LOOP_ROWSPAN", 7);
+			$this->tpl->setVariable("METHOD_LOOP_TXT_METHOD", $this->lng->txt("meta_method"));
+			$this->tpl->setVariable("TXT_IS_PART_OF", $this->lng->txt("meta_is_part_of"));
+			$this->tpl->setVariable("VAL_IS_PART_OF", $this->__showNuggetSelect('method['.$md_met->getMetaId().'][IsPartOf]', 
+																			$md_met->getIsPartOf()));
+			$this->tpl->setVariable("TXT_KIND_OF_TECHNIQUE", $this->lng->txt("meta_kind_of_technique"));
+			$this->tpl->setVariable("VAL_KIND_OF_TECHNIQUE", $this->__showKindOfTechniqueSelect('method['.$md_met->getMetaId().'][KindOfTechnique]', 
+																			$md_met->getKindOfTechnique()));
+			
+			$this->tpl->parseCurrentBlock();
+		}
+
+		// Result Type
+		foreach(($ids = $this->md_section->getResultTypeIds()) as $res_id)
+		{
+			$md_res = $this->md_section->getResultType($res_id);
+
+			$this->tpl->setCurrentBlock("result_type_loop");
+
+			$this->ctrl->setParameter($this,'meta_index',$res_id);
+			$this->ctrl->setParameter($this,'meta_path','meta_result_type');
+			$this->tpl->setVariable("RESULT_TYPE_LOOP_ACTION_DELETE",$this->ctrl->getLinkTarget($this,'deleteElement'));
+			$this->tpl->setVariable("RESULT_TYPE_LOOP_TXT_DELETE",$this->lng->txt('delete'));
+
+			$this->tpl->setVariable("RESULT_TYPE_LOOP_ROWSPAN", 7);
+			$this->tpl->setVariable("RESULT_TYPE_LOOP_TXT_RESULT_TYPE", $this->lng->txt("meta_result_type"));
+			$this->tpl->setVariable("TXT_ARTEFACT", $this->lng->txt("meta_artefact"));
+			$this->tpl->setVariable("VAL_ARTEFACT", $this->__showArtefactSelect('result_type['.$md_res->getMetaId().'][Artefact]', 
+																			$md_res->getArtefact()));
+			$this->tpl->setVariable("TXT_CONTAINS", $this->lng->txt("meta_contains"));
+			$this->tpl->setVariable("VAL_CONTAINS", $this->__showNuggetSelect('result_type['.$md_res->getMetaId().'][Contains]', 
+																			$md_res->getContains()));
+			$this->tpl->setVariable("TXT_IS_PART_OF", $this->lng->txt("meta_is_part_of"));
+			$this->tpl->setVariable("VAL_IS_PART_OF", $this->__showNuggetSelect('result_type['.$md_res->getMetaId().'][IsPartOf]', 
+																			$md_res->getIsPartOf()));
+			$this->tpl->setVariable("RESULT_TYPE_LOOP_NO", $res_id);
+			$this->tpl->setVariable("TXT_RESPONSIBLE", $this->lng->txt("meta_responsible"));
+			$this->tpl->setVariable("VAL_RESPONSIBLE", ilUtil::prepareFormOutput($md_res->getResponsible()));
+			
+			$this->tpl->parseCurrentBlock();
+		}
+		/*
+		$this->tpl->setVariable("TXT_PREVIOUS", $this->lng->txt("meta_previous"));
+		$this->tpl->setVariable("VAL_PREVIOUS", $this->__showNuggetSelect('situation_model['.$this->md_section->getMetaId().'][Previous]', 
+													$this->md_section->getPrevious()));
+		$this->tpl->setVariable("TXT_NEXT", $this->lng->txt("meta_next"));
+		//$this->tpl->setVariable("VAL_NEXT", ilUtil::prepareFormOutput($this->md_section->getNext()));
+		$this->tpl->setVariable("VAL_NEXT", $this->__showNuggetSelect('situation_model['.$this->md_section->getMetaId().'][Next]', 
+													$this->md_section->getNext()));
+		*/
+		$this->tpl->setVariable("TXT_SAVE", $this->lng->txt("save"));
+		$this->tpl->parseCurrentBlock();
+		
 	}		
 
 	function updateSituationModel()
 	{
 		include_once 'Services/MetaData/classes/class.ilMDLanguageItem.php';
 
-		// relation
-		foreach($ids = $this->md_obj->getSituationModelIds() as $id)
+		
+		// update situation model section
+		$this->md_section = $this->md_obj->getSituationModel();
+		//$this->md_section->setPrevious(ilUtil::stripSlashes($_POST['situation_model'][$this->md_section->getMetaId()]['Previous']));
+		//$this->md_section->setNext(ilUtil::stripSlashes($_POST['situation_model'][$this->md_section->getMetaId()]['Next']));
+		$this->md_section->setCompetencyLevel(ilUtil::stripSlashes($_POST['situation_model'][$this->md_section->getMetaId()]['CompetencyLevel']));
+		$this->md_section->update();
+
+		// Activity
+		if(is_array($_POST['activity']))
 		{
-			// entity
-			$situationModel = $this->md_obj->getSituationModel($id);
-			$situationModel->setPrevious(ilUtil::stripSlashes($_POST['situation_model'][$id]['Previous']));
-			$situationModel->setNext(ilUtil::stripSlashes($_POST['situation_model'][$id]['Next']));
-			
-			$situationModel->update();
+			foreach($_POST['activity'] as $id => $data)
+			{
+				$md_act =& $this->md_section->getActivity($id);
+				$md_act->setPrevious(ilUtil::stripSlashes($_POST['activity'][$md_act->getMetaId()]['Previous']));
+				$md_act->setNext(ilUtil::stripSlashes($_POST['activity'][$md_act->getMetaId()]['Next']));
+				$md_act->setContains(ilUtil::stripSlashes($_POST['activity'][$md_act->getMetaId()]['Contains']));
+				$md_act->setIsPartOf(ilUtil::stripSlashes($_POST['activity'][$md_act->getMetaId()]['IsPartOf']));
+				$md_act->setIncludedMethod(ilUtil::stripSlashes($_POST['activity'][$md_act->getMetaId()]['IncludedMethod']));
+				
+				if(is_array($_POST['text_activity']))
+				{
+					foreach($_POST['text_activity'] as $id => $data)
+					{
+						$md_act->setParticipating(ilUtil::stripSlashes($data['Participating']));
+						$md_act->setResponsible(ilUtil::stripSlashes($data['Responsible']));
+					}
+				}
+				
+				$md_act->update();
+			}
+		}
+
+		// Method
+		if(is_array($_POST['method']))
+		{
+			foreach($_POST['method'] as $id => $data)
+			{
+				$md_met =& $this->md_section->getMethod($id);
+				$md_met->setIsPartOf(ilUtil::stripSlashes($_POST['method'][$md_met->getMetaId()]['IsPartOf']));
+				$md_met->setKindOfTechnique(ilUtil::stripSlashes($_POST['method'][$md_met->getMetaId()]['KindOfTechnique']));			
+				$md_met->update();
+			}
+		}
+
+		// Result Type
+		if(is_array($_POST['result_type']))
+		{
+			foreach($_POST['result_type'] as $id => $data)
+			{
+				$md_res =& $this->md_section->getResultType($id);
+				$md_res->setArtefact(ilUtil::stripSlashes($_POST['result_type'][$md_res->getMetaId()]['Artefact']));
+				$md_res->setContains(ilUtil::stripSlashes($_POST['result_type'][$md_res->getMetaId()]['Contains']));
+				$md_res->setIsPartOf(ilUtil::stripSlashes($_POST['result_type'][$md_res->getMetaId()]['IsPartOf']));
+				
+				if(is_array($_POST['text_result_type']))
+				{
+					foreach($_POST['text_result_type'] as $id => $data)
+					{
+						$md_res->setResponsible(ilUtil::stripSlashes($data['Responsible']));
+					}
+				}
+				
+				$md_res->update();
+			}
 		}
 		
 		$this->callListeners('SituationModel');
@@ -3291,6 +3442,10 @@ class ilMDEditorGUI
 				$this->md_section =& $this->md_obj->getMetaMetadata();
 				break;
 
+			case 'meta_situation_model':
+				$this->md_section =& $this->md_obj->getSituationModel();
+				break;
+
 			case 'meta_general':
 				$this->md_section = $this->md_obj->getGeneral();
 				break;
@@ -3341,6 +3496,18 @@ class ilMDEditorGUI
 				$md_new = $md_new->addEntity();
 				break;
 
+			case 'meta_activity':
+				$md_new =& $this->md_section->addActivity();
+				break;
+
+			case 'meta_method':
+				$md_new =& $this->md_section->addMethod();
+				break;
+
+			case 'meta_result_type':
+				$md_new =& $this->md_section->addResultType();
+				break;
+
 			case 'educational_language':
 			case 'meta_language':
 				$md_new = $this->md_section->addLanguage();
@@ -3368,16 +3535,6 @@ class ilMDEditorGUI
 			case 'relation_resource_description':
 				$rel = $this->md_obj->getRelation($_GET['meta_index']);
 				$md_new = $rel->addDescription();
-				break;
-
-			case 'situation_model_resource_identifier':
-				$sm = $this->md_obj->getSituationModel($_GET['meta_index']);
-				$md_new = $sm->addIdentifier_();
-				break;
-				
-			case 'situation_model_resource_description':
-				$sm = $this->md_obj->getSituationModel($_GET['meta_index']);
-				$md_new = $sm->addDescription();
 				break;
 				
 			case 'TaxonPath':
@@ -3444,7 +3601,6 @@ class ilMDEditorGUI
 		}
 	}		
 
-
 	// PRIVATE
 	function __fillSubelements()
 	{
@@ -3462,8 +3618,6 @@ class ilMDEditorGUI
 		}
 		return true;
 	}
-
-
 
 	function __setTabs($a_active)
 	{
@@ -3563,6 +3717,113 @@ class ilMDEditorGUI
 
 			if ($a_value != 0 &&
 				$a_value == $text)
+			{
+				$tpl->setVariable("SELECTED", "selected");
+			}
+
+			$tpl->parseCurrentBlock();
+		}
+		$tpl->setVariable("TXT_PLEASE_SELECT", $this->lng->txt("meta_please_select"));
+		$tpl->setVariable("SEL_NAME", $a_name);
+
+		$return = $tpl->get();
+		unset($tpl);
+
+		return $return;
+	}
+
+	/**
+	* shows competence level select box
+	*/
+	function __showCompetencyLevelSelect($a_name, $a_value)
+	{		
+		$tpl = new ilTemplate("tpl.nugget_selection.html", true, true,
+			"Services/MetaData");
+
+		$options = array(1,2,3);
+
+		foreach($options as $option)
+		{
+			$tpl->setCurrentBlock("ng_option");
+			$tpl->setVariable("VAL_NG", $option);
+			$tpl->setVariable("TXT_NG", $option);
+
+			if ($a_value != 0 &&
+				$a_value == $option)
+			{
+				$tpl->setVariable("SELECTED", "selected");
+			}
+
+			$tpl->parseCurrentBlock();
+		}
+		$tpl->setVariable("TXT_PLEASE_SELECT", $this->lng->txt("meta_please_select"));
+		$tpl->setVariable("SEL_NAME", $a_name);
+
+		$return = $tpl->get();
+		unset($tpl);
+
+		return $return;
+	}
+
+	/**
+	* shows kind of technique select box
+	*/
+	function __showKindOfTechniqueSelect($a_name, $a_value)
+	{		
+		$tpl = new ilTemplate("tpl.nugget_selection.html", true, true,
+			"Services/MetaData");
+
+		$options = array("base","special");
+
+		foreach($options as $option)
+		{
+			$tpl->setCurrentBlock("ng_option");
+			$tpl->setVariable("VAL_NG", $option);
+
+			if($option == "base")
+			{
+				$tpl->setVariable("TXT_NG", "Basistechnik");
+			}
+			if($option == "special")
+			{
+				$tpl->setVariable("TXT_NG", "Spezifische Technik");
+			}
+
+			if ($a_value != "" &&
+				$a_value == $option)
+			{
+				$tpl->setVariable("SELECTED", "selected");
+			}
+
+			$tpl->parseCurrentBlock();
+		}
+		$tpl->setVariable("TXT_PLEASE_SELECT", $this->lng->txt("meta_please_select"));
+		$tpl->setVariable("SEL_NAME", $a_name);
+
+		$return = $tpl->get();
+		unset($tpl);
+
+		return $return;
+	}
+
+	/**
+	* shows artefact select box
+	*/
+	function __showArtefactSelect($a_name, $a_value)
+	{		
+		$tpl = new ilTemplate("tpl.nugget_selection.html", true, true,
+			"Services/MetaData");
+
+		$options = array("Programmcode","UML-Diagramm","Anforderungsdokument");
+
+		foreach($options as $option)
+		{
+			$tpl->setCurrentBlock("ng_option");
+			$tpl->setVariable("VAL_NG", $option);
+			$tpl->setVariable("TXT_NG", $option);
+
+			if ($a_value != "" &&
+				$a_value == $option)
 			{
 				$tpl->setVariable("SELECTED", "selected");
 			}

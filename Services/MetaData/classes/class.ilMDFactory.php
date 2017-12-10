@@ -193,22 +193,30 @@ class ilMDFactory
 				$situationModel = new ilMDSituationModel();
 				$situationModel->setMetaId($a_index);
 				return $situationModel;
-				
-			case 'situation_model_resource_identifier':
-				include_once 'Services/MetaData/classes/class.ilMDIdentifier_.php';
+			
+			case 'meta_activity':
+				include_once 'Services/MetaData/classes/class.ilMDActivity.php';
 
-				$ide = new ilMDIdentifier_();
-				$ide->setMetaId($a_index);
+				$act = new ilMDActivity();
+				$act->setMetaId($a_index);
 				
-				return $ide;
-				
-			case 'situation_model_resource_description':
-				include_once 'Services/MetaData/classes/class.ilMDDescription.php';
+				return $act;
 
-				$des = new ilMDDescription();
-				$des->setMetaId($a_index);
+			case 'meta_method':
+				include_once 'Services/MetaData/classes/class.ilMDMethod.php';
+
+				$met = new ilMDMethod();
+				$met->setMetaId($a_index);
 				
-				return $des;
+				return $met;
+
+			case 'meta_result_type':
+				include_once 'Services/MetaData/classes/class.ilMDResultType.php';
+
+				$res = new ilMDResultType();
+				$res->setMetaId($a_index);
+				
+				return $res;
 
 			case 'meta_annotation':
 				include_once 'Services/MetaData/classes/class.ilMDAnnotation.php';

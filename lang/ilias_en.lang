@@ -7257,8 +7257,10 @@ meta#:#md_time#:#Time:
 meta#:#md_used#:#Usage
 meta#:#meta_accessibility_restrictions#:#Accessibility Restrictions
 meta#:#meta_active#:#Active
+meta#:#meta_activity#:#Activity
 meta#:#meta_add#:#Add
 meta#:#meta_annotation#:#Annotation
+meta#:#meta_artefact#:#Artefact
 meta#:#meta_atomic#:#Atomic
 meta#:#meta_author#:#Author
 meta#:#meta_browser#:#Browser
@@ -7507,6 +7509,8 @@ meta#:#meta_choose_section#:#Please choose a section###deprecated
 meta#:#meta_classification#:#Classification
 meta#:#meta_collection#:#Collection
 meta#:#meta_competency#:#Competency
+meta#:#meta_competency_level#:#Competency Level
+meta#:#meta_contains#:#contains
 meta#:#meta_contentprovider#:#Content provider
 meta#:#meta_context#:#Context
 meta#:#meta_contribute#:#Contribute
@@ -7553,6 +7557,7 @@ meta#:#meta_higher_education#:#Higher Education
 meta#:#meta_id#:#Id
 meta#:#meta_idea#:#Idea
 meta#:#meta_identifier#:#Identifier
+meta#:#meta_included_method#:#included method
 meta#:#meta_index#:#Index
 meta#:#meta_info_tlt_not_valid#:#The current value is not valid. Therefore it can not be used other sections, e.g for learning progress statistics. Please insert atypical learning time in hours and/or minutes.
 meta#:#meta_initiator#:#Initiator
@@ -7571,6 +7576,7 @@ meta#:#meta_is_required_by#:#Is Required By
 meta#:#meta_is_version_of#:#Is Version Of
 meta#:#meta_keyword#:#Keyword
 meta#:#meta_kind#:#Kind
+meta#:#meta_kind_of_technique#:#kind of technique
 meta#:#meta_l_aa#:#Afar
 meta#:#meta_l_ab#:#Abkhazian
 meta#:#meta_l_af#:#Afrikaans
@@ -7725,6 +7731,7 @@ meta#:#meta_maximum_version#:#Maximum Version
 meta#:#meta_medium#:#Medium
 meta#:#meta_meta_metadata#:#Meta-Metadata
 meta#:#meta_metadatascheme#:#Metadata Scheme
+meta#:#meta_method#:#Technique/Method
 meta#:#meta_minimum_version#:#Minimum Version
 meta#:#meta_mixed#:#Mixed
 meta#:#meta_ms_windows#:#MS-Windows###deprecated 
@@ -7733,7 +7740,7 @@ meta#:#meta_name#:#Name
 meta#:#meta_narrative_text#:#Narrative Text
 meta#:#meta_networked#:#Networked
 meta#:#meta_new_element#:#New Element
-meta#:#meta_next#:#Next Nugget
+meta#:#meta_next#:#next
 meta#:#meta_no_annotation#:#No metadata available for the Annotation section.
 meta#:#meta_no_classification#:#No metadata available for the Classification section.
 meta#:#meta_no_educational#:#No metadata available for the Educational section.
@@ -7749,11 +7756,12 @@ meta#:#meta_operating_system#:#Operating System
 meta#:#meta_or_composite#:#Or Composite
 meta#:#meta_other_plattform_requirements#:#Other Platform Requirements
 meta#:#meta_other#:#Other
+meta#:#meta_participating#:#participating stakeholder
 meta#:#meta_pc_dos#:#PC-DOS
 meta#:#meta_please_select#:#Please select
 meta#:#meta_pointofcontact#:#Point(s) of Contact
 meta#:#meta_prerequisite#:#Prerequisite
-meta#:#meta_previous#:#Previous Nugget
+meta#:#meta_previous#:#previous
 meta#:#meta_problem_statement#:#Problem Statement
 meta#:#meta_publisher#:#Publisher
 meta#:#meta_purpose#:#Purpose
@@ -7765,6 +7773,8 @@ meta#:#meta_relation#:#Relation
 meta#:#meta_requirement#:#Requirement
 meta#:#meta_requires#:#Requires
 meta#:#meta_resource#:#Resource
+meta#:#meta_responsible#:#responsible stakeholder
+meta#:#meta_result_type#:#Result Type
 meta#:#meta_revised#:#Revised
 meta#:#meta_rights#:#Rights
 meta#:#meta_role#:#Role
