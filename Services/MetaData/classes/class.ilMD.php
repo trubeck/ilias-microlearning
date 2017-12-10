@@ -198,33 +198,26 @@ class ilMD extends ilMDBase
 		return $rel;
 	}
 
-	function &getSituationModelIds()
+	function &getSituationModel()
 	{
 		include_once 'Services/MetaData/classes/class.ilMDSituationModel.php';
 
-		return ilMDSituationModel::_getIds($this->getRBACId(),$this->getObjId());
-	}
-	function &getSituationModel($a_situation_model_id)
-	{
-		include_once 'Services/MetaData/classes/class.ilMDSituationModel.php';
-
-		if(!$a_situation_model_id)
+		if($id = ilMDSituationModel::_getId($this->getRBACId(),$this->getObjId()))
 		{
-			return false;
+			$sm = new ilMDSituationModel();
+			$sm->setMetaId($id);
+			
+			return $sm;
 		}
-
-		$rel = new ilMDSituationModel();
-		$rel->setMetaId($a_situation_model_id);
-		
-		return $rel;
+		return false;
 	}
 	function &addSituationModel()
 	{
 		include_once 'Services/MetaData/classes/class.ilMDSituationModel.php';
 
-		$rel = new ilMDSituationModel($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		$sm = new ilMDSituationModel($this->getRBACId(),$this->getObjId(),$this->getObjType());
 		
-		return $rel;
+		return $sm;
 	}
 
 	function &getAnnotationIds()
@@ -404,7 +397,8 @@ class ilMD extends ilMDBase
 	{
 		global $ilDB;
 		
-		$tables = array('il_meta_annotation',
+		$tables = array('il_meta_activity',
+						'il_meta_annotation',
 						'il_meta_classification',
 						'il_meta_contribute',
 						'il_meta_description',
@@ -419,8 +413,10 @@ class ilMD extends ilMDBase
 						'il_meta_lifecycle',
 						'il_meta_location',
 						'il_meta_meta_data',
+						'il_meta_method',
 						'il_meta_relation',
 						'il_meta_requirement',
+						'il_meta_result_type',
 						'il_meta_rights',
 						'il_meta_situation_model',
 						'il_meta_taxon',

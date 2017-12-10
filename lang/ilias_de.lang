@@ -8332,8 +8332,10 @@ meta#:#md_time#:#Zeit:
 meta#:#md_used#:#Verwendung (Anzahl)
 meta#:#meta_accessibility_restrictions#:#Zugangsbeschränkungen
 meta#:#meta_active#:#Aktiv
+meta#:#meta_activity#:#Aktivität
 meta#:#meta_add#:#Hinzufügen
 meta#:#meta_annotation#:#Anmerkung
+meta#:#meta_artefact#:#Artefakt
 meta#:#meta_atomic#:#Atomar
 meta#:#meta_author#:#Autor
 meta#:#meta_browser#:#Browser
@@ -8593,6 +8595,8 @@ meta#:#meta_choose_section#:#Bitte wählen Sie einen Bereich###deprecated
 meta#:#meta_classification#:#Klassifizierung
 meta#:#meta_collection#:#Sammlung
 meta#:#meta_competency#:#Kompetenz
+meta#:#meta_competency_level#:#Kompetenz-Level
+meta#:#meta_contains#:#enthält
 meta#:#meta_contentprovider#:#Content-Provider
 meta#:#meta_context#:#Kontext
 meta#:#meta_contribute#:#Beitrag
@@ -8639,6 +8643,7 @@ meta#:#meta_higher_education#:#Hochschulbildung
 meta#:#meta_id#:#Id
 meta#:#meta_idea#:#Idee
 meta#:#meta_identifier#:#Kennung
+meta#:#meta_included_method#:#enthaltene Methode
 meta#:#meta_index#:#Index
 meta#:#meta_info_tlt_not_valid#:#Der aktuelle Wert ist nicht gültig und kann deswegen in anderen Bereichen (z.B Lernfortschritt) nicht verwertet werden. Bitte geben Sie eine Zeit in Stunden und/oder Minuten an.
 meta#:#meta_initiator#:#Initiator
@@ -8657,6 +8662,7 @@ meta#:#meta_is_required_by#:#...wird benötigt von...
 meta#:#meta_is_version_of#:#...ist Version von...
 meta#:#meta_keyword#:#Schlagwort
 meta#:#meta_kind#:#Art
+meta#:#meta_kind_of_technique#:#Art der Technik
 meta#:#meta_l_aa#:#Afar
 meta#:#meta_l_ab#:#Abchasisch
 meta#:#meta_l_af#:#Afrikaans
@@ -8811,6 +8817,7 @@ meta#:#meta_maximum_version#:#Maximum-Version
 meta#:#meta_medium#:#Mittel
 meta#:#meta_meta_metadata#:#Meta-Metadaten
 meta#:#meta_metadatascheme#:#Metadaten-Schema
+meta#:#meta_method#:#Technik/Methode
 meta#:#meta_minimum_version#:#Minimal-Version
 meta#:#meta_mixed#:#Gemischt
 meta#:#meta_ms_windows#:#MS-Windows###deprecated 
@@ -8819,7 +8826,7 @@ meta#:#meta_name#:#Name
 meta#:#meta_narrative_text#:#Erzählender Text
 meta#:#meta_networked#:#Vernetzt
 meta#:#meta_new_element#:#Neues Element
-meta#:#meta_next#:#Nachfolge-Nugget
+meta#:#meta_next#:#Nachfolger
 meta#:#meta_no#:#Nein
 meta#:#meta_no_annotation#:#Keine Metadaten für den Bereich 'Anmerkung' vorhanden.
 meta#:#meta_no_classification#:#Keine Metadaten für den Bereich 'Klassifizierung' vorhanden.
@@ -8835,11 +8842,12 @@ meta#:#meta_operating_system#:#Betriebssystem
 meta#:#meta_or_composite#:#... oder zusammengesetzt ...
 meta#:#meta_other#:#Andere
 meta#:#meta_other_plattform_requirements#:#Andere Plattform-Anforderungen
+meta#:#meta_participating#:#beteiligte Stakeholder
 meta#:#meta_pc_dos#:#PC-DOS
 meta#:#meta_please_select#:#Bitte wählen Sie
 meta#:#meta_pointofcontact#:#Kontakt
 meta#:#meta_prerequisite#:#Voraussetzung
-meta#:#meta_previous#:#Vorgänger-Nugget
+meta#:#meta_previous#:#Vorgänger
 meta#:#meta_problem_statement#:#Problemstellung
 meta#:#meta_publisher#:#Herausgeber
 meta#:#meta_purpose#:#Zweck
@@ -8851,6 +8859,8 @@ meta#:#meta_relation#:#Beziehung
 meta#:#meta_requirement#:#Anforderung
 meta#:#meta_requires#:#Benötigt
 meta#:#meta_resource#:#Ressource
+meta#:#meta_responsible#:#verantwortliche Stakeholder
+meta#:#meta_result_type#:#Ergebnistyp
 meta#:#meta_revised#:#Überarbeitete Fassung
 meta#:#meta_rights#:#Rechte und Lizenzen
 meta#:#meta_role#:#Rolle

@@ -33,6 +33,14 @@ include_once 'class.ilMDBase.php';
 class ilMDSituationModel extends ilMDBase
 {
 	// SET/GET
+	function setCompetencyLevel($a_competency_level)
+	{
+		return $this->competency_level = $a_competency_level;
+	}
+	function getCompetencyLevel()
+	{
+		return $this->competency_level;
+	}
 	function setPrevious($a_previous)
 	{
 		$this->previous = $a_previous;
@@ -49,17 +57,129 @@ class ilMDSituationModel extends ilMDBase
 	{
 		return $this->next;
 	}
-	function &getDescriptionLanguage()
+	
+	function getPossibleSubelements()
 	{
-		return $this->description_language;
-	}
-	function getDescriptionLanguageCode()
-	{
-		if(is_object($this->description_language))
+		global $ilDB;
+
+		$result = $ilDB->query("SELECT * FROM il_meta_activity");
+		$data_act = $ilDB->fetchAssoc($result);
+		$result = $ilDB->query("SELECT * FROM il_meta_method");
+		$data_met = $ilDB->fetchAssoc($result);
+		$result = $ilDB->query("SELECT * FROM il_meta_result_type");
+		$data_res = $ilDB->fetchAssoc($result);
+		include_once "Services/Logging/classes/class.ilLog.php";
+
+		if($data_act == null)
 		{
-			return $this->description_language->getLanguageCode();
+			$subs['Activity'] = 'meta_activity';
 		}
-		return false;
+		if($data_met == null)
+		{
+			$subs['Technique/Method'] = 'meta_method';
+		}
+		if($data_res == null)
+		{
+			$subs['Result Type'] = 'meta_result_type';
+		}
+		
+		return $subs;
+	}
+
+	function &getActivityIds()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDActivity.php';
+
+		return ilMDActivity::_getIds($this->getRBACId(),$this->getObjId(),$this->getMetaId(),'meta_situation_model');
+	}
+
+	function &getActivity($a_activity_id)
+	{
+		include_once 'Services/MetaData/classes/class.ilMDActivity.php';
+		
+		if(!$a_activity_id)
+		{
+			return false;
+		}
+		$act = new ilMDActivity();
+		$act->setMetaId($a_activity_id);
+
+		return $act;
+	}
+
+	function &addActivity()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDActivity.php';
+
+		$act = new ilMDActivity($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		$act->setParentId($this->getMetaId());
+		$act->setParentType('meta_situation_model');
+
+		return $act;
+	}
+
+	function &getMethodIds()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDMethod.php';
+
+		return ilMDMethod::_getIds($this->getRBACId(),$this->getObjId(),$this->getMetaId(),'meta_situation_model');
+	}
+
+	function &getMethod($a_method_id)
+	{
+		include_once 'Services/MetaData/classes/class.ilMDMethod.php';
+		
+		if(!$a_method_id)
+		{
+			return false;
+		}
+		$met = new ilMDMethod();
+		$met->setMetaId($a_method_id);
+
+		return $met;
+	}
+
+	function &addMethod()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDMethod.php';
+
+		$met = new ilMDMethod($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		$met->setParentId($this->getMetaId());
+		$met->setParentType('meta_situation_model');
+
+		return $met;
+	}
+
+	function &getResultTypeIds()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDResultType.php';
+
+		return ilMDResultType::_getIds($this->getRBACId(),$this->getObjId(),$this->getMetaId(),'meta_situation_model');
+	}
+
+	function &getResultType($a_result_type_id)
+	{
+		include_once 'Services/MetaData/classes/class.ilMDResultType.php';
+		
+		if(!$a_result_type_id)
+		{
+			return false;
+		}
+		$res = new ilMDResultType();
+		$res->setMetaId($a_result_type_id);
+
+		return $res;
+	}
+
+	function &addResultType()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDResultType.php';
+
+		$res = new ilMDResultType($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		$res->setParentId($this->getMetaId());
+		$res->setParentType('meta_situation_model');
+
+		return $res;
 	}
 	
 	function save()
@@ -83,6 +203,8 @@ class ilMDSituationModel extends ilMDBase
 
 		if($this->getMetaId())
 		{
+			/**
+	
 			$objIdOldPreviousNugget = $this->getObjIdOfOldPreviousNugget($this->getPrevious());
 			//check if chosen objId is set in another nugget as previous
 			if($objIdOldPreviousNugget != null)
@@ -100,16 +222,16 @@ class ilMDSituationModel extends ilMDBase
 				$query = "UPDATE il_meta_situation_model SET next=0 WHERE obj_id = ".$ilDB->quote($objIdOldNextNugget ,'integer');
 				$res = $ilDB->manipulate($query);
 			}
-
+			*/
 			if($this->db->update('il_meta_situation_model',
 									$this->__getFields(),
 									array("meta_situation_model_id" => array('integer',$this->getMetaId()))))
 			{
 			
-			$this->resetPossibleNextConnection();
-			$this->updateEntryOfPreviousNugget($this->getPrevious());
-			$this->resetPossiblePreviousConnection();
-			$this->updateEntryOfNextNugget($this->getNext());
+			//$this->resetPossibleNextConnection();
+			//$this->updateEntryOfPreviousNugget($this->getPrevious());
+			//$this->resetPossiblePreviousConnection();
+			//$this->updateEntryOfNextNugget($this->getNext());
 				
 			return true;
 			}
@@ -304,33 +426,36 @@ class ilMDSituationModel extends ilMDBase
 				"WHERE meta_situation_model_id = ".$ilDB->quote($this->getMetaId() ,'integer');
 			$res = $ilDB->manipulate($query);
 			
+			foreach($this->getActivityIds() as $id)
+			{
+				$act = $this->getActivity($id);
+				$act->delete();
+			}
+		
+			foreach($this->getMethodIds() as $id)
+			{
+				$met = $this->getMethod($id);
+				$met->delete();
+			}
+
+			foreach($this->getResultTypeIds() as $id)
+			{
+				$res = $this->getResultType($id);
+				$res->delete();
+			}
 			return true;
 		}
 		return false;
 	}
 	
-	function deleteEntryOf()
-	{
-		global $ilDB;
-		
-		if($this->getMetaId())
-		{
-			$query = "DELETE FROM il_meta_situation_model ".
-				"WHERE meta_situation_model_id = ".$ilDB->quote($this->getMetaId() ,'integer');
-			$res = $ilDB->manipulate($query);
-			
-			return true;
-		}
-		return false;
-	}
-
 	function __getFields()
 	{
-		return array('rbac_id'	=> array('integer',$this->getRBACId()),
-					 'obj_id'	=> array('integer',$this->getObjId()),
-					 'obj_type'	=> array('text',$this->getObjType()),
-					 'previous'	=> array('integer',$this->getPrevious()),
-					 'next'		=> array('integer',$this->getNext()));
+		return array('rbac_id'			=> array('integer',$this->getRBACId()),
+					 'obj_id'			=> array('integer',$this->getObjId()),
+					 'obj_type'			=> array('text',$this->getObjType()),
+					 'competency_level'	=> array('integer',$this->getCompetencyLevel()),
+					 'previous'			=> array('integer',$this->getPrevious()),
+					 'next'				=> array('integer',$this->getNext()));
 	}
 
 	function read()
@@ -348,6 +473,7 @@ class ilMDSituationModel extends ilMDBase
 				$this->setRBACId($row->rbac_id);
 				$this->setObjId($row->obj_id);
 				$this->setObjType($row->obj_type);
+				$this->setCompetencyLevel($row->competency_level);
 				$this->setPrevious($row->previous);
 				$this->setNext($row->next);
 			}
@@ -363,15 +489,14 @@ class ilMDSituationModel extends ilMDBase
 	function toXML(&$writer)
 	{
 		$writer->xmlStartTag('SituationModel');
+		$writer->xmlElement('CompetencyLevel',null,$this->getCompetencyLevel());
 		$writer->xmlElement('Previous',null,$this->getPrevious());
 		$writer->xmlElement('Next',null,$this->getNext());
 		$writer->xmlEndTag('SituationModel');
 	}
 
-				
-
 	// STATIC
-	static function _getIds($a_rbac_id,$a_obj_id)
+	static function _getId($a_rbac_id,$a_obj_id)
 	{
 		global $ilDB;
 
@@ -383,9 +508,10 @@ class ilMDSituationModel extends ilMDBase
 		$res = $ilDB->query($query);
 		while($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT))
 		{
-			$ids[] = $row->meta_situation_model_id;
+			return $row->meta_situation_model_id;
 		}
-		return $ids ? $ids : array();
+		return false;
 	}
+
 }
 ?>
