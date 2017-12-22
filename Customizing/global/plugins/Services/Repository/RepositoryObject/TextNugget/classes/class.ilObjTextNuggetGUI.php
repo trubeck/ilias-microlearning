@@ -275,7 +275,7 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 		$this->setSubTabs("view");
 		$this->tabs->activateSubTab("view");
 		
-		$tpl = new ilTemplate("tpl.paluno.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/TextNugget");
+		$tpl = new ilTemplate("tpl.paluno2.html", true, true, "Customizing/global/plugins/Services/Repository/RepositoryObject/TextNugget");
 		
 		$tpl->setCurrentBlock("paluno_block");
 

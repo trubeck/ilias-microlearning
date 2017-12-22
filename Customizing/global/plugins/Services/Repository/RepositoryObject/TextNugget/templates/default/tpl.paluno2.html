@@ -1,0 +1,91 @@
+<!-- BEGIN paluno_block -->
+<!-- Form mit Merk- und Prüfungsbutton -->
+<div id="textnugget">
+    <div class="row top_buttons">
+        <div>
+            <h1 class="ilHeader">{TITLE}</h1>
+        </div>
+        <div id="save_button">
+            {FORM}
+        </div>
+    </div>
+
+    <hr>
+    <!-- Template mit Beschreibung und Inhalt -->
+    <div class="row">
+        <div id="description_outer" class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <div id="description_header" class=ilFormHeader">
+                <h3 class="ilHeader">Beschreibung</h3>
+            </div>
+            <div id="description_inner">
+                {DESCRIPTION}
+            </div>
+        </div>
+        <div id="text_outer" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div id="text_inner">
+                {TEXT}
+            </div>
+        </div>
+        <div id="suggestions_outer" class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <div id="suggestions_header">
+                <h3 class="ilHeader">Weitere Nuggets</h3>
+            </div>
+
+            <div id="suggestions_inner">
+                <div>
+                    <div class="nugget_thumb">
+                        <a href="{LINK_NUG1}"><img src="{NUGGET_1}"></a>
+                    </div>
+                    <div class="nugget_thumb_label">
+                        <p>{NAME_1}</p>
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="nugget_thumb">
+                        <a href="{LINK_NUG2}"><img src="{NUGGET_2}"></a>
+                    </div>
+                    <div class="nugget_thumb_label">
+                        <p>{NAME_2}</p>
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="nugget_thumb">
+                        <a href="{LINK_NUG3}"><img src="{NUGGET_3}"></a>
+                    </div>
+                    <div class="nugget_thumb_label">
+                        <p>{NAME_3}</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div id="exam_button_row" class=row">
+        <div  class="col-xs-2 col-sm-4 col-md-4 col-lg-5"></div>
+        <div id="exam_button_outer" class="col-xs-8 col-sm-4 col-md-2 col-lg-2">
+            <div id="exam_button_inner">
+                <a href={LINK_EXAM} style="color:white;text-decoration: none">
+
+                        {EXAM}
+                </a>
+            </div>
+        </div>
+        <div  class="col-xs-2 col-sm-4 col-md-4 col-lg-5"></div>
+    </div>
+</div>
+
+<div class="prototype">
+</div>
+
+<!-- END paluno_block -->
+<!-- BEGIN empty_block -->
+<h1>
+    {NO_FILE}
+</h1>
+<!-- END empty_block -->
