@@ -1,0 +1,35 @@
+<tr class="{CSS_ROW}">
+	<td class="std" style="vertical-align: top">
+		<input type="checkbox" name="file[]" value="{CB_ID}" id="cb_{CB_ID}" {VAL_CHECKED} />
+	</td>
+	<td class="std xmg_fn" style="vertical-align: top">
+        <div class="xmg_fn"><label for="cb_{CB_ID}">{FILENAME}</label></div><div class="xmg_size"><label for="cb_{CB_ID}">{SIZE}</label></div>
+    </td>
+	<td class="std xmg_type" style="vertical-align: top">
+        <img src="{PREVIEW}" class="{PREVIEW_CLASS_BORDER}" alt="{TEXT_PREVIEW}"/>
+    </td>
+	<td class="std xmg_action" style="vertical-align: top">
+        <!-- BEGIN rotate -->
+            <div class="input-group">
+                {CONTENT_TYPE}:</br>
+                <a class="btn btn-default" href="{URL_ROTATE_LEFT}" title="{TEXT_ROTATE_LEFT}"><b>&#8634;</b></a>
+                <a class="btn btn-default" href="{URL_ROTATE_RIGHT}" title="{TEXT_ROTATE_RIGHT}"><b>&#8635;</b></a>
+            </div>
+        <!-- END rotate -->
+    </td>
+	<td class="std xmg_custom" style="vertical-align: top">
+        <input class="form-control" type="text" size="3" name="custom[{CB_ID}]"{CUSTOM} />
+    </td>
+	<td class="std xmg_id" style="vertical-align: top">
+        <input class="form-control" type="text" name="id[{CB_ID}]"{ELEMENT_ID} />
+    </td>
+	<td class="std xmg_topic" style="vertical-align: top">
+        <input class="form-control" type="text" name="topic[{CB_ID}]"{TOPIC} />
+    </td>
+	<td class="std xmg_title" style="vertical-align: top">
+        <input class="form-control" type="text" name="title[{CB_ID}]"{TITLE} />
+    </td>
+	<td class="std xmg_desc" style="vertical-align: top">
+        <input class="form-control" type="text" name="description[{CB_ID}]"{DESCRIPTION} />
+    </td>
+</tr>

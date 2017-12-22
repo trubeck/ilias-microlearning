@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectDefinition xmlns:xi="http://www.w3.org/2001/XInclude" type="xmg">
+    <Document type="default">
+        <xi:include href="../../../../../../../Services/Object/LuceneDataSource.xml" />
+        <xi:include href="../../../../../../../Services/Tagging/LuceneDataSource.xml" />
+        <DataSource type="JDBC" action="append">
+            <Query>
+                SELECT xmg_id, filename
+                FROM rep_robj_xmg_downloads
+                WHERE download_flag = 1 AND xmg_id IN (?)
+            </Query>
+            <Param format="list" type="int" value="objId" />
+            <Field store="YES" index="ANALYZED" column="filename" type="text" name="propertyMedium" />
+        </DataSource>
+    </Document>
+    <Document type="subItem">
+        <DataSource type="JDBC" action="create">
+            <Query>
+                SELECT 'xmg' type, id, xmg_id, media_id, topic, title, description, filename
+                FROM rep_robj_xmg_filedata
+                WHERE xmg_id IN (?)
+            </Query>
+            <Param format="list" type="int" value="objId" />
+            <Field store="YES" index="ANALYZED" column="media_id" type="text" name="propertyHigh" />
+            <Field store="YES" index="ANALYZED" column="topic" type="text" name="propertyMedium" />
+            <Field store="YES" index="ANALYZED" column="title" type="text" name="propertyHigh" />
+            <Field store="YES" index="ANALYZED" column="description" type="text" name="propertyLow" />
+            <Field store="YES" index="ANALYZED" column="filename" type="text" name="propertyHigh" />
+            <Field store="YES" index="NOT_ANALYZED" column="id" type="integer" name="subItem" />
+            <Field global="NO" store="YES" index="NOT_ANALYZED" column="type" type="text" name="type" />
+            <Field global="NO" store="YES" index="NOT_ANALYZED" column="xmg_id" type="integer" name="objId" />
+        </DataSource>
+    </Document>
+</ObjectDefinition>
