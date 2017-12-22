@@ -2,72 +2,48 @@
 // Import Custom Less Files here
 @import "student-variables.less";
 
+
+//allgemeine Ausblendungen
+
 #mm_pd_crs_grp, #mm_pd_bookm, #mm_pd_notes, #mm_pd_wsp, #mm_pd_port, #mm_pd_cal, #mm_pd_mail, #mm_pd_contacts, #mm_pd_profile, #mm_pd_sett, #il_right_col,  .divider, #imgtree, #tab_info_short, [id^="search"] thead{
   display: none;
 }
 
+//Hintergrundbild
+
   body {
-    background-image: url("images/Background2_klein.jpg");
-    background-size: 100%;
+    background-image: url("images/gradient_bg_3.jpg");
+    background-size: 100% 110%;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
 
-@media (max-width: 767px) {
-  body {
-    background-image: url("images/Background2.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-}
-
-.il_ContainerItemTitle{
-  word-wrap: break-word;
-}
-
-.il_ContainerItemTitle, :not(table[id^='search'] .il_ContainerItemTitle){
-  max-width: none;
-  width: 135px;
-}
-div.ilContainerListItemOuter{
-  height: 198px;
-}
-
-div.ilListItemSection{
-  max-width: none;
-  width: 175px;
-  height: auto;
-  padding-top: 15px;
-  margin-left: -40px
-}
+// Farbe für Buttons
 
 .btn-default, .btn-default:hover{
   color: @mid-gray;
 }
 
-.navbar-brand img{
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  border-radius: 4px;
-}
+// Obere Menüleiste durchsichtig machen
 
-.form-group, .il_InfoScreenPropertyValue{
-  color: @mid-gray !important;
-  background-color: transparent !important;
-}
-
-.form-horizontal, .ilFormFooter, .ilFormHeader{
+div.ilTopBar{
   background-color: transparent;
-
 }
 
-.form-horizontal .control-label, .form-horizontal .help-block {
-  color: darken(@mid-gray, 20%);
+// Titel ausblenden
+
+.ilTopTitle{
+  display: none;
+  z-index: 2 !important;
 }
 
+// Darstellungsfehler in Mobilansicht beheben
 
+@media (max-width: 767px) {
+  #ilTopNav{
+    margin-top: -2px;
+  }
+}
 
 #ilTopNav .navbar-nav  li  a{
   border: none;
@@ -75,13 +51,58 @@ div.ilListItemSection{
   background-color: @mid-gray;
 }
 
-#current_perma_link{
-  color: black;
+#ilTopNav{
+  width: 400px;
 }
 
-h3.ilHeader{
-  color: @mid-gray;
+// Untere Menüleiste hinter die obere schieben
+
+.ilMainHeader.ilTopFixed{
+  top: 0px;
+  height: 40px;
+  z-index: 1;
 }
+
+// Menübuttons über die obere, transparente Leiste legen, damit die klickbar bleiben
+
+.ilMainMenu.ilTopFixed{
+  top: 43px;
+  z-index: 1041;
+}
+
+
+// Größe uns Positionierung des Logos an "ERNA" anpassen
+
+.ilMainHeader > header > .row > a.navbar-brand{
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 1px;
+}
+
+.ilMainHeader > header > .row > a.navbar-brand > img{
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 4px;
+  width: 35px;
+  height: 35px;
+}
+
+// Allgemeines stylen des Headers
+
+div.ilMainHeader{
+  background-color: @mid-gray;
+
+  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+}
+
+.ilMainMenu{
+  background-color: @mid-gray;
+}
+
+// Farben der Dropdownmenüs anpassen
 
 #ilTopNav .navbar-nav > .active > a, #ilTopNav .navbar-nav > .open > a, #ilTopNav .navbar-nav > .active > a:hover, #ilTopNav .navbar-nav > .open > a:hover, #ilTopNav .navbar-nav > .active > a:active, #ilTopNav .navbar-nav > .open > a:active, #ilTopNav .navbar-nav > .active > a:focus, #ilTopNav .navbar-nav > .open > a:focus{
   background-color: @mid-gray;
@@ -99,18 +120,45 @@ h3.ilHeader{
   color: white;
 }
 
+// Info-Ansicht zum Nugget repariert. (Ohne Kontextmenü nicht aufrufbar, also zur Zeit obsolet)
+
+.form-group, .il_InfoScreenPropertyValue{
+  color: @mid-gray !important;
+  background-color: transparent !important;
+}
+
+.form-horizontal, .ilFormFooter, .ilFormHeader{
+  background-color: transparent;
+
+}
+
+.form-horizontal .control-label, .form-horizontal .help-block {
+  color: darken(@mid-gray, 20%);
+}
+
 .form-control{
   color: white;
 }
 
-.ilMainHeader{
-  background-color: @mid-gray;
+// Permalink im Footer schwarz anzeigen
 
-  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
-  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
-  box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+#current_perma_link{
+  color: black;
 }
 
+
+
+
+// BEGIN REPOSITORY ###################################
+
+
+
+
+// Farbe von Kategorieüberschriften im Repo im Standard-Grau
+
+h3.ilHeader{
+  color: @mid-gray;
+}
 
 #il_center_col{
   width: 100%;
@@ -128,16 +176,33 @@ div.ilBlockHeader{
   border: none;
 }
 
+div.il_ContainerItemTitle{
+  max-width: @card-size;
+  word-wrap: break-word;
+}
+div.ilContainerListItemOuter{
+  height: 198px;
+  padding: 0px;
+}
+
+div.ilListItemSection{
+  max-width: none;
+  width: 175px;
+  height: auto;
+  padding-top: 15px;
+  margin-left: -40px
+}
+
 div.ilBlockContent, .ilObjListRow{
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
   border-radius: 8px;
 
-  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
-  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
-  box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
-  background-color: @mid-gray !important;
+  -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.4);
+  -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .4);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, .4);
+  background-color: @mid-gray;
 
 }
 
@@ -156,10 +221,13 @@ button[id^="ilAdvSelListAnchorText_block_dd_pditems"]{
   display: none;
 }
 
+// BEGIN GRID-ANSICHT
+
 @media (min-width: 1200px) {
   .ilContainerBlock {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-row-gap: 15px;
   }
 
   .ilContainerBlockHeader, thead{
@@ -186,6 +254,7 @@ button[id^="ilAdvSelListAnchorText_block_dd_pditems"]{
   .ilContainerBlock {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 15px;
   }
 
   .ilContainerBlockHeader {
@@ -197,6 +266,7 @@ button[id^="ilAdvSelListAnchorText_block_dd_pditems"]{
   .ilContainerBlock {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-row-gap: 15px;
   }
 
   .ilContainerBlockHeader {
@@ -204,17 +274,122 @@ button[id^="ilAdvSelListAnchorText_block_dd_pditems"]{
   }
 }
 
+// END GRID-ANSICHT
+
+// Dimensionen und Farbe der Kacheln für den Desktop
+
 .ilObjListRow{
   width: @card-size;
   height: @card-size;
   margin-left: 7px;
   margin-right: 7px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
+
+// Dimensionen und Farbe der Kacheln für die Mobilansicht
+
+@media (max-width: 480px){
+  .ilObjListRow{
+    width: @card-size-mobile;
+    height: @card-size-mobile;
+
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+}
+
+// Metadaten über den Inhalt der Kacheln im Repo ausblenden
+
+div.ilListItemSection.il_ItemProperties{
+  display: none;
+}
+
+
+//Vorschaubild für die Kacheln
+
+.repository_preview img{
+  max-width: none;
+  max-height: none;
+  margin-left: -1px;
+  margin-top: -1px;
+  width: @card-size;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px 8px 0px 0px;
+}
+
+// Kontextmeü der Kacheln (zur Zeit ausgeblendet)
+
+.repository_context{
+  margin-right: 10px;
+  z-index: 2;
+  margin-top: -120px;
+  background-color: @mid-gray;
+  display: none;
+}
+
+//Styling des Buttons für das Kontextmenü
+
+.repository_context button{
+  background-color: @mid-gray;
+  border-width: 2px;
+  border-radius: 5px;
+}
+.repository_context button .caret{
+  color: white;
+}
+
+div.ilListItemSection.il_Description{
+  display: none;
+}
+
+div.il_ContainerListItem{
+  padding-top: 3px;
+}
+
+@media (max-width: 480px){
+  .repository_preview img{
+    width: @card-size-mobile;
+    height: 80px;
+  }
+
+  .repository_context{
+    margin-right: 5px;
+    margin-top: -75px;
+  }
+
+  div.il_ContainerListItem{
+    width: @card-size-mobile;
+  }
+  div.il_ContainerItemTitle{
+    width: 100%;
+  }
+  h4.il_ContainerItemTitle{
+    font-size: 12px;
+  }
+}
+
+
+// END REPOSITORY ###################################
+
+
+
+
 
 
 // BEGINN SUCHE #####################################
 
-table[id^='search'] div.ilContainerListItemOuterm, table[id^='search'] div.ilContainerListItemContent{
+
+
+table[id^='search'] .repository_context, table[id^='search'] .repository_preview{
+  display: none;
+}
+
+table[id^='search'] div.ilListItemSection.il_Description{
+  display: block;
+}
+
+table[id^='search'] div.ilContainerListItemOuter, table[id^='search'] div.ilContainerListItemContent{
   width: 70vw;
 }
 
@@ -289,20 +464,20 @@ table[id^='search'] .ilObjListRow{
   -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
   -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
   box-shadow: 2px 2px 7px rgba(0, 0, 0, .5);
+  padding: 20px 20px 20px 20px;
 }
 
 #textnugget .top_buttons{
   width: 100%;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+}
+#textnugget .top_buttons>div{
+  float: left;
+  margin-right: 20px;
 }
 
 #textnugget hr{
   display: block;
   border: 1px inset;
-  margin-left: 20px;
-  margin-right: 20px;
   margin-bottom: 30px;
 }
 
@@ -315,23 +490,24 @@ table[id^='search'] .ilObjListRow{
 #textnugget .top_buttons .ilFormFooter{
   margin-right: 0;
 }
- #textnugget .top_buttons .ilFormHeader h3.ilHeader{
-   font-style: italic;
-   font-size: 24px;
- }
+#textnugget .top_buttons .ilHeader{
+  font-style: italic;
+  font-size: 30px;
+}
+
+#textnugget #save_button>form>div>div>div>input{
+  color: white;
+  min-width: 60px;
+  background-color: @mid-gray;
+  border: 2px solid lighten(@mid-gray, 10%);
+  border-radius: 20px;
+  margin-top: 5px;
+
+}
+
 
 #textnugget .row{
   margin: 0;
-}
-
-#textnugget #description_outer{
-  padding-right: 20px;
-  margin-bottom: 30px;
-}
-
-#textnugget #suggestions_outer{
-  margin-left: -20px;
-  padding-left: 60px;
 }
 
 #textnugget h3.ilHeader{
@@ -342,13 +518,24 @@ ul#ilTab, .media.il_HeaderInner{
   display: none;
 }
 
+#textnugget #description_outer{
+  padding-right: 20px;
+  padding-left: 0px;
+  margin-bottom: 30px;
+}
+
+#textnugget #suggestions_outer{
+  margin-left: -40px;
+  padding-left: 60px;
+}
+
+
 #textnugget #text_outer{
   border-width: 2px;
   border-radius: 5px;
   height: 500px;
   background-color: darken(@mid-gray, 10%);
   margin-bottom: 50px;
-  margin-left: 20px;
   overflow-y:scroll;
   overflow-y:auto;
   -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0,0.5);
@@ -366,7 +553,8 @@ ul#ilTab, .media.il_HeaderInner{
 
 #textnugget #suggestions_inner>div{
   margin-top: 10px;
-  width: 100%;
+  margin-right: 50px;
+  float: left;
 }
 
 #textnugget #suggestions_inner .nugget_thumb img{
@@ -376,6 +564,25 @@ ul#ilTab, .media.il_HeaderInner{
 #textnugget #suggestions_inner .nugget_thumb_label{
   overflow-x:scroll;
   overflow-x:auto;
+}
+
+#textnugget #exam_button_row{
+  height: 50px;
+
+}
+
+#textnugget #exam_button_outer{
+  text-align: center;
+  border: 2px solid lighten(@mid-gray, 10%);
+  border-radius: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 20px;
+  width: 250px;
+
+
 }
 
 // END Textnugget

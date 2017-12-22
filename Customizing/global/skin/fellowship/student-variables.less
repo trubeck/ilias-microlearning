@@ -31,7 +31,8 @@
 */
 @web-font-path:		"fonts/";
 
-@mid-gray:		#434343;
+//@mid-gray:		#434343;
+@mid-gray: #1D2324;
 @il-primary-container-bg:		@mid-gray;
 @il-secondary-container-bg:		transparent;
 
@@ -47,7 +48,8 @@
 //##
 @body-bg:		@mid-gray;
 @text-color:		white;
-@link-color: #2dcab9;//lighten(@brand-primary, 5%);
+//@link-color: #2dcab9;//lighten(@brand-primary, 5%);
+@link-color: white;
 @link-hover-color:		darken(@link-color, 15%);
 
 @component-active-color:		@mid-gray;
@@ -345,5 +347,8 @@
 
 
 //Card Sizes
-@card-title-width: 143px;
+@card-title-width: 200px;
 @card-size: 200px;
+
+@card-title-width-mobile: @card-title-width/1.6;
+@card-size-mobile: @card-size/1.6;
