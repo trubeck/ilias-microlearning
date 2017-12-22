@@ -41,6 +41,69 @@ class ilMDSituationModel extends ilMDBase
 	{
 		return $this->competency_level;
 	}
+
+	// Subelements
+
+	function &getResponsibleIds()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDResponsible.php';
+
+		return ilMDResponsible::_getIds($this->getRBACId(),$this->getObjId(),$this->getMetaId(),'meta_situation_model');
+	}
+	function &getResponsible($a_responsible_id)
+	{
+		include_once 'Services/MetaData/classes/class.ilMDResponsible.php';
+		
+		if(!$a_responsible_id)
+		{
+			return false;
+		}
+		$resp = new ilMDResponsible();
+		$resp->setMetaId($a_responsible_id);
+
+		return $resp;
+	}
+	function &addResponsible()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDResponsible.php';
+
+		$resp = new ilMDResponsible($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		$resp->setParentId($this->getMetaId());
+		$resp->setParentType('meta_situation_model');
+
+		return $resp;
+	}
+
+	function &getStakeholderIds()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDStakeholder.php';
+
+		return ilMDStakeholder::_getIds($this->getRBACId(),$this->getObjId(),$this->getMetaId(),'meta_situation_model');
+	}
+	function &getStakeholder($a_stakeholder_id)
+	{
+		include_once 'Services/MetaData/classes/class.ilMDStakeholder.php';
+		
+		if(!$a_stakeholder_id)
+		{
+			return false;
+		}
+		$sta = new ilMDStakeholder();
+		$sta->setMetaId($a_stakeholder_id);
+
+		return $sta;
+	}
+	function &addStakeholder()
+	{
+		include_once 'Services/MetaData/classes/class.ilMDStakeholder.php';
+
+		$sta = new ilMDStakeholder($this->getRBACId(),$this->getObjId(),$this->getObjType());
+		$sta->setParentId($this->getMetaId());
+		$sta->setParentType('meta_situation_model');
+
+		return $sta;
+	}
+
 	function setPrevious($a_previous)
 	{
 		$this->previous = $a_previous;
@@ -60,15 +123,16 @@ class ilMDSituationModel extends ilMDBase
 	
 	function getPossibleSubelements()
 	{
-		global $ilDB;
+		global $ilDB; 
 
-		$result = $ilDB->query("SELECT * FROM il_meta_activity");
+		$obj_id = $this->getObjId();
+
+		$result = $ilDB->query("SELECT * FROM il_meta_activity WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
 		$data_act = $ilDB->fetchAssoc($result);
-		$result = $ilDB->query("SELECT * FROM il_meta_method");
+		$result = $ilDB->query("SELECT * FROM il_meta_method WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
 		$data_met = $ilDB->fetchAssoc($result);
-		$result = $ilDB->query("SELECT * FROM il_meta_result_type");
+		$result = $ilDB->query("SELECT * FROM il_meta_result_type WHERE obj_id = ".$ilDB->quote($obj_id, "integer"));
 		$data_res = $ilDB->fetchAssoc($result);
-		include_once "Services/Logging/classes/class.ilLog.php";
 
 		if($data_act == null)
 		{
@@ -425,6 +489,18 @@ class ilMDSituationModel extends ilMDBase
 			$query = "DELETE FROM il_meta_situation_model ".
 				"WHERE meta_situation_model_id = ".$ilDB->quote($this->getMetaId() ,'integer');
 			$res = $ilDB->manipulate($query);
+
+			foreach($this->getResponsibleIds() as $id)
+			{
+				$resp = $this->getResponsible($id);
+				$resp->delete();
+			}
+
+			foreach($this->getStakeholderIds() as $id)
+			{
+				$sta = $this->getStakeholder($id);
+				$sta->delete();
+			}
 			
 			foreach($this->getActivityIds() as $id)
 			{
