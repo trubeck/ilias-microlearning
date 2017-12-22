@@ -2987,6 +2987,7 @@ class ilMDEditorGUI
 				$md_resp->update();
 			}
 		}
+
 		//Stakeholder
 		if(is_array($_POST['met_stakeholder']))
 		{
