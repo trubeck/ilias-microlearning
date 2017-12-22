@@ -419,6 +419,8 @@ class ilMD extends ilMDBase
 						'il_meta_result_type',
 						'il_meta_rights',
 						'il_meta_situation_model',
+						'il_meta_responsible',
+						'il_meta_stakeholder',
 						'il_meta_taxon',
 						'il_meta_taxon_path',
 						'il_meta_technical',

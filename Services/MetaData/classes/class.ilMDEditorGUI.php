@@ -2760,7 +2760,7 @@ class ilMDEditorGUI
 	 * list situationModel section
 	 */
 	function listSituationModel()
-	{
+	{		
 		$this->tpl->addBlockFile('ADM_CONTENT','adm_content','tpl.md_editor.html','Services/MetaData');
 		$this->__setTabs('meta_situation_model');
 		$this->tpl->addBlockFile('MD_CONTENT','md_content','tpl.md_situation_model.html','Services/MetaData');
@@ -2780,7 +2780,67 @@ class ilMDEditorGUI
 		$this->ctrl->setReturn($this,'listSituationModel');
 		$this->ctrl->setParameter($this, 'meta_index', $this->md_section->getMetaId());
 
+		//Responsible
+		foreach($resp_ids = $this->md_section->getResponsibleIds() as $resp_id)
+		{
+			$md_resp = $this->md_section->getResponsible($resp_id);
+			$this->ctrl->setParameter($this,'meta_path','meta_responsible');
+				
+			if(count($resp_ids) > 1)
+			{
+				$this->tpl->setCurrentBlock("sm_responsible_delete");
+					
+				$this->ctrl->setParameter($this,'meta_index',$resp_id);
+				$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_ACTION_DELETE",$this->ctrl->getLinkTarget($this,'deleteElement'));
+				$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_TXT_DELETE",$this->lng->txt('delete'));
+				$this->tpl->parseCurrentBlock();
+			}
+				
+			$this->tpl->setCurrentBlock("sm_responsible_loop");
+
+			$this->ctrl->setParameter($this,'section_element','meta_responsible');
+			$this->ctrl->setParameter($this,'meta_index', $this->md_section->getMetaId());
+			$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_ACTION_ADD",$this->ctrl->getLinkTarget($this,'addSectionElement'));
+			$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_TXT_ADD",$this->lng->txt('add'));
+			
+			//$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_SM_NO", $this->md_section->getMetaId());
+			$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_NO",$resp_id);
+			$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_VAL_RESPONSIBLE",ilUtil::prepareFormOutput($md_resp->getResponsible()));
+			$this->tpl->setVariable("SM_RESPONSIBLE_LOOP_TXT_RESPONSIBLE",$this->lng->txt('meta_responsible'));
+			$this->tpl->parseCurrentBlock();
+		}
+
+		//Stakeholder
+		foreach($sta_ids = $this->md_section->getStakeholderIds() as $sta_id)
+		{
+			$md_sta = $this->md_section->getStakeholder($sta_id);
+			$this->ctrl->setParameter($this,'meta_path','meta_stakeholder');
+				
+			if(count($sta_ids) > 1)
+			{
+				$this->tpl->setCurrentBlock("sm_stakeholder_delete");
+					
+				$this->ctrl->setParameter($this,'meta_index',$sta_id);
+				$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_ACTION_DELETE",$this->ctrl->getLinkTarget($this,'deleteElement'));
+				$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_TXT_DELETE",$this->lng->txt('delete'));
+				$this->tpl->parseCurrentBlock();
+			}
+				
+			$this->tpl->setCurrentBlock("sm_stakeholder_loop");
+
+			$this->ctrl->setParameter($this,'section_element','meta_stakeholder');
+			$this->ctrl->setParameter($this,'meta_index', $this->md_section->getMetaId());
+			$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_ACTION_ADD",$this->ctrl->getLinkTarget($this,'addSectionElement'));
+			$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_TXT_ADD",$this->lng->txt('add'));
+			
+			$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_NO",$sta_id);
+			$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_VAL_STAKEHOLDER",ilUtil::prepareFormOutput($md_sta->getStakeholder()));
+			$this->tpl->setVariable("SM_STAKEHOLDER_LOOP_TXT_STAKEHOLDER",$this->lng->txt('meta_stakeholder'));
+			$this->tpl->parseCurrentBlock();
+		}
+
 		$this->tpl->setCurrentBlock("situation_model");
+		$this->tpl->setVariable("SM_LOOP_ROWSPAN",2 + count($resp_ids) + count($sta_ids));
 		$this->tpl->setVariable("EDIT_ACTION",$this->ctrl->getFormAction($this));
 		$this->tpl->setVariable("TXT_SITUATION_MODEL", $this->lng->txt("meta_situation_model"));
 
@@ -2910,13 +2970,34 @@ class ilMDEditorGUI
 	function updateSituationModel()
 	{
 		include_once 'Services/MetaData/classes/class.ilMDLanguageItem.php';
-
-		
 		// update situation model section
 		$this->md_section = $this->md_obj->getSituationModel();
 		//$this->md_section->setPrevious(ilUtil::stripSlashes($_POST['situation_model'][$this->md_section->getMetaId()]['Previous']));
 		//$this->md_section->setNext(ilUtil::stripSlashes($_POST['situation_model'][$this->md_section->getMetaId()]['Next']));
 		$this->md_section->setCompetencyLevel(ilUtil::stripSlashes($_POST['situation_model'][$this->md_section->getMetaId()]['CompetencyLevel']));
+		
+		//Responsible
+		if(is_array($_POST['met_responsible']))
+		{
+			foreach($_POST['met_responsible']as $resp_id => $data)
+			{
+				$md_resp =& $this->md_section->getResponsible($resp_id);
+				$md_resp->setResponsible(ilUtil::stripSlashes($data['ResponsibleRole']));
+				
+				$md_resp->update();
+			}
+		}
+		//Stakeholder
+		if(is_array($_POST['met_stakeholder']))
+		{
+			foreach($_POST['met_stakeholder']as $sta_id => $data)
+			{
+				$md_sta =& $this->md_section->getStakeholder($sta_id);
+				$md_sta->setStakeholder(ilUtil::stripSlashes($data['StakeholderRole']));
+				
+				$md_sta->update();
+			}
+		}
 		$this->md_section->update();
 
 		// Activity
@@ -3393,6 +3474,10 @@ class ilMDEditorGUI
 			case 'meta_situation_model':
 				$this->md_section = $this->md_obj->addSituationModel();
 				$this->md_section->save();
+				$resp =& $this->md_section->addResponsible();
+				$resp->save();
+				$sta =& $this->md_section->addStakeholder();
+				$sta->save();
 				break;
 				
 			case 'meta_annotation':
@@ -3494,6 +3579,20 @@ class ilMDEditorGUI
 				$md_new =& $this->md_section->addContribute();
 				$md_new->save();
 				$md_new = $md_new->addEntity();
+				break;
+
+			case 'meta_responsible':
+				$md_new = $this->$this->md_section =& $this->md_obj->getSituationModel();
+				$md_new = $md_new->addResponsible();
+				break;
+
+			case 'meta_stakeholder':
+				$md_new = $this->$this->md_section =& $this->md_obj->getSituationModel();
+				$md_new = $md_new->addStakeholder();
+				break;
+
+			case 'meta_keyword':
+				$md_new = $this->md_section->addKeyword();
 				break;
 
 			case 'meta_activity':

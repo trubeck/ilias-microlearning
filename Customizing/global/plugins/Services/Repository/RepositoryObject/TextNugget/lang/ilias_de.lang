@@ -46,9 +46,10 @@ update_successful#:Die Änderungen wurden gespeichert.
 view#:#User-View
 admin#:#Admin-View
 set_preview_picture#:#Vorschaubild setzen
+current_picture#:#Aktuelles Bild:
 xtxt_input_picture#:#Bitte geben Sie eine Datei an. Achten Sie bitte auf die maximal erlaubte Upload-Größe.
 edit_text#:#Text bearbeiten
-delete#:#Video löschen
+delete#:#Löschen
 cancel#:#Abbrechen
 duration#:#Laufzeit
 duration_info#:#Wenn kein Wert eingegeben wird, bestimmt IT&me die Laufzeit automatisch.

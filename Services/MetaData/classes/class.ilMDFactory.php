@@ -193,6 +193,20 @@ class ilMDFactory
 				$situationModel = new ilMDSituationModel();
 				$situationModel->setMetaId($a_index);
 				return $situationModel;
+
+			case 'meta_responsible':
+				include_once 'Services/MetaData/classes/class.ilMDResponsible.php';
+
+				$resp = new ilMDResponsible();
+				$resp->setMetaId($a_index);
+				return $resp;
+
+			case 'meta_stakeholder':
+				include_once 'Services/MetaData/classes/class.ilMDStakeholder.php';
+
+				$sta = new ilMDStakeholder();
+				$sta->setMetaId($a_index);
+				return $sta;
 			
 			case 'meta_activity':
 				include_once 'Services/MetaData/classes/class.ilMDActivity.php';

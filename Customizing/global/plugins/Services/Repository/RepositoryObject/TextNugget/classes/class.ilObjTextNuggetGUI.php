@@ -81,7 +81,7 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 				return;
 				break;
 			case 'iltexteditorgui':
-				$this->tabs->removeTab("export");
+				//$this->tabs->removeTab("export");
 				$ret = $this->forwardToPageObject();
 				$tpl->setContent($ret);
 				break;
@@ -116,6 +116,8 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 			case "setTstNuggets":
 			case "setPreviewPicture":
 			case "savePreviewPicture":
+			case "updatePreviewPicture":
+			case "deletePreviewPicture":
 			case "saveExamNugget":
 			case "confirmDeletion":
 			case "makeTest":
@@ -531,7 +533,13 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 		//save/cancel
 		if($this->hasPreviewPicture())
 		{
-			$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "showAdmin"));
+			$label = new ilNonEditableValueGUI($this->txt("current_picture"));
+    		$label->setInfo("mob_vpreview");
+    		$this->form_gui->addItem($label);
+			$this->form_gui->addCommandButton("updatePreviewPicture", $this->txt("update"));
+			$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "updatePreviewPicture"));
+			$this->form_gui->addCommandButton("deletePreviewPicture", $this->txt("delete"));
+			$this->form_gui->setFormAction($this->ctrl->getFormAction($this, "deletePreviewPicture"));
 		}
 		else
 		{
@@ -550,8 +558,10 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 
 		$this->setPreviewPicture();
 
+		include_once "Services/Logging/classes/class.ilLog.php";
 		if (!$this->form_gui->checkInput())
 		{
+			$ilLog->write("input");
 			ilUtil::sendFailure($this->txt("xtxt_input_picture"));
 		}
 		else
@@ -580,7 +590,6 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 			}
 
 			$boool = $this->hasPreviewPicture();
-			include_once "Services/Logging/classes/class.ilLog.php";
 			if($boool)
 			{
 				$ilLog->write("ja");
@@ -594,6 +603,94 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 		}
 	}
 
+	function deletePreviewPicture()
+	{
+		global $ilDB;
+
+		$this->setPreviewPicture();
+
+        $type = "mob";
+        $result = $ilDB->query("SELECT * FROM object_data WHERE type = ".$ilDB->quote($type, "text"));
+
+        $mobObjIds = "";
+        while($data = $ilDB->fetchAssoc($result))
+        {
+            $mobObjIds .= $data["obj_id"] . ",";
+        }
+
+        $mobObjIds = explode(",", substr($mobObjIds, 0, -1));
+
+		include_once("./Services/MediaObjects/classes/class.ilObjMediaObjectGUI.php");
+		foreach($mobObjIds as $id)
+		{
+			$mob = new ilObjMediaObject($id);
+			if($mob->getImportId() == $this->object->getId())
+			{
+				$mob->delete();
+				$this->ctrl->redirect($this, "showContent");
+			}
+		}
+
+		$this->ctrl->redirect($this, "showContent");
+	}
+
+	function updatePreviewPicture()
+	{
+		global $ilDB, $ilLog; 	
+
+		$this->setPreviewPicture();
+
+		include_once "Services/Logging/classes/class.ilLog.php";
+		if (!$this->form_gui->checkInput())
+		{
+			$ilLog->write("input");
+			ilUtil::sendFailure($this->txt("xtxt_input_picture"));
+		}
+		else
+		{
+			$type = "mob";
+			$result = $ilDB->query("SELECT * FROM object_data WHERE type = ".$ilDB->quote($type, "text"));
+
+			$mobObjIds = "";
+			while($data = $ilDB->fetchAssoc($result))
+			{
+				$mobObjIds .= $data["obj_id"] . ",";
+			}
+
+			$mobObjIds = explode(",", substr($mobObjIds, 0, -1));
+
+			include_once("./Services/MediaObjects/classes/class.ilObjMediaObjectGUI.php");
+			foreach($mobObjIds as $id)
+			{
+				$mob = new ilObjMediaObject($id);
+				if($mob->getImportId() == $this->object->getId())
+				{
+					// save preview pic
+					$prevpic = $this->form_gui->getInput("preview_pic");
+					if ($prevpic["size"] > 0)
+					{
+						$mob->uploadVideoPreviewPic($prevpic);
+					}
+
+					//save obj_id in database (importId is never in use)
+					$mob->setImportId($this->object->getId());
+					$mob->update();
+
+					if ($prevpic["size"] == 0)
+					{
+						// re-read media object
+						$mob = new ilObjMediaObject($mob->getId());
+						$mob->generatePreviewPic(320, 240);
+					}
+					
+					$this->ctrl->redirect($this, "showContent");
+				}
+			}
+
+			$this->ctrl->redirect($this, "showContent");
+		}
+	}
+
 	/**
 	* Does object have a previe picture?
 	*/
@@ -601,7 +698,6 @@ class ilObjTextNuggetGUI extends ilObjectPluginGUI
 	{	
 		global $ilDB;
 
-		include_once "Services/Logging/classes/class.ilLog.php";
         $type = "mob";
         $result = $ilDB->query("SELECT * FROM object_data WHERE type = ".$ilDB->quote($type, "text"));
 

@@ -46,9 +46,10 @@ update_successful#:Update Successful
 view#:#User-View
 admin#:#Admin-View
 set_preview_picture#:#Set Preview Picture
+current_picture#:#Current Picture:
 xtxt_input_picture#:#Please specify a file. Note the maximum allowed upload file size.
 edit_text#:#Edit Text
-delete#:#Delete video
+delete#:#Delete
 cancel#:#Cancel
 duration#:#Play Time
 duration_info#:#If no value is entered, IT&me tries do determine the play time automatically.

@@ -13,9 +13,42 @@
           </td>
 		</tr>
         <tr>
+            <td class="option" width="10" rowspan="{SM_LOOP_ROWSPAN}">&nbsp;</td>
             <td class="sub_option" colspan="4">{TXT_COMPETENCY_LVL}</td>
             <td class="option_value">{VAL_COMPETENCY_LVL}</td>
         </tr>
+        <!-- BEGIN sm_responsible_loop -->
+        <tr>
+            <td class="sub_option" colspan="2">
+                <div class="ilFloatLeft">
+                    {SM_RESPONSIBLE_LOOP_TXT_RESPONSIBLE}
+                    <!-- BEGIN sm_responsible_delete -->
+                    <a class="il_ContainerItemCommand" href="{SM_RESPONSIBLE_LOOP_ACTION_DELETE}">{SM_RESPONSIBLE_LOOP_TXT_DELETE}</a>
+                    <!-- END sm_responsible_delete -->
+                    <a class="il_ContainerItemCommand" href="{SM_RESPONSIBLE_LOOP_ACTION_ADD}">{SM_RESPONSIBLE_LOOP_TXT_ADD}</a>
+                </div>
+            </td>
+            <td class="option_value">
+                <input type="text" maxlength="200" name="met_responsible[{SM_RESPONSIBLE_LOOP_NO}][ResponsibleRole]" value="{SM_RESPONSIBLE_LOOP_VAL_RESPONSIBLE}">
+            </td>
+        </tr>
+        <!-- END sm_responsible_loop -->
+        <!-- BEGIN sm_stakeholder_loop -->
+        <tr>
+            <td class="sub_option" colspan="2">
+                <div class="ilFloatLeft">
+                    {SM_STAKEHOLDER_LOOP_TXT_STAKEHOLDER}
+                    <!-- BEGIN sm_stakeholder_delete -->
+                    <a class="il_ContainerItemCommand" href="{SM_STAKEHOLDER_LOOP_ACTION_DELETE}">{SM_STAKEHOLDER_LOOP_TXT_DELETE}</a>
+                    <!-- END sm_stakeholder_delete -->
+                    <a class="il_ContainerItemCommand" href="{SM_STAKEHOLDER_LOOP_ACTION_ADD}">{SM_STAKEHOLDER_LOOP_TXT_ADD}</a>
+                </div>
+            </td>
+            <td class="option_value">
+                <input type="text" maxlength="200" name="met_stakeholder[{SM_STAKEHOLDER_LOOP_NO}][Stakeholder]" value="{SM_STAKEHOLDER_LOOP_VAL_STAKEHOLDER}">
+            </td>
+        </tr>
+        <!-- END sm_stakeholder_loop -->
         <tr>
           <td class="option" colspan="5">
             <div class="ilRight">
